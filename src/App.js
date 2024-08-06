@@ -1,9 +1,10 @@
 import './App.css';
+import Game from './Game.js'
 
 function App() {
   return (
     <div className="App">
-      <p>Game banayenge</p>
+      <Game/>
     </div>
   );
 }

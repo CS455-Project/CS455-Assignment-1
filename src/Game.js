@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import UNIT from './constants.js';
 import Character from './components/character';
+import './Game.css'
 
 function Game() {
     const canvasRef = useRef(null);
@@ -34,12 +35,12 @@ function Game() {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        canvas.width = 20 * UNIT;
-        canvas.height = 20 * UNIT;
+        canvas.width = 60 * UNIT;
+        canvas.height = 40 * UNIT;
 
         window.addEventListener('keydown', handleKeyPress);
 
-        const drawInterval = setInterval(animate, 1000 / 60); // 60 FPS
+        const drawInterval = setInterval(animate, 1000 / 120);
 
         return () => {
             clearInterval(drawInterval); // Cleanup on unmount
@@ -48,7 +49,7 @@ function Game() {
     }, [character]);
 
     return (
-        <div>
+        <div className="container">
             <canvas ref={canvasRef} />
         </div>
     );

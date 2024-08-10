@@ -34,9 +34,9 @@
     int? lastPosition = null;
 
     private void setNextAppearance(){
-        foreach(var item in Squares ){
+        @* foreach(var item in Squares ){
             item.IsShown = false;
-        }
+        } *@
 
         int randomPosition;
 
@@ -44,7 +44,16 @@
             randomPosition = random.Next(0,9);
         }while ( lastPosition == randomPosition);
 
-        Squares[randomPosition].IsShown = true;
+        @* Squares[0].IsShown = true; *@
+        foreach(var s in Squares){
+            if (s.Id == randomPosition){
+                s.IsShown = true;
+            }
+            else {
+                s.IsShown = false;
+            }
+        }
+        @* Squares[randomPosition].IsShown = true; *@
         hitPosition = randomPosition;
         lastPosition = randomPosition;
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Zvwm03k1xfQAoYONP0DPodtomi9BItgNiKao22ENmKI=",
+  "Hash": "X49t8tT5VGWcBF5vQ+u5SlPhbKFeBWnbL/FO08GK/JE=",
   "Source": "MoleProject",
   "BasePath": "/",
   "Mode": "Root",
@@ -7805,6 +7805,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/scopedcss/projectbundle/MoleProject.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/assets/smile.png",
+      "SourceId": "MoleProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "assets/smile.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/smile.png"
     },
     {
       "Identity": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/css/app.css",

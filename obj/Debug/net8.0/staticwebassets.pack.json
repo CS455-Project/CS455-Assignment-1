@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/MoleProject.styles.css"
     },
     {
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/assets/smile.png",
+      "PackagePath": "staticwebassets/assets/smile.png"
+    },
+    {
       "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/css/app.css",
       "PackagePath": "staticwebassets/css/app.css"
     },

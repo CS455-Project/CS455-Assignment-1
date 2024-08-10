@@ -4,9 +4,9 @@ namespace MoleProject.Pages
 {
     public partial class Game {
         public int score = 0;
-        public int currentTime = 15;
-        public int gameSpeed = 500;
-        public string msg = "new game has begun";
+        public int currentTime = 60;
+        public int gameSpeed = 1000;
+        public string msg = "";
         public int hitPosition = 0;
         public bool isGameRunning = true;
 

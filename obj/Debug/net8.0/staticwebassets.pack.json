@@ -1,44 +1,60 @@
 {
   "Files": [
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/obj/Debug/net8.0/scopedcss/projectbundle/BlazorGame.bundle.scp.css",
-      "PackagePath": "staticwebassets/BlazorGame.bundle.scp.css"
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/bin/Debug/net8.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
     },
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/compressed/cv2f5d9mwy.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
     },
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/wwwroot/assets/smile.png",
-      "PackagePath": "staticwebassets/assets/smile.png"
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/scopedcss/bundle/MoleProject.styles.css",
+      "PackagePath": "staticwebassets/MoleProject.styles.css"
     },
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/wwwroot/bootstrap/bootstrap.min.css",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
     },
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/wwwroot/bootstrap/bootstrap.min.css.map",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/css/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
     },
     {
-      "Id": "/home/arush-upadhyaya/Desktop/BlazorGame/wwwroot/favicon.png",
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.BlazorGame.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Desktop/MoleProject/wwwroot/sample-data/weather.json",
+      "PackagePath": "staticwebassets/sample-data/weather.json"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.MoleProject.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.BlazorGame.props",
-      "PackagePath": "build\\BlazorGame.props"
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.MoleProject.props",
+      "PackagePath": "build\\MoleProject.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.BlazorGame.props",
-      "PackagePath": "buildMultiTargeting\\BlazorGame.props"
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.MoleProject.props",
+      "PackagePath": "buildMultiTargeting\\MoleProject.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.BlazorGame.props",
-      "PackagePath": "buildTransitive\\BlazorGame.props"
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.MoleProject.props",
+      "PackagePath": "buildTransitive\\MoleProject.props"
     }
   ],
   "ElementsToRemove": []

@@ -1,0 +1,80 @@
+﻿@page "/"
+
+
+<PageTitle>Game</PageTitle>
+<h1> Hello to Smack </h1>
+
+<div class="info-container">
+    <h2>score : @score</h2>
+    <h2>Remaining Time : @currentTime</h2>
+    <h2>@msg</h2>
+    @* <h2>Random val is @lastPosition</h2>
+    <h2>Random val is @hitPosition</h2> *@
+</div>
+
+<div class="canvas">
+    @foreach( var s in Squares ){
+        <Square SquareModel="s" OnMouseUp="() => MouseUp(s)"/>
+    }   
+</div>
+
+@code {
+    private PeriodicTimer? gameLoopTimer;
+    private PeriodicTimer? gameTimeTimer;
+
+    public void MouseUp(SquareModel s){
+        if ( isGameRunning ){
+            if ( s.Id == hitPosition ){
+                score += 1;
+            }
+        }
+    }
+    private Random random = new Random();
+
+    int? lastPosition = null;
+
+    private void setNextAppearance(){
+        foreach(var item in Squares ){
+            item.IsShown = false;
+        }
+
+        int randomPosition;
+
+        do {
+            randomPosition = random.Next(0,9);
+        }while ( lastPosition == randomPosition);
+
+        Squares[randomPosition].IsShown = true;
+        hitPosition = randomPosition;
+        lastPosition = randomPosition;
+
+        StateHasChanged();
+    }
+
+    private async Task GameLoopAsync(PeriodicTimer timer){
+        while ( isGameRunning ){
+            setNextAppearance();
+            await timer.WaitForNextTickAsync();
+        }
+    }
+
+    private async Task GameTimeAsync(PeriodicTimer timer ){
+        while ( isGameRunning ){
+            currentTime--;
+
+            if ( currentTime == 0 ){
+                msg = "Game Over";
+                isGameRunning = false;
+            }
+            StateHasChanged();
+            await timer.WaitForNextTickAsync();
+        }
+    }
+    protected override void OnInitialized() {
+        gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(gameSpeed));
+        _ = GameLoopAsync(gameLoopTimer);
+
+        gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        _ = GameTimeAsync(gameTimeTimer);
+    }
+}

@@ -4,7 +4,7 @@ namespace MoleProject.Pages
 {
     public partial class Game {
         public int score = 0;
-        public int currentTime = 30;
+        public int currentTime = 60;
         public int gameSpeed = 1000;
         public string msg = "";
         public int hitPosition = 0;

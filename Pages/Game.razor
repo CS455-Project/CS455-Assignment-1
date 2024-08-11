@@ -1,6 +1,5 @@
 ﻿@page "/"
 
-
 <PageTitle>Game</PageTitle>
 <h1> Hello to Smack </h1>
 
@@ -8,8 +7,6 @@
     <h2>score : @score</h2>
     <h2>Remaining Time : @currentTime</h2>
     <h2>@msg</h2>
-    @* <h2>Random val is @lastPosition</h2>
-    <h2>Random val is @hitPosition</h2> *@
 </div>
 
 <div class="canvas">
@@ -17,6 +14,19 @@
         <Square SquareModel="s" OnMouseUp="() => MouseUp(s)"/>
     }   
 </div>
+
+<!-- Modal for Game Over -->
+<!-- @if (!isGameRunning)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close" @onclick="CloseModal">&times;</span>
+            <h2>Game Over</h2>
+            <p>Your Score: @score</p>
+            <button @onclick="RestartGame">Play Again</button>
+        </div>
+    </div>
+} -->
 
 @code {
     private PeriodicTimer? gameLoopTimer;
@@ -34,9 +44,9 @@
     int? lastPosition = null;
 
     private void setNextAppearance(){
-        @* foreach(var item in Squares ){
+        foreach(var item in Squares ){
             item.IsShown = false;
-        } *@
+        }
 
         int randomPosition;
 
@@ -44,7 +54,7 @@
             randomPosition = random.Next(0,9);
         }while ( lastPosition == randomPosition);
 
-        @* Squares[0].IsShown = true; *@
+<!--        
         foreach(var s in Squares){
             if (s.Id == randomPosition){
                 s.IsShown = true;
@@ -52,8 +62,8 @@
             else {
                 s.IsShown = false;
             }
-        }
-        @* Squares[randomPosition].IsShown = true; *@
+        } -->
+        Squares[randomPosition].IsShown = true; 
         hitPosition = randomPosition;
         lastPosition = randomPosition;
 
@@ -79,6 +89,7 @@
             await timer.WaitForNextTickAsync();
         }
     }
+    
     protected override void OnInitialized() {
         gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(gameSpeed));
         _ = GameLoopAsync(gameLoopTimer);

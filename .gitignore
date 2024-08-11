@@ -1,6 +1,6 @@
-bin
-Layout
-obj
+/bin/
+/obj/
+/Layout/
 Properties
 App.razor
 MoleProject.csproj

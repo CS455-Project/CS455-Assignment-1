@@ -13,7 +13,7 @@ namespace MoleProject.Pages
         public List<SquareModel> Squares {get;set;} =  new List<SquareModel>();
 
         public Game(){
-            for ( int i = 0 ; i < 9 ; i++ ){
+            for ( int i = 0 ; i < 16 ; i++ ){
                 Squares.Add(new SquareModel{Id = i});
             }
         }

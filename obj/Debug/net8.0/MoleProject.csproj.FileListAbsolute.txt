@@ -1029,3 +1029,4 @@ C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.dll
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\refint\MoleProject.dll
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.pdb
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\ref\MoleProject.dll
+C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.sourcelink.json

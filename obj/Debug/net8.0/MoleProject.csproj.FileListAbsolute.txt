@@ -2066,3 +2066,4 @@ C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.sou
 /home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/MoleProject.sourcelink.json
 /home/arush-upadhyaya/Desktop/MoleProject/bin/Debug/net8.0/web.config
 >>>>>>> cd269677a849057d9149e2ff86dce96f17046070
+C:\Users\Akanksha Wattamwar\Desktop\MoleProject\bin\Debug\net8.0\web.config

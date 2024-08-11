@@ -5,7 +5,7 @@ namespace MoleProject.Shared
         public bool isShown;
 
         public int Id {get;set;}
-        public static string? Style{get;set;}
+        public string Style{get;set;}
         public bool IsShown{
             get => isShown;
             set {

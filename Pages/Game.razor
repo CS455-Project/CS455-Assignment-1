@@ -8,21 +8,19 @@
     <h2>score : @score</h2>
     <h2>Remaining Time : @currentTime</h2>
     <h2>@msg</h2>
-    @* <h2>Random val is @lastPosition</h2>
-    <h2>Random val is @hitPosition</h2> *@
 </div>
 
 <div class="canvas">
     @foreach( var s in Squares ){
         <Square SquareModel="s" OnMouseUp="() => MouseUp(s)"/>
-    }   
+    } 
 </div>
 
 @code {
-    private PeriodicTimer? gameLoopTimer;
-    private PeriodicTimer? gameTimeTimer;
+    private PeriodicTimer gameLoopTimer;
+    private PeriodicTimer gameTimeTimer;
 
-    public void MouseUp(SquareModel s){
+    private void MouseUp(SquareModel s){
         if ( isGameRunning ){
             if ( s.Id == hitPosition ){
                 score += 1;
@@ -34,26 +32,18 @@
     int? lastPosition = null;
 
     private void setNextAppearance(){
-        @* foreach(var item in Squares ){
+        foreach(var item in Squares ){
             item.IsShown = false;
-        } *@
+        }
 
         int randomPosition;
 
         do {
             randomPosition = random.Next(0,9);
         }while ( lastPosition == randomPosition);
+        // randomPosition = 0;
 
-        @* Squares[0].IsShown = true; *@
-        foreach(var s in Squares){
-            if (s.Id == randomPosition){
-                s.IsShown = true;
-            }
-            else {
-                s.IsShown = false;
-            }
-        }
-        @* Squares[randomPosition].IsShown = true; *@
+        Squares[randomPosition].IsShown = true;
         hitPosition = randomPosition;
         lastPosition = randomPosition;
 

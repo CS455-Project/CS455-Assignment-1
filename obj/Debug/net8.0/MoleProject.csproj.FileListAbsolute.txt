@@ -1030,3 +1030,4 @@
 /home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/MoleProject.pdb
 /home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/ref/MoleProject.dll
 /home/arush-upadhyaya/Desktop/MoleProject/obj/Debug/net8.0/MoleProject.sourcelink.json
+/home/arush-upadhyaya/Desktop/MoleProject/bin/Debug/net8.0/web.config

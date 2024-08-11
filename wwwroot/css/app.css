@@ -15,9 +15,9 @@ a, .btn-link {
     border-color : black;
     display : flex;
     flex-wrap : wrap;
-    height : 600px;
+    height : 800px;
     justify-content : center;
-    width : 600px;
+    width : 800px;
     border : 1px solid black;
     background-color : #e6e6e6;
 }

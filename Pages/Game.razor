@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿ @page "/"
 
 
 <PageTitle>Game</PageTitle>
@@ -39,7 +39,7 @@
         int randomPosition;
 
         do {
-            randomPosition = random.Next(0,9);
+            randomPosition = random.Next(0,16);
         }while ( lastPosition == randomPosition);
         // randomPosition = 0;
 
@@ -76,4 +76,5 @@
         gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
         _ = GameTimeAsync(gameTimeTimer);
     }
-}
+} 
+

@@ -3099,3 +3099,5 @@ C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.dll
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\refint\MoleProject.dll
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\MoleProject.pdb
 C:\Users\Akanksha Wattamwar\Desktop\MoleProject\obj\Debug\net8.0\ref\MoleProject.dll
+C:\Users\Akanksha Wattamwar\Desktop\MoleProject\bin\Debug\net8.0\sample-data\weather.json
+C:\Users\Akanksha Wattamwar\Desktop\MoleProject\bin\Debug\net8.0\_framework\blazor.boot.json

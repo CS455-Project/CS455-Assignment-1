@@ -172,9 +172,13 @@ code {
     background-color: #f0f0f0;
 }
 
-.start-menu h1 {
-    font-size: 4em;
+.start-menu {
+    font-size: 6em;
     margin-bottom: 200px;
+}
+
+.start-menu h1{
+    font-size: 4em;
 }
 
 .start-menu button {

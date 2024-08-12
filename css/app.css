@@ -172,17 +172,22 @@ code {
     background-color: #f0f0f0;
 }
 
-.start-menu {
-    text-align: center;
-}
-
 .start-menu h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
+    font-size: 4em;
+    margin-bottom: 200px;
 }
 
 .start-menu button {
     padding: 15px 30px;
+    border-radius: 50px;
+    border-width: 3px;
+    background-color: green;
+    color : white;
     font-size: 18px;
     cursor: pointer;
+}
+
+.start-menu button:hover{
+    background-color: white;
+    color : black;
 }

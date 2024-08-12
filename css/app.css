@@ -174,29 +174,15 @@ code {
 
 .start-menu {
     text-align: center;
-    flex-direction:column;
 }
 
-.start-menu h1{
-    font-size: 2em;
-  
-}
-.start-menu {
-    font-size: 4em; 
-    margin-bottom: 200px;
+.start-menu h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
 }
 
 .start-menu button {
     padding: 15px 30px;
-    border-radius: 50px;
-    border-width: 5px;
-    background-color: green;
-    color : white;
-    font-size: 25px;
+    font-size: 18px;
     cursor: pointer;
-}
-
-.start-menu button:hover{
-    background-color: white;
-    color : black;
 }

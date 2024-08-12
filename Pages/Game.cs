@@ -10,11 +10,11 @@ namespace MoleProject.Pages
         public int hitPosition = 0;
         public bool isGameRunning = true;
 
-        public List<SquareModel> Squares {get;set;} =  new List<SquareModel>();
+        public List<CellModel> Cells {get;set;} =  new List<CellModel>();
 
         public Game(){
             for ( int i = 0 ; i < 16 ; i++ ){
-                Squares.Add(new SquareModel{Id = i});
+                Cells.Add(new CellModel{Id = i});
                 // System.Console.WriteLine(i);
             }
         }

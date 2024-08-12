@@ -1,8 +1,8 @@
-<div class="square @SquareModel.Style" @onmouseup="ValidateHit" />
+<div class="square @CellModel.Style" @onmouseup="ValidateHit" />
 
 @code{
     [Parameter]
-    public SquareModel? SquareModel { get;set;}
+    public CellModel? CellModel { get;set;}
     [Parameter]
     public EventCallback OnMouseUp {get;set;}
 

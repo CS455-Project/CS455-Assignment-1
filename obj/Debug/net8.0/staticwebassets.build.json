@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h/AdXeQ8dcz9/yDkin5etRPV0zz8WzXtkpVFTorFx8w=",
+  "Hash": "5FYh8yNnlo8ozuEP8gxHyAoLtGynZ5IzOBjR/om89uE=",
   "Source": "MoleProject",
   "BasePath": "/",
   "Mode": "Root",
@@ -7902,6 +7902,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
+      "Identity": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\hitsound.mp3",
+      "SourceId": "MoleProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "hitsound.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\hitsound.mp3"
+    },
+    {
       "Identity": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\icon-192.png",
       "SourceId": "MoleProject",
       "SourceType": "Discovered",
@@ -7940,6 +7959,25 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
+      "Identity": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\misssound.mp3",
+      "SourceId": "MoleProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "misssound.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\misssound.mp3"
+    },
+    {
       "Identity": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\sample-data\\weather.json",
       "SourceId": "MoleProject",
       "SourceType": "Discovered",
@@ -7957,6 +7995,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
+    },
+    {
+      "Identity": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\sound.js",
+      "SourceId": "MoleProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Akanksha Wattamwar\\Desktop\\MoleProject\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "sound.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sound.js"
     }
   ]
 }

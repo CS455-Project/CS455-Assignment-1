@@ -1,6 +1,6 @@
 namespace MoleProject.Shared
 {
-    public class SquareModel
+    public class CellModel
     {
         public bool isShown;
 

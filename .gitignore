@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 bin/
 obj/
+
+.gitignore
+CS455-Assignment-1.generated.sln

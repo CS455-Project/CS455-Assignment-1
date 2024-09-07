@@ -10,7 +10,7 @@
         <div class="info-container">
             <h2>Score: @score</h2>
             <h2>Remaining Time: @currentTime</h2>
-            <!-- <h2>@msg</h2> -->
+            <!-- <h2>@Message</h2> -->
         </div>
 
         <div class="canvas">
@@ -123,7 +123,7 @@ else
 
             if (currentTime == 0)
             {
-                msg = "Game Over";
+                Message = "Game Over";
                 isGameRunning = false;
                 showGameOverModal = true;
             }
@@ -138,7 +138,7 @@ else
         score = 0;
         currentTime = 60; // Reset time
         isGameRunning = true;
-        msg = "";
+        Message = "";
         showGameOverModal = false;
 
         gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(gameSpeed));

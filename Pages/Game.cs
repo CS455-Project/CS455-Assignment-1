@@ -33,12 +33,12 @@ namespace MoleProject.Pages
             get { return isGameRunning; }
             set { isGameRunning = value; }
         }
-
         private int score = 0;
         public int Score{
             get { return score; }
             set { score = value; }
         }
+
 
         public List<CellModel> Cells {get;set;} =  new List<CellModel>();
 
@@ -49,3 +49,4 @@ namespace MoleProject.Pages
         }
     }
 }
+

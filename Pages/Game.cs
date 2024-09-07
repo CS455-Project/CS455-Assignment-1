@@ -6,7 +6,7 @@ namespace MoleProject.Pages
 
         
         public int currentTime = 60;
-        public int gameSpeed = 500;
+        public int gameSpeed = 1000;
         public string msg = "";
         public int hitPosition = 0;
         public bool isGameRunning = true;

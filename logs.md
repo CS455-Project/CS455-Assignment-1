@@ -1,9 +1,9 @@
-# Project Log: [Project Name]
+# Project Log: Whack'Em All
 
 ## Overview
-**Project Start Date:** [Start Date]  
-**Project End Date (Expected):** [End Date]  
-**Project Description:** [Brief description of the project goals and objectives]
+**Project Start Date:** 6th August 2024  
+**Project End Date (Expected):** TBD  
+**Project Description:** This project seeks to implement the Whack'a'Mole Game using Blazor Web Assembly Application
 
 ---
 
@@ -24,3 +24,22 @@
 - [List of what will be done next]
 
 ---
+
+## Summary 
+
+**MileStone Achieved:** 
+	1. Game Ready to Play Locally
+	2. Game Deployed using GitHub Pages
+
+**Remaining Milestones:** 
+	1. Integerate Code Linters
+	2. Unit Testing
+	3. Automated Testing During Deployment 
+	4. Code Quality and Test Report
+	5. Instructions page for the Game
+	6. Choice of Code Quailty Metrics
+
+---
+
+## Resources and References 
+

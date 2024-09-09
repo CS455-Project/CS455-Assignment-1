@@ -18,9 +18,12 @@ jobs:
       with:
         dotnet-version: 8.0.107
 
-    # publishes Blazor project to the release-folder
+    - name: Run Unit Tests
+      run: dotnet test TestProject/TestProject.csproj --no-build --verbosity normal
     - name: Publish .NET Core Project
       run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
+      if: ${{ steps.run-unit-tests.outcome == 'success' }}
+    # publishes Blazor project to the release-folder
     
     # changes the base-tag in index.html from '/' to 'MoleProject' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to MoleProject
@@ -40,4 +43,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: release/wwwroot
-

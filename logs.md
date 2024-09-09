@@ -26,9 +26,11 @@
 **Task(s) Completed:**  
 - Created Test Project
 - Organised project into src and test
+- Modified the yaml file to run tests automatically and fail the deployment on test case failure
 
 **Challenges Faced:**  
 - Figuring out adding a project reference to a test project took a while
+- Ordering of the functionalities in the yaml file.
 
 **Solutions or Workarounds:**  
 - Used an online blog to understand setup --> https://blog.openreplay.com/how-to--unit-testing-blazor-apps/

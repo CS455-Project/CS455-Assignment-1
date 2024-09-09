@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../CS455-Assignment-1/MoleProject.csproj" />
+    <ProjectReference Include="../src/MoleProject.csproj" />
   </ItemGroup>
 
 </Project>

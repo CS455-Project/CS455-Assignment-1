@@ -16,9 +16,6 @@ jobs:
       with:
         dotnet-version: 8.0.107
 
-    - name: Restore dependencies
-      run: dotnet restore
-
     - name: Run tests
       run: dotnet test
       

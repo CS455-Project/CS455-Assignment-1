@@ -40,3 +40,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: release/wwwroot
+
+    - name: run Unit Tests
+      run: dotnet test --no-build --verbosity normal
+      if: ${{ steps.run-unit-tests.outcome == 'failure' }}
+    - name: Publish .NET Core Project
+      run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
+      if: ${{ steps.run-unit-tests.outcome == 'success' }}

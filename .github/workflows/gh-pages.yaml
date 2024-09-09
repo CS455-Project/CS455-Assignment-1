@@ -20,11 +20,10 @@ jobs:
 
     - name: Run Unit Tests
       run: dotnet test TestProject/TestProject.csproj --no-build --verbosity normal
+      if: ${{ steps.run-unit-tests.outcome == 'failure' }}
     - name: Publish .NET Core Project
       run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
       if: ${{ steps.run-unit-tests.outcome == 'success' }}
-    # publishes Blazor project to the release-folder
-    
     # changes the base-tag in index.html from '/' to 'MoleProject' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to MoleProject
       run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html

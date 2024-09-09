@@ -27,30 +27,31 @@
 - Created Test Project
 - Organised project into src and test
 - Modified the yaml file to run tests automatically and fail the deployment on test case failure
+- Installed Coverlet and used it to generate test coverage report
 
 **Challenges Faced:**  
 - Figuring out adding a project reference to a test project took a while
 - Ordering of the functionalities in the yaml file.
+- glibc error with running `reportgenerator` in linux device, ran in the windows machine as resort
 
 **Solutions or Workarounds:**  
 - Used an online blog to understand setup --> https://blog.openreplay.com/how-to--unit-testing-blazor-apps/
 
 ---
 
-
 ## Summary 
 
 **Milestone Achieved:** 
 1. Game Ready to Play Locally.
 2. Game Deployed using GitHub Pages.
-
-**Remaining Milestones:** 
-1. Integerate Code Linters.
-2. Unit Testing.
 3. Automated Testing During Deployment.
 4. Code Quality and Test Report.
-5. Instructions page for the Game.
-6. Choice of Code Quality Metrics.
+5. Integerate Code Linters.
+
+**Remaining Milestones:** 
+1. Unit Testing.
+2. Instructions page for the Game.
+3. Choice of Code Quality Metrics.
 
 ---
 

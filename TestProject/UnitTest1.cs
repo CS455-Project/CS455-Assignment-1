@@ -11,7 +11,7 @@ public class WhackEmAllTests : TestContext
         
         Assert.True(gameService.isGameRunning);
         Assert.Equal(0, gameService.score);
-        Assert.True(gameService.currentTime < 0);
+        Assert.True(gameService.currentTime >= 0);
     }
 
     [Fact]

@@ -1,4 +1,4 @@
-﻿ @page "/"
+﻿@page "/"
 @inject IJSRuntime JSRuntime
 <PageTitle>Whack'Em-All</PageTitle>
 
@@ -132,7 +132,7 @@ else
         }
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         isGameStarted = true;
         score = 0;

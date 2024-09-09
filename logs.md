@@ -21,6 +21,20 @@
 - Read the documentation by SonarLint and made the required changes in the codebase.
 
 ---
+### 09-09-2024
+
+**Task(s) Completed:**  
+- Created Test Project
+- Organised project into src and test
+
+**Challenges Faced:**  
+- Figuring out adding a project reference to a test project took a while
+
+**Solutions or Workarounds:**  
+- Used an online blog to understand setup --> https://blog.openreplay.com/how-to--unit-testing-blazor-apps/
+
+---
+
 
 ## Summary 
 

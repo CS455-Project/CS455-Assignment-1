@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 8.0.107
 
     - name: Run tests
-      run: dotnet test
+      run: dotnet test TestProject/
       
     - name: Publish .NET Core Project
       if: ${{ success() }}

@@ -9,19 +9,16 @@
 
 ## Log Entries
 
-### [Date of Entry]
+### 07-09-2024
 
 **Task(s) Completed:**  
-- [List of tasks completed today]
+- Integrated Sonarlint and refactored the code.
 
 **Challenges Faced:**  
-- [Describe any roadblocks or issues encountered]
+- Many attributes were made public unnecessarily.
 
 **Solutions or Workarounds:**  
-- [How challenges were resolved or next steps to resolve them]
-
-**Next Steps:**  
-- [List of what will be done next]
+- Read the documentation by SonarLint and made the required changes in the codebase.
 
 ---
 

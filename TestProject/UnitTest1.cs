@@ -1,34 +1,6 @@
 using Bunit;
 using Xunit;
 
-public class TestableGame : Game
-{
-    protected override async Task GameLoopAsync(PeriodicTimer timer)
-    {
-        // while (isGameRunning)
-        // {
-        //     setNextAppearance();
-        //     await timer.WaitForNextTickAsync();
-        // }
-    }
-
-    protected override async Task GameTimeAsync(PeriodicTimer timer)
-    {
-        // while (isGameRunning)
-        // {
-
-        //     if (currentTime == 0)
-        //     {
-        //         EndGame();
-        //         break;
-        //     }
-
-        //     StateHasChanged();
-        //     await timer.WaitForNextTickAsync();
-        //     currentTime--;
-        // }
-    }
-}
 public class WhackEmAllTests : TestContext
 {
 

@@ -48,12 +48,11 @@
 - Added cognitive complexity check
 - Added cyclomatic complexity check
 - Added numerous gates on old code
+- Added tests for restart game and return to start menu 
+- Added tests for testing sound
 
 **Challenges Faced:**
 - StateHasChanged had to be place outside SetNext to test it
-
-**Solutions or Workarounds:**  
-- 
 
 ---
 
@@ -65,11 +64,11 @@
 3. Automated Testing During Deployment.
 4. Code Quality and Test Report.
 5. Integerate Code Linters.
+6. Unit Testing.
+7. Choice of Code Quality Metrics.
 
 **Remaining Milestones:** 
-1. Unit Testing.
-2. Instructions page for the Game.
-3. Choice of Code Quality Metrics.
+1. Instructions page for the Game.
 
 ---
 

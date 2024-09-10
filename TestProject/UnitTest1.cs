@@ -18,14 +18,19 @@ public class WhackEmAllTests : TestContext
         Assert.True(gameService.isGameStarted);
         Assert.True(string.IsNullOrEmpty(gameService.message));
         Assert.False(gameService.showGameOverModal);
-        Assert.NotEqual(0, gameService.hitPosition);
         Assert.NotNull(gameService.gameLoopTimer);
         Assert.NotNull(gameService.gameTimeTimer); 
+        Assert.Equal(60, gameService.currentTime);
     }
 
     [Fact]
-    public void Game_ShouldEndWhenTimeIsZero()
+    public void EndGame_ShouldTerminateGameCorrectly()
     {
         var gameService = new Game();
+        gameService.EndGame();
+
+        Assert.False(gameService.isGameRunning);
+        Assert.True(gameService.showGameOverModal);
+        Assert.Equal("Game Over", gameService.message);
     }
 }

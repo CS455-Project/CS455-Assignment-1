@@ -116,16 +116,16 @@ else
     {
         while (isGameRunning)
         {
-            currentTime--;
 
             if (currentTime == 0)
             {
-                message = "Game Over";
-                isGameRunning = false;
-                showGameOverModal = true;
+                EndGame();
+                break;
             }
+
             StateHasChanged();
             await timer.WaitForNextTickAsync();
+            currentTime--;
         }
     }
 
@@ -144,6 +144,17 @@ else
         gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
         _ = GameTimeAsync(gameTimeTimer);
     }
+
+    public void EndGame()
+    {
+        message = "Game Over";
+        isGameRunning = false;
+        showGameOverModal = true;
+        gameLoopTimer?.Dispose();
+        gameTimeTimer?.Dispose();
+
+    }
+
 
     private void RestartGame()
     {

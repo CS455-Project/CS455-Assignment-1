@@ -40,7 +40,7 @@ h1 a.button i { position: relative; top: 1px; }
 
 .card-group { display: flex; flex-wrap: wrap; margin-top: -15px; margin-left: -15px; }
 .card-group + .card-group { margin-top: 0; }
-.card-group .card { margin-top: 15px; margin-left: 15px; display: flex; flex-direction: column; background-color: #e4e4e4; background: radial-gradient(circle, #fefefe 0%, #f6f6f6 100%); border: 1px solid #c1c1c1; padding: 15px; color: #6f6f6f; max-width: 100% }
+.card-group .card { margin-top: 15px; margin-left: 15px; display: flex; flex-direction: column; background: radial-gradient(circle, #fefefe 0%, #f6f6f6 100%); background-color: #e4e4e4; border: 1px solid #c1c1c1; padding: 15px; color: #6f6f6f; max-width: 100% }
 .card-group .card .card-header { font-size: 1.5rem; font-family: 'Century Gothic', sans-serif; margin-bottom: 15px; flex-grow: 1; }
 .card-group .card .card-body { display: flex; flex-direction: row; gap: 15px; flex-grow: 1; }
 .card-group .card .card-body div.table { display: flex; flex-direction: column; }
@@ -603,8 +603,8 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
         }
 
         .card-group .card {
-            background-color: #333;
             background: radial-gradient(circle, #444 0%, #333 100%);
+            background-color: #333;
             border: 1px solid #545454;
             color: #fff;
         }

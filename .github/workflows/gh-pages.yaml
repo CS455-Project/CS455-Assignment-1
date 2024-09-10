@@ -34,7 +34,7 @@ jobs:
           /d:sonar.cs.opencover.reportsPaths="coverage.opencover.xml"
 
     - name: Build
-      run: dotnet build 
+      run: dotnet build src/MoleProject.csproj
 
     - name: Test with coverage
       run: |

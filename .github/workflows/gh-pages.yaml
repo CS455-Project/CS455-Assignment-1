@@ -35,9 +35,10 @@ jobs:
           /d:sonar.cs.opencover.reportsPaths="coverage.xml"
 
     - name: Build
-      run: |
-      dotnet build src/MoleProject.csproj
-      dotnet test TestProject/TestProject.csproj --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      run: dotnet build src/MoleProject.csproj
+
+    - name: Test
+      run: dotnet test TestProject/TestProject.csproj --no-build --verbosity normal --collect:"XPlat Code Coverage"
 
     - name: Run tests with coverage
       run: |

@@ -42,9 +42,10 @@
 
 **Task(s) Completed:**  
 - Added tests for start game and end game
+- Added tests for SetNextAppearence
 
 **Challenges Faced:**
-- 
+- StateHasChanged had to be place outside SetNext to test it
 
 **Solutions or Workarounds:**  
 - 

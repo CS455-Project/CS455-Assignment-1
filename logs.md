@@ -46,6 +46,7 @@
 - Linked the Project with SonarCloud
 - Added Unit Test quality gate using SonarCloud
 - Added cognitive complexity check
+- Added cyclomatic complexity check
 
 **Challenges Faced:**
 - StateHasChanged had to be place outside SetNext to test it

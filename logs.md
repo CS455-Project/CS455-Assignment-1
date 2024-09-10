@@ -38,6 +38,20 @@
 - Used an online blog to understand setup --> https://blog.openreplay.com/how-to--unit-testing-blazor-apps/
 
 ---
+### 10-09-2024
+
+**Task(s) Completed:**  
+- Added tests for start game and end game
+- Added tests for SetNextAppearence
+- Linked the Project with SonarCloud
+
+**Challenges Faced:**
+- StateHasChanged had to be place outside SetNext to test it
+
+**Solutions or Workarounds:**  
+- 
+
+---
 
 ## Summary 
 

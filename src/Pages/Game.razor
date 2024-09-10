@@ -55,14 +55,9 @@ else
 }
 
 @code {
-    private PeriodicTimer? gameLoopTimer;
-    private PeriodicTimer? gameTimeTimer;
-    private bool showGameOverModal = false;
-    private bool isGameStarted = false;
     private Random random = new Random();
     private int? lastPosition = null;
-
-    private async Task MouseUp(CellModel s)
+    protected async Task MouseUp(CellModel s)
     {
         if (isGameRunning)
         {
@@ -76,18 +71,18 @@ else
         }
     }
 
-    private async Task PlayHitSound()
+    protected async Task PlayHitSound()
     {
         await JSRuntime.InvokeVoidAsync("playSound1");
     }
 
-    private async Task PlayMissSound()
+    protected async Task PlayMissSound()
     {
         await JSRuntime.InvokeVoidAsync("playSound2");
     }
 
 
-    private void setNextAppearance()
+    public void setNextAppearance()
     {
         foreach (var item in Cells)
         {
@@ -104,34 +99,34 @@ else
         Cells[randomPosition].IsShown = true;
         hitPosition = randomPosition;
         lastPosition = randomPosition;
-
-        StateHasChanged();
     }
 
-    public async Task GameLoopAsync(PeriodicTimer timer)
+    protected virtual async Task GameLoopAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {
             setNextAppearance();
+            StateHasChanged();
             await timer.WaitForNextTickAsync();
             StateHasChanged();
         }
     }
 
-    public async Task GameTimeAsync(PeriodicTimer timer)
+    protected virtual async Task GameTimeAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {
-            currentTime--;
 
             if (currentTime == 0)
             {
-                message = "Game Over";
-                isGameRunning = false;
-                showGameOverModal = true;
+                EndGame();
+                StateHasChanged();
+                break;
             }
+
             StateHasChanged();
             await timer.WaitForNextTickAsync();
+            currentTime--;
         }
     }
 
@@ -151,7 +146,18 @@ else
         _ = GameTimeAsync(gameTimeTimer);
     }
 
-    public void RestartGame()
+    public void EndGame()
+    {
+        message = "Game Over";
+        isGameRunning = false;
+        showGameOverModal = true;
+        gameLoopTimer?.Dispose();
+        gameTimeTimer?.Dispose();
+
+    }
+
+
+    private void RestartGame()
     {
         showGameOverModal = false;
         StartGame();

@@ -38,6 +38,18 @@
 - Used an online blog to understand setup --> https://blog.openreplay.com/how-to--unit-testing-blazor-apps/
 
 ---
+### 10-09-2024
+
+**Task(s) Completed:**  
+- Added tests for start game and end game
+
+**Challenges Faced:**
+- 
+
+**Solutions or Workarounds:**  
+- 
+
+---
 
 ## Summary 
 

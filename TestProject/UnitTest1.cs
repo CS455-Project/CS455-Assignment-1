@@ -9,7 +9,6 @@ public class WhackEmAllTests : TestContext
     {
         var gameService = new Game();
         gameService.StartGame();
-        // Assert.Equal(60, gameService.currentTime);
 
         Assert.True(gameService.isGameRunning);
         Assert.Equal(0, gameService.score);

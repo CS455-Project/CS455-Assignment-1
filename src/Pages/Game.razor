@@ -57,7 +57,7 @@ else
 @code {
     private Random random = new Random();
     private int? lastPosition = null;
-    protected async Task MouseUp(CellModel s)
+    public async Task MouseUp(CellModel s)
     {
         if (isGameRunning)
         {
@@ -153,17 +153,17 @@ else
         showGameOverModal = true;
         gameLoopTimer?.Dispose();
         gameTimeTimer?.Dispose();
-
+        
     }
 
 
-    private void RestartGame()
+    public void RestartGame()
     {
         showGameOverModal = false;
         StartGame();
     }
 
-    private void ReturnToStartMenu()
+    public void ReturnToStartMenu()
     {
         showGameOverModal = false;
         isGameStarted = false;

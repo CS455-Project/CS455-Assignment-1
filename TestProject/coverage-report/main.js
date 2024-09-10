@@ -222,9 +222,9 @@ var assemblies = [
     "name": "MoleProject",
     "classes": [
       { "name": "MoleProject.Layout.NavMenu", "rp": "MoleProject_NavMenu.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 39, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "MoleProject.Pages.Game", "rp": "MoleProject_Game.html", "cl": 52, "ucl": 53, "cal": 105, "tl": 187, "cb": 9, "tb": 24, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "MoleProject.Pages.Game", "rp": "MoleProject_Game.html", "cl": 89, "ucl": 23, "cal": 112, "tl": 198, "cb": 19, "tb": 28, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "MoleProject.Shared.Cell", "rp": "MoleProject_Cell.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "MoleProject.Shared.CellModel", "rp": "MoleProject_CellModel.html", "cl": 11, "ucl": 1, "cal": 12, "tl": 22, "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "MoleProject.Shared.CellModel", "rp": "MoleProject_CellModel.html", "cl": 12, "ucl": 0, "cal": 12, "tl": 22, "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Program", "rp": "MoleProject_Program.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
@@ -242,7 +242,7 @@ var riskHotspots = [
   {
     "assembly": "MoleProject", "class": "MoleProject.Pages.Game", "reportPath": "MoleProject_Game.html", "methodName": "BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)", "methodShortName": "BuildRenderTree(...)", "fileIndex": 1, "line": 7,
     "metrics": [
-      { "value": 72, "exceeded": true },
+      { "value": 31.33, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
 ];

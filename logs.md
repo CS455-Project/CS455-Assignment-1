@@ -44,6 +44,7 @@
 - Added tests for start game and end game
 - Added tests for SetNextAppearence
 - Linked the Project with SonarCloud
+- Added Unit Test quality gate using SonarCloud
 
 **Challenges Faced:**
 - StateHasChanged had to be place outside SetNext to test it

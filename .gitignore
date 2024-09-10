@@ -405,10 +405,6 @@ FodyWeavers.xsd
 *.sln.iml
 .idea
 
-##
-## Visual studio for Mac
-##
-
 
 # globs
 Makefile.in

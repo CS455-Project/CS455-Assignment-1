@@ -57,7 +57,7 @@ else
 @code {
     private Random random = new Random();
     private int? lastPosition = null;
-    private async Task MouseUp(CellModel s)
+    protected async Task MouseUp(CellModel s)
     {
         if (isGameRunning)
         {
@@ -71,18 +71,18 @@ else
         }
     }
 
-    private async Task PlayHitSound()
+    protected async Task PlayHitSound()
     {
         await JSRuntime.InvokeVoidAsync("playSound1");
     }
 
-    private async Task PlayMissSound()
+    protected async Task PlayMissSound()
     {
         await JSRuntime.InvokeVoidAsync("playSound2");
     }
 
 
-    private void setNextAppearance()
+    public void setNextAppearance()
     {
         foreach (var item in Cells)
         {
@@ -99,20 +99,19 @@ else
         Cells[randomPosition].IsShown = true;
         hitPosition = randomPosition;
         lastPosition = randomPosition;
-
-        StateHasChanged();
     }
 
-    private async Task GameLoopAsync(PeriodicTimer timer)
+    protected virtual async Task GameLoopAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {
             setNextAppearance();
+            StateHasChanged();
             await timer.WaitForNextTickAsync();
         }
     }
 
-    private async Task GameTimeAsync(PeriodicTimer timer)
+    protected virtual async Task GameTimeAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {

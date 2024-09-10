@@ -43,6 +43,7 @@
 **Task(s) Completed:**  
 - Added tests for start game and end game
 - Added tests for SetNextAppearence
+- Linked the Project with SonarCloud
 
 **Challenges Faced:**
 - StateHasChanged had to be place outside SetNext to test it

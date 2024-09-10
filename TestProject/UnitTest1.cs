@@ -6,25 +6,6 @@ public class WhackEmAllTests : TestContext
 {
 
     [Fact]
-<<<<<<< HEAD
-    public async Task StartGame_ShouldInitializeGameCorrectly()
-{
-    var mockGameLoopTimer = new Mock<PeriodicTimer>();
-    var mockGameTimeTimer = new Mock<PeriodicTimer>();
-
-    var gameService = new Game();
-    gameService.StartGame(); // Replace with injection if necessary
-
-    Assert.Equal(0, gameService.score);
-    Assert.Equal(59, gameService.currentTime);
-
-    // Simulate 5 seconds of time passing
-    for (int i = 0; i < 5; i++)
-    {
-        mockGameLoopTimer.Raise(t => t.Tick += null, EventArgs.Empty);
-        mockGameTimeTimer.Raise(t => t.Tick += null, EventArgs.Empty);
-        await Task.Delay(1000); // Simulate delay for clarity (optional)
-=======
     public void StartGame_ShouldInitializeGameCorrectly()
     {
         var gameService = new TestableGame();
@@ -40,12 +21,7 @@ public class WhackEmAllTests : TestContext
         Assert.NotNull(gameService.gameLoopTimer);
         Assert.NotNull(gameService.gameTimeTimer); 
         Assert.Equal(60, gameService.currentTime);
->>>>>>> cdf04e08446d6d4fa9cbb11f366673da60118f36
     }
-
-    Assert.Equal(54, gameService.currentTime); // Should be 59 - 5
-    Assert.True(gameService.isGameRunning);
-}
 
     [Fact]
     public void EndGame_ShouldTerminateGameCorrectly()

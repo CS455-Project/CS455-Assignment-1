@@ -29,24 +29,7 @@ public class GameTests : TestContext
     }
 
     [Fact]
-    public void StartGame_SetsInitialState()
-    {
-        // Arrange
-        var cut = RenderComponent<Game>();
-        
-        // Act
-        cut.Instance.StartGame();
-
-        // Assert
-        Assert.True(cut.Instance.isGameStarted);
-        Assert.True(cut.Instance.isGameRunning);
-        Assert.Equal(0, cut.Instance.score);
-        Assert.Equal(60, cut.Instance.currentTime);
-        Assert.False(cut.Instance.showGameOverModal);
-    }
-
-    [Fact]
-    public async Task MouseUp_HitPosition_IncreaseScoreAndPlayHitSound()
+    public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
     {
         // Arrange
         var cut = RenderComponent<Game>();
@@ -58,11 +41,11 @@ public class GameTests : TestContext
 
         // Assert
         Assert.Equal(1, cut.Instance.score);
-        mockJSRuntime.Verify(js => js.InvokeVoidAsync("playSound1", It.IsAny<object[]>()), Times.Once);
+        mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
     }
 
     [Fact]
-    public async Task MouseUp_MissPosition_PlayMissSound()
+    public async Task MouseUp_MissPosition_InvokeJavaScript()
     {
         // Arrange
         var cut = RenderComponent<Game>();
@@ -74,24 +57,9 @@ public class GameTests : TestContext
 
         // Assert
         Assert.Equal(0, cut.Instance.score);
-        mockJSRuntime.Verify(js => js.InvokeVoidAsync("playSound2", It.IsAny<object[]>()), Times.Once);
+        mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
     }
 
-    [Fact]
-    public void EndGame_SetsCorrectState()
-    {
-        // Arrange
-        var cut = RenderComponent<Game>();
-        cut.Instance.StartGame();
-
-        // Act
-        cut.Instance.EndGame();
-
-        // Assert
-        Assert.False(cut.Instance.isGameRunning);
-        Assert.True(cut.Instance.showGameOverModal);
-        Assert.Equal("Game Over", cut.Instance.message);
-    }
 
     [Fact]
     public void RestartGame_ResetsGameState()

@@ -68,7 +68,7 @@
 7. Choice of Code Quality Metrics.
 
 **Remaining Milestones:** 
-1. Instructions page for the Game.
+1. Instructions page for the Game(Not related to assignment 2).
 
 ---
 

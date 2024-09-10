@@ -30,7 +30,7 @@ jobs:
       run: |
         dotnet sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" \
           /o:"CS455 Project" \
-          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.login=${{ secrets.SONAR_TOKEN }} \
           /d:sonar.host.url="https://sonarcloud.io" \
           /d:sonar.cs.opencover.reportsPaths="coverage.xml"
 

@@ -108,16 +108,17 @@ else
         StateHasChanged();
     }
 
-    private async Task GameLoopAsync(PeriodicTimer timer)
+    public async Task GameLoopAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {
             setNextAppearance();
             await timer.WaitForNextTickAsync();
+            StateHasChanged();
         }
     }
 
-    private async Task GameTimeAsync(PeriodicTimer timer)
+    public async Task GameTimeAsync(PeriodicTimer timer)
     {
         while (isGameRunning)
         {
@@ -150,7 +151,7 @@ else
         _ = GameTimeAsync(gameTimeTimer);
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         showGameOverModal = false;
         StartGame();

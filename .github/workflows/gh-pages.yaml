@@ -1,76 +1,76 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  push:
+    branches:
+      - main
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write    
+  build-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    
 
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
 
-    - name: Install dependencies
-      run: |
-        dotnet tool install --global coverlet.console
-        dotnet tool install --global dotnet-sonarscanner
+    - name: Install dependencies
+      run: |
+        dotnet tool install --global coverlet.console
+        dotnet tool install --global dotnet-sonarscanner
 
-    - name: Begin SonarScanner
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        dotnet sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" \
-          /o:"cs455-project" \
-          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-          /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.opencover.reportsPaths="coverage.opencover.xml"
+    - name: Begin SonarScanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" \
+          /o:"cs455-project" \
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.host.url="https://sonarcloud.io" \
+          /d:sonar.cs.opencover.reportsPaths="coverage.opencover.xml"
 
-    - name: Build
-      run: dotnet build src/MoleProject.csproj
+    - name: Build
+      run: dotnet build src/MoleProject.csproj
 
-    - name: Test with coverage
-      run: |
-        dotnet test TestProject/TestProject.csproj --no-build --verbosity normal \
-          /p:CollectCoverage=true \
-          /p:CoverletOutputFormat=opencover \
-          /p:CoverletOutput=./coverage.opencover.xml
+    - name: Test with coverage
+      run: |
+        dotnet test TestProject/TestProject.csproj --no-build --verbosity normal \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=opencover \
+          /p:CoverletOutput=./coverage.opencover.xml
 
-    - name: End SonarScanner
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    - name: End SonarScanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-    - name: Publish .NET Core Project
-      if: success()
-      run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
-      
-    - name: Change base-tag in index.html from / to MoleProject
-      if: success()
-      run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
-      
-    - name: Copy index.html to 404.html
-      if: success()
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
+    - name: Publish .NET Core Project
+      if: success()
+      run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
+      
+    - name: Change base-tag in index.html from / to MoleProject
+      if: success()
+      run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
+      
+    - name: Copy index.html to 404.html
+      if: success()
+      run: cp release/wwwroot/index.html release/wwwroot/404.html
 
-    - name: Add .nojekyll file
-      if: success()
-      run: touch release/wwwroot/.nojekyll
-      
-    - name: Commit wwwroot to GitHub Pages
-      if: success()
-      uses: JamesIves/github-pages-deploy-action@3.7.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: release/wwwroot
+    - name: Add .nojekyll file
+      if: success()
+      run: touch release/wwwroot/.nojekyll
+      
+    - name: Commit wwwroot to GitHub Pages
+      if: success()
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: release/wwwroot

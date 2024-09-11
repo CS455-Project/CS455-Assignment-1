@@ -12,8 +12,8 @@ namespace MoleProject.Pages
         public bool isGameStarted {get;set;} = false;
         public bool showGameOverModal {get;set;} = false;
         public int score { get; set; } = 0;
-        public PeriodicTimer gameLoopTimer { get; set; }
-        public PeriodicTimer gameTimeTimer { get; set; } 
+        public PeriodicTimer ? gameLoopTimer { get; set; }
+        public PeriodicTimer ? gameTimeTimer { get; set; } 
         public List<CellModel> Cells { get; set; } = new List<CellModel>();
 
         public Game()

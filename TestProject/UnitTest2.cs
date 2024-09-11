@@ -7,78 +7,80 @@ using System.Threading.Tasks;
 using MoleProject.Pages;
 using MoleProject.Shared;
 
-public class GameTests : TestContext
-{
-    private Mock<IJSRuntime> mockJSRuntime;
-
-    public GameTests()
+namespace GameTests{
+    public class GameTests: TestContext
     {
-        mockJSRuntime = new Mock<IJSRuntime>();
-        Services.AddSingleton(mockJSRuntime.Object);
-    }
+        private Mock<IJSRuntime> mockJSRuntime;
 
-    [Fact]
-    public void Constructor_InitializesCells()
-    {
-        var game = new Game();
+        public GameTests()
+        {
+            mockJSRuntime = new Mock<IJSRuntime>();
+            Services.AddSingleton(mockJSRuntime.Object);
+        }
 
-        Assert.Equal(16, game.Cells.Count);
-        Assert.All(game.Cells, cell => Assert.IsType<CellModel>(cell));
-    }
+        [Fact]
+        public void Constructor_InitializesCells()
+        {
+            var game = new Game();
 
-    [Fact]
-    public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
-    {
-        var cut = RenderComponent<Game>();
-        cut.Instance.StartGame();
-        var hitCell = new CellModel { Id = cut.Instance.hitPosition };
+            Assert.Equal(16, game.Cells.Count);
+            Assert.All(game.Cells, cell => Assert.IsType<CellModel>(cell));
+        }
 
-        await cut.Instance.MouseUp(hitCell);
+        [Fact]
+        public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
+        {
+            var cut = RenderComponent<Game>();
+            cut.Instance.StartGame();
+            var hitCell = new CellModel { Id = cut.Instance.hitPosition };
 
-        Assert.Equal(1, cut.Instance.score);
-        mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
-    }
+            await cut.Instance.MouseUp(hitCell);
 
-    [Fact]
-    public async Task MouseUp_MissPosition_InvokeJavaScript()
-    {
-        var cut = RenderComponent<Game>();
-        cut.Instance.StartGame();
-        var missCell = new CellModel { Id = (cut.Instance.hitPosition + 1) % 16 };
+            Assert.Equal(1, cut.Instance.score);
+            mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
+        }
 
-        await cut.Instance.MouseUp(missCell);
+        [Fact]
+        public async Task MouseUp_MissPosition_InvokeJavaScript()
+        {
+            var cut = RenderComponent<Game>();
+            cut.Instance.StartGame();
+            var missCell = new CellModel { Id = (cut.Instance.hitPosition + 1) % 16 };
 
-        Assert.Equal(0, cut.Instance.score);
-        mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
-    }
+            await cut.Instance.MouseUp(missCell);
+
+            Assert.Equal(0, cut.Instance.score);
+            mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
+        }
 
 
-    [Fact]
-    public void RestartGame_ResetsGameState()
-    {
-        var cut = RenderComponent<Game>();
-        cut.Instance.StartGame();
-        cut.Instance.EndGame();
+        [Fact]
+        public void RestartGame_ResetsGameState()
+        {
+            var cut = RenderComponent<Game>();
+            cut.Instance.StartGame();
+            cut.Instance.EndGame();
 
-        cut.Instance.RestartGame();
+            cut.Instance.RestartGame();
 
-        Assert.True(cut.Instance.isGameStarted);
-        Assert.True(cut.Instance.isGameRunning);
-        Assert.Equal(0, cut.Instance.score);
-        Assert.Equal(60, cut.Instance.currentTime);
-        Assert.False(cut.Instance.showGameOverModal);
-    }
+            Assert.True(cut.Instance.isGameStarted);
+            Assert.True(cut.Instance.isGameRunning);
+            Assert.Equal(0, cut.Instance.score);
+            Assert.Equal(60, cut.Instance.currentTime);
+            Assert.False(cut.Instance.showGameOverModal);
+        }
 
-    [Fact]
-    public void ReturnToStartMenu_SetsCorrectState()
-    {
-        var cut = RenderComponent<Game>();
-        cut.Instance.StartGame();
-        cut.Instance.EndGame();
+        [Fact]
+        public void ReturnToStartMenu_SetsCorrectState()
+        {
+            var cut = RenderComponent<Game>();
+            cut.Instance.StartGame();
+            cut.Instance.EndGame();
 
-        cut.Instance.ReturnToStartMenu();
+            cut.Instance.ReturnToStartMenu();
 
-        Assert.False(cut.Instance.isGameStarted);
-        Assert.False(cut.Instance.showGameOverModal);
+            Assert.False(cut.Instance.isGameStarted);
+            Assert.False(cut.Instance.showGameOverModal);
+        }
     }
 }

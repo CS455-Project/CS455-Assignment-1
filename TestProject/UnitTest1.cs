@@ -1,54 +1,61 @@
 using Bunit;
 using Xunit;
 using System.Threading;
+using MoleProject;
+using MoleProject.Layout;
+using MoleProject.Pages;
+using MoleProject.Shared;
 
-public class WhackEmAllTests : TestContext
-{
-
-    [Fact]
-    public void StartGame_ShouldInitializeGameCorrectly()
+namespace WhackEmAllTests{
+    public class WhackEmAllTests : TestContext
     {
-        var gameService = new TestableGame();
-        gameService.StartGame();
 
-        Assert.True(gameService.isGameRunning);
-        Assert.Equal(0, gameService.score);
-        Assert.Equal(750, gameService.gameSpeed);
-        Assert.Equal(16, gameService.Cells.Count);
-        Assert.True(gameService.isGameStarted);
-        Assert.True(string.IsNullOrEmpty(gameService.message));
-        Assert.False(gameService.showGameOverModal);
-        Assert.NotNull(gameService.gameLoopTimer);
-        Assert.NotNull(gameService.gameTimeTimer); 
-        Assert.Equal(60, gameService.currentTime);
-    }
+        [Fact]
+        public void StartGame_ShouldInitializeGameCorrectly()
+        {
+            var gameService = new Game();
+            gameService.StartGame();
 
-    [Fact]
-    public void EndGame_ShouldTerminateGameCorrectly()
-    {
-        var gameService = new TestableGame();
-        gameService.EndGame();
+            Assert.True(gameService.isGameRunning);
+            Assert.Equal(0, gameService.score);
+            Assert.Equal(750, gameService.gameSpeed);
+            Assert.Equal(16, gameService.Cells.Count);
+            Assert.True(gameService.isGameStarted);
+            Assert.True(string.IsNullOrEmpty(gameService.message));
+            Assert.False(gameService.showGameOverModal);
+            Assert.NotNull(gameService.gameLoopTimer);
+            Assert.NotNull(gameService.gameTimeTimer); 
+            Assert.Equal(60, gameService.currentTime);
+        }
 
-        Assert.False(gameService.isGameRunning);
-        Assert.True(gameService.showGameOverModal);
-        Assert.Equal("Game Over", gameService.message);
-    }
+        [Fact]
+        public void EndGame_ShouldTerminateGameCorrectly()
+        {
+            var gameService = new Game();
+            gameService.EndGame();
 
-    [Fact]
-    public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
-    {
-        var gameService = new TestableGame();
+            Assert.False(gameService.isGameRunning);
+            Assert.True(gameService.showGameOverModal);
+            Assert.Equal("Game Over", gameService.message);
+        }
 
-        gameService.StartGame();
+        [Fact]
+        public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
+        {
+            var gameService = new Game();
 
-        gameService.setNextAppearance();
-        int currentMoleIndex = gameService.hitPosition;
-        Assert.True(gameService.Cells[currentMoleIndex].IsShown);
+            gameService.StartGame();
 
-        gameService.setNextAppearance();
-        int newMoleIndex = gameService.hitPosition;
+            gameService.setNextAppearance();
+            int currentMoleIndex = gameService.hitPosition;
+            Assert.True(gameService.Cells[currentMoleIndex].IsShown);
 
-        Assert.False(gameService.Cells[currentMoleIndex].IsShown);
-        Assert.True(gameService.Cells[newMoleIndex].IsShown);
+            gameService.setNextAppearance();
+            int newMoleIndex = gameService.hitPosition;
+
+            Assert.False(gameService.Cells[currentMoleIndex].IsShown);
+            Assert.True(gameService.Cells[newMoleIndex].IsShown);
+        }
     }
 }
+

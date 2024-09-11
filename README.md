@@ -1,4 +1,4 @@
-# CS455 Assigment-1
+# CS455 Assigment-1 
 This repository consists of the codebase for the Whack'Em All project, completed as the first Assignment for the course CS455 : Introduction to Software Engineering, under Prof. Sruti S Ragavan, department of CSE, IIT Kanpur
 
 ## Release Notes

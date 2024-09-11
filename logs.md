@@ -55,6 +55,12 @@
 - StateHasChanged had to be place outside SetNext to test it
 
 ---
+### 10-09-2024
+
+**Task(s) Completed:**
+- Added Test coverage to CI Pipeline
+
+---
 
 ## Summary 
 

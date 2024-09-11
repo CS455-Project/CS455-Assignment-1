@@ -33,8 +33,8 @@ jobs:
           /o:"cs455-project" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
-          /d:sonar.exclusions="**/dotCover.Output/**,dotCover.Output.html"
+          /d:sonar.cs.dotcover.reportsPaths=coverage.opencover.xml \
+          /d:sonar.exclusions="**/coverage.opencover.xml"
 
     - name: Build
       run: dotnet build src/MoleProject.csproj
@@ -42,8 +42,13 @@ jobs:
     - name: Build Solution
       run: dotnet build TestProject/TestProject.sln --configuration Debug
 
-    - name: Test with coverage
-      run: dotnet dotcover test  TestProject/TestProject.csproj --dcReportType=HTML       
+    # Run tests and collect coverage using coverlet
+    - name: Run tests and collect coverage
+      run: |
+        dotnet test TestProject/TestProject.csproj --no-build --verbosity normal \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=opencover \
+          /p:CoverletOutput=./coverage.opencover.xml
 
     - name: End SonarScanner
       env:

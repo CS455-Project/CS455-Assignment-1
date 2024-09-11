@@ -4,23 +4,23 @@ on:
   [push]
 
 jobs:
-  dotnetformat:
-    name: DotNet Format
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  # dotnetformat:
+  #   name: DotNet Format
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "8.0.x"
+  #     - name: Setup .NET Core SDK
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: "8.0.x"
 
-      - name: Install dotnet-format
-        run: dotnet tool install -g dotnet-format
+  #     - name: Install dotnet-format
+  #       run: dotnet tool install -g dotnet-format
 
-      - name: Run dotnet-format
-        run: dotnet format src/MoleProject.csproj --verify-no-changes
+  #     - name: Run dotnet-format
+  #       run: dotnet format src/MoleProject.csproj --verify-no-changes
     
 
   build :

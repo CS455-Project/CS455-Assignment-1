@@ -52,8 +52,8 @@ jobs:
 
     # # Run tests and collect coverage
     - name: Run tests and collect coverage
-      run: dotnet dotcover test  TestProject/TestProject.csproj --dcReportType=HTML                  
-
+      run: dotnet test TestProject/TestProject.csproj /p:CollectCoverage=true /p:CoverletOutput=./coverage/ /p:CoverletOutputFormat=html
+                 
     - name: End SonarScanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

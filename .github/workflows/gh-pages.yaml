@@ -42,11 +42,7 @@ jobs:
       run: dotnet build TestProject/TestProject.sln --configuration Debug
 
     - name: Test with coverage
-      run: |
-        dotnet test TestProject/TestProject.csproj --no-build --verbosity normal \
-          /p:CollectCoverage=true \
-          /p:CoverletOutputFormat=opencover \
-          /p:CoverletOutput=./coverage.opencover.xml
+      run: dotnet dotcover test tests/StackNServe.Tests/StackNServe.Tests.csproj --dcReportType=HTML
 
     - name: End SonarScanner
       env:

@@ -42,7 +42,7 @@ jobs:
       run: dotnet build TestProject/TestProject.sln --configuration Debug
 
     - name: Test with coverage
-      run: dotnet dotcover test tests/StackNServe.Tests/StackNServe.Tests.csproj --dcReportType=HTML
+      run: dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML
 
     - name: End SonarScanner
       env:

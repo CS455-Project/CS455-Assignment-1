@@ -2,81 +2,90 @@ using NUnit.Framework;
 using Moq;
 using System;
 
-public interface IAudioPlayer
+namespace Audio
 {
-    void Play(string soundId);
-}
-
-public class SoundPlayer
-{
-    private readonly IAudioPlayer _audioPlayer;
-
-    public SoundPlayer(IAudioPlayer audioPlayer)
+    public interface IAudioPlayer
     {
-        _audioPlayer = audioPlayer;
-    }
-
-    public void PlaySound1()
-    {
-        _audioPlayer.Play("hitSound");
-    }
-
-    public void PlaySound2()
-    {
-        _audioPlayer.Play("missSound");
+        void Play(string soundId);
     }
 }
 
-[TestFixture]
-public class SoundPlayerTests
+namespace GameLogic
 {
-    private Mock<IAudioPlayer> _mockAudioPlayer;
-    private SoundPlayer _soundPlayer;
-
-    [SetUp]
-    public void Setup()
+    public class SoundPlayer
     {
-        _mockAudioPlayer = new Mock<IAudioPlayer>();
-        _soundPlayer = new SoundPlayer(_mockAudioPlayer.Object);
+        private readonly Audio.IAudioPlayer _audioPlayer;
+
+        public SoundPlayer(Audio.IAudioPlayer audioPlayer)
+        {
+            _audioPlayer = audioPlayer;
+        }
+
+        public void PlaySound1()
+        {
+            _audioPlayer.Play("hitSound");
+        }
+
+        public void PlaySound2()
+        {
+            _audioPlayer.Play("missSound");
+        }
     }
+}
 
-    [Test]
-    public void PlaySound1_ShouldPlayHitSound()
+namespace SoundPlayerTests
+{
+    [TestFixture]
+    public class SoundPlayerTests
     {
-        // Act
-        _soundPlayer.PlaySound1();
+        private Mock<Audio.IAudioPlayer>? _mockAudioPlayer;
+        private GameLogic.SoundPlayer? _soundPlayer;
 
-        // Assert
-        _mockAudioPlayer.Verify(x => x.Play("hitSound"), Times.Once);
-    }
+        [SetUp]
+        public void Setup()
+        {
+            _mockAudioPlayer = new Mock<Audio.IAudioPlayer>();
+            _soundPlayer = new GameLogic.SoundPlayer(_mockAudioPlayer.Object);
+        }
 
-    [Test]
-    public void PlaySound2_ShouldPlayMissSound()
-    {
-        // Act
-        _soundPlayer.PlaySound2();
+        [Test]
+        public void PlaySound1_ShouldPlayHitSound()
+        {
+            // Act
+            _soundPlayer!.PlaySound1();
 
-        // Assert
-        _mockAudioPlayer.Verify(x => x.Play("missSound"), Times.Once);
-    }
+            // Assert
+            _mockAudioPlayer!.Verify(x => x.Play("hitSound"), Times.Once);
+        }
 
-    [Test]
-    public void PlaySound1_ShouldNotPlayMissSound()
-    {
-        // Act
-        _soundPlayer.PlaySound1();
+        [Test]
+        public void PlaySound2_ShouldPlayMissSound()
+        {
+            // Act
+            _soundPlayer!.PlaySound2();
 
-        // Assert
-        _mockAudioPlayer.Verify(x => x.Play("missSound"), Times.Never);
-    }
+            // Assert
+            _mockAudioPlayer!.Verify(x => x.Play("missSound"), Times.Once);
+        }
 
-    [Test]
-    public void PlaySound2_ShouldNotPlayHitSound()
-    {
-        // Act
-        _soundPlayer.PlaySound2();
+        [Test]
+        public void PlaySound1_ShouldNotPlayMissSound()
+        {
+            // Act
+            _soundPlayer!.PlaySound1();
 
-        // Assert
-        _mockAudioPlayer.Verify(x => x.Play("hitSound"), Times.Never);
+            // Assert
+            _mockAudioPlayer!.Verify(x => x.Play("missSound"), Times.Never);
+        }
+
+        [Test]
+        public void PlaySound2_ShouldNotPlayHitSound()
+        {
+            // Act
+            _soundPlayer!.PlaySound2();
+
+            // Assert
+            _mockAudioPlayer!.Verify(x => x.Play("hitSound"), Times.Never);
+        }
     }
 }

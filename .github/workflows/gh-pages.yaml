@@ -64,7 +64,7 @@ jobs:
 
     # # Run tests and collect coverage
     - name: Run tests and collect coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/Coverage/Coverage/coverage.opencover.xml
+      run: dotnet test TestProject/TestProject.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/Coverage/Coverage/coverage.opencover.xml
                  
     - name: End SonarScanner
       env:

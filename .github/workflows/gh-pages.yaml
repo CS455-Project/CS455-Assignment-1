@@ -33,8 +33,7 @@ jobs:
           /o:"cs455-project" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html \
-          /d:sonar.exclusions="**/dotCover.Output/**,dotCover.Output.html"
+          /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 
     - name: Build
       run: dotnet build src/MoleProject.csproj
@@ -52,7 +51,7 @@ jobs:
 
     # # Run tests and collect coverage
     - name: Run tests and collect coverage
-      run: dotnet test TestProject/TestProject.csproj /p:CollectCoverage=true /p:CoverletOutput=./coverage/ /p:CoverletOutputFormat=html
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/Coverage/Coverage/coverage.opencover.xml
                  
     - name: End SonarScanner
       env:

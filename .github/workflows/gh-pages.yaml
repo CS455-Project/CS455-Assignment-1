@@ -49,15 +49,6 @@ jobs:
           --uitest false  # Disable UI testing if needed
           --dcReportType=HTML  # Generate dotCover report
 
-    - name: Publish dotCover report (optional)
-      # This step is optional and depends on your preference.
-      # You can upload the generated HTML report to a storage location (e.g., Azure Blob Storage)
-      # for further analysis.
-      # 
-      # run: |
-      #   # Replace with your storage upload logic here
-      #   # This might involve tools like AzCopy for Azure Blob Storage
-
     - name: Analyze test results with SonarScanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

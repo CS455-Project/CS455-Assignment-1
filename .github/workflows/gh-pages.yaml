@@ -9,11 +9,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write    
 
     steps:
     - uses: actions/checkout@v3
-
+    
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
       with:
@@ -21,8 +21,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        dotnet tool install --global coverlet.console
         dotnet tool install --global dotnet-sonarscanner
-        dotnet tool install --global dotCover.GlobalTool
 
     - name: Begin SonarScanner
       env:
@@ -32,38 +32,54 @@ jobs:
         dotnet sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" \
           /o:"cs455-project" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-          /d:sonar.host.url="https://sonarcloud.io"
+          /d:sonar.host.url="https://sonarcloud.io" \
+          /d:sonar.cs.opencover.reportsPaths="/coverage.opencover.xml"
 
-    - name: Build Src
+    - name: Build
       run: dotnet build src/MoleProject.csproj
+
+    - name: Troubleshoot NuGet restore
+      run: |
+          dotnet nuget locals all --clear
+          dotnet restore TestProject/TestProject.sln -v normal
+          if [ $? -ne 0 ]; then
+            dotnet restore TestProject/TestProject.sln --source https://api.nuget.org/v3/index.json -v normal
+          fi
+          dotnet add TestProject/TestProject.csproj package coverlet.collector
+          if [ $? -ne 0 ]; then
+            dotnet add TestProject/TestProject.csproj package coverlet.collector -v 6.0.0
+          fi
+
 
     - name: Build Solution
       run: dotnet build TestProject/TestProject.sln --configuration Debug
 
-    - name: Run tests and collect coverage
-      run: |
-        dotnet cover test TestProject/TestProject.csproj \
-          --framework "xunit"  # Replace with your test framework if needed
-          --collect="xunit;microsoft.dotnet.test.framework"  # Replace with your collectors if needed
-          --settings="**/*.runsettings"  # Include your test settings file if applicable
-          --uitest false  # Disable UI testing if needed
-          --dcReportType=HTML  # Generate dotCover report
+    # Run tests and collect coverage using coverlet
+    # - name: Test with Coverage
+    #   run: |
+    #     dotnet test TestProject/TestProject.csproj --no-build --verbosity normal \
+    #       /p:CollectCoverage=true \
+    #       /p:CoverletOutputFormat=opencover \
+    #       /p:CoverletOutput=./coverage.opencover.xml
 
-    - name: Analyze test results with SonarScanner
+    # # Run tests and collect coverage
+    - name: Run tests and collect coverage
+      run: dotnet test TestProject/TestProject.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/Coverage/Coverage/coverage.opencover.xml
+                 
+    - name: End SonarScanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-        /d:sonar.coverage.reportPaths=./coverage.opencover.xml
+      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
     - name: Publish .NET Core Project
       if: success()
       run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
-
+      
     - name: Change base-tag in index.html from / to MoleProject
       if: success()
       run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
-
+      
     - name: Copy index.html to 404.html
       if: success()
       run: cp release/wwwroot/index.html release/wwwroot/404.html
@@ -71,12 +87,11 @@ jobs:
     - name: Add .nojekyll file
       if: success()
       run: touch release/wwwroot/.nojekyll
-
+      
     - name: Commit wwwroot to GitHub Pages
       if: success()
-      uses: JamesIves/github-pages-deploy-action@3.7.1   
-
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: release/wwwroot   
+        FOLDER: release/wwwroot

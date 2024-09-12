@@ -8,6 +8,8 @@ Notes : Added Unit Test, Code Quailty Gates and Resolved Code Issues using Sonar
 
 ## Links
 
+- The source code for the game is in the `src/` folder and can be accessed using [this](https://github.com/CS455-Project/CS455-Assignment-1/tree/main/src) link.
+- The `TestProject/` folder contains the unit tests and coverage report of the source code and can be accessed using [this](https://github.com/CS455-Project/CS455-Assignment-1/tree/main/TestProject) link.
 - The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
 - For detailed code quality and coverage analysis, visit our [SonarCloud project page](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1).
 
@@ -39,7 +41,8 @@ The project uses the following tools for testing and quality assurance:
 ### xUnit, bUnit and NUnit
 - **xUnit**: This is the testing framework used for unit testing the application's code. It is known for its simplicity and ease of use.
 - **bUnit**: This is used for testing Blazor components specifically. It allows for testing the UI components and their interactions in isolation.
-- **NUnit**: 
+- **NUnit**: A popular unit testing framework for .NET applications, known for its flexibility and rich set of attributes for organizing and running tests.
+- **Moq**: A mocking library for .NET, used to create mock objects for testing dependencies, allowing for behavior verification and isolation of components.
 
 ### SonarCloud
 - **SonarCloud**: This tool has been integrated to enforce quality gates on the codebase. SonarCloud provides continuous inspection of code quality and helps identify bugs, code smells, and security vulnerabilities. Quality gates are used to ensure that the code meets predefined standards before it is merged or released.

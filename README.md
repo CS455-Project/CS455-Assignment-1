@@ -38,7 +38,7 @@ dotnet watch
 ## Testing
 The project uses the following tools for testing and quality assurance:
 
-### xUnit, bUnit and NUnit
+### xUnit, bUnit, NUnit and Moq
 - **xUnit**: This is the testing framework used for unit testing the application's code. It is known for its simplicity and ease of use.
 - **bUnit**: This is used for testing Blazor components specifically. It allows for testing the UI components and their interactions in isolation.
 - **NUnit**: A popular unit testing framework for .NET applications, known for its flexibility and rich set of attributes for organizing and running tests.

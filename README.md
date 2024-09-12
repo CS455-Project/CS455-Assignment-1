@@ -2,9 +2,11 @@
 This repository consists of the codebase for the Whack'Em All project, completed as the first Assignment for the course CS455 : Introduction to Software Engineering, under Prof. Sruti S Ragavan, department of CSE, IIT Kanpur
 
 ## Release Notes
-Version : 2.0 
-Date : 12 September 2024
-Notes : Added Unit Test, Code Quailty Gates and Resolved Code Issues using Sonar Cloud
+**Version** : 2.0 
+
+**Date** : 12 September 2024
+
+**Notes** : Added Unit Test, Code Quailty Gates and Resolved Code Issues using Sonar Cloud
 
 ## Links
 

@@ -56,7 +56,7 @@ jobs:
 
       # Build the solution after starting SonarCloud analysis
       - name: Build the solution
-        run: dotnet build src/MoleProject.csproj --configuration Debug
+        run: dotnet build MoleProject.csproj --configuration Debug
 
       # # Build the test project explicitly to generate test DLLs
       # - name: Build the test project
@@ -120,7 +120,7 @@ jobs:
 
     # Publish the project
     - name: Publish .NET Core Project
-      run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
+      run: dotnet publish MoleProject.csproj -c Release -o release --nologo
     
     # Verify that index.html exists after the publish
     - name: Verify index.html exists

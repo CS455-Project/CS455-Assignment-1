@@ -24,7 +24,7 @@ For local deployment, this app requires `.NET Core SDK 8.0.107` to be installed 
 To run the application locally, follow the following steps &rarr;
 1. In the directory of your choice, clone this repo 
 ```bash
-git clone https://github.com/akankshabw/CS455-Assignment-1
+git clone https://github.com/CS455-Project/CS455-Assignment-1
 ```
 2. To run locally, make sure you are in the `src/` directory and run &rarr;
 ```bash

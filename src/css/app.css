@@ -200,3 +200,17 @@ code {
 .game-container{
     text-align: center;
 }
+
+li{
+    font-size: 100px;
+}
+
+
+ul{
+    list-style-type: none;
+}
+  
+.Instructions{
+    background-color: #e2eaa3;
+}
+  

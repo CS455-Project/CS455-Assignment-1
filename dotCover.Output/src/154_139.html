@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\Pages\Game.razor</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+@page &quot;/&quot;
+@inject IJSRuntime JSRuntime
+@using MoleProject.Shared;
+
+&lt;PageTitle&gt;Whack&#39;Em-All&lt;/PageTitle&gt;
+
+@if (isGameStarted)
+{
+    &lt;div class=&quot;game-container&quot;&gt;
+        &lt;h1&gt;Welcome to Whack&#39;Em-All&lt;/h1&gt;
+
+        &lt;div class=&quot;info-container&quot;&gt;
+            &lt;h2&gt;Score: @score&lt;/h2&gt;
+            &lt;h2&gt;Remaining Time: @currentTime&lt;/h2&gt;
+            &lt;!-- &lt;h2&gt;@message&lt;/h2&gt; --&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;canvas&quot;&gt;
+            @foreach (var s in Cells)
+            {
+                &lt;Cell CellModel=&quot;s&quot; OnMouseUp=&quot;() =&gt; MouseUp(s)&quot; /&gt;
+            }
+        &lt;/div&gt;
+
+        &lt;audio id=&quot;hitSound&quot; src=&quot;hitsound.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
+        &lt;audio id=&quot;missSound&quot; src=&quot;misssound.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
+    &lt;/div&gt;
+}
+else
+{
+    &lt;div class=&quot;start-menu full-screen&quot;&gt;
+        &lt;h1&gt;Welcome to Whack&#39;Em-All!&lt;/h1&gt;
+        &lt;p&gt; How to play?? &lt;/p&gt;
+        &lt;h2&gt;Try to pick as many smileys as you can :)&lt;/h2&gt;
+        &lt;p&gt;Are you ready to start the game?&lt;/p&gt;
+        &lt;button @onclick=&quot;StartGame&quot;&gt;Start Game&lt;/button&gt;
+    &lt;/div&gt;
+}
+
+@if (showGameOverModal)
+{
+    &lt;div class=&quot;modal-overlay&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            @if(@score &lt; 45){
+                &lt;h2&gt; Oops ...Game Over !!&lt;/h2&gt;
+                &lt;p&gt;Your final score is: @score&lt;/p&gt;
+            }else{
+                &lt;h2&gt;You Won !!&lt;/h2&gt;
+                &lt;p&gt;Your final score is: @score&lt;/p&gt;
+            }
+            &lt;button @onclick=&quot;RestartGame&quot;&gt;Restart Game&lt;/button&gt;
+            &lt;button @onclick=&quot;ReturnToStartMenu&quot;&gt;Return to Start Menu&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+}
+
+@code {
+    private Random random = new Random();
+    private int? lastPosition = null;
+    public async Task MouseUp(CellModel s)
+    {
+        if (isGameRunning)
+        {
+            if (s.Id == hitPosition)
+            {
+                score += 1;
+                await PlayHitSound(); 
+            }else{
+                await PlayMissSound();
+            }
+        }
+    }
+
+    protected async Task PlayHitSound()
+    {
+        await JSRuntime.InvokeVoidAsync(&quot;playSound1&quot;);
+    }
+
+    protected async Task PlayMissSound()
+    {
+        await JSRuntime.InvokeVoidAsync(&quot;playSound2&quot;);
+    }
+
+
+    public void setNextAppearance()
+    {
+        foreach (var item in Cells)
+        {
+            item.IsShown = false;
+        }
+
+        int randomPosition;
+
+        do
+        {
+            randomPosition = random.Next(0, 16);
+        } while (lastPosition == randomPosition);
+
+        Cells[randomPosition].IsShown = true;
+        hitPosition = randomPosition;
+        lastPosition = randomPosition;
+    }
+
+    protected virtual async Task GameLoopAsync(PeriodicTimer timer)
+    {
+        while (isGameRunning)
+        {
+            setNextAppearance();
+            StateHasChanged();
+            await timer.WaitForNextTickAsync();
+            StateHasChanged();
+        }
+    }
+
+    protected virtual async Task GameTimeAsync(PeriodicTimer timer)
+    {
+        while (isGameRunning)
+        {
+
+            if (currentTime == 0)
+            {
+                EndGame();
+                StateHasChanged();
+                break;
+            }
+
+            StateHasChanged();
+            await timer.WaitForNextTickAsync();
+            currentTime--;
+        }
+    }
+
+    public void StartGame()
+    {
+        isGameStarted = true;
+        score = 0;
+        currentTime = 60; // Reset time
+        isGameRunning = true;
+        message = &quot;&quot;;
+        showGameOverModal = false;
+
+        gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(gameSpeed));
+        _ = GameLoopAsync(gameLoopTimer);
+
+        gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        _ = GameTimeAsync(gameTimeTimer);
+    }
+
+    public void EndGame()
+    {
+        message = &quot;Game Over&quot;;
+        isGameRunning = false;
+        showGameOverModal = true;
+        gameLoopTimer?.Dispose();
+        gameTimeTimer?.Dispose();
+        
+    }
+
+
+    public void RestartGame()
+    {
+        showGameOverModal = false;
+        StartGame();
+    }
+
+    public void ReturnToStartMenu()
+    {
+        showGameOverModal = false;
+        isGameStarted = false;
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[7,2,7,20,1],[8,1,8,2,0],[19,14,19,21,0],[19,23,19,28,0],[19,29,19,31,0],[19,32,19,37,0],[20,13,20,14,0],[21,54,21,64,0],[22,13,22,14,0],[28,1,28,2,0],[30,1,30,2,1],[38,1,38,2,1],[40,2,40,24,1],[41,1,41,2,0],[44,14,44,29,0],[44,29,44,30,0],[47,13,47,14,0],[47,18,47,19,0],[50,13,50,14,0],[55,1,55,2,1],[58,5,58,42,1],[59,5,59,38,1],[61,5,61,6,1],[62,9,62,27,1],[63,9,63,10,1],[64,13,64,37,1],[65,13,65,14,1],[66,17,66,28,1],[67,17,67,38,1],[68,13,68,14,1],[68,18,68,19,1],[69,17,69,39,1],[70,13,70,14,1],[71,9,71,10,1],[72,5,72,6,1],[75,5,75,6,1],[76,9,76,55,1],[77,5,77,6,1],[80,5,80,6,1],[81,9,81,55,1],[82,5,82,6,1],[86,5,86,6,1],[87,9,87,16,1],[87,18,87,26,1],[87,27,87,29,1],[87,30,87,35,1],[88,9,88,10,1],[89,13,89,34,1],[90,9,90,10,1],[95,9,95,10,1],[96,13,96,49,1],[97,9,97,10,1],[97,11,97,50,1],[99,9,99,46,1],[100,9,100,38,1],[101,9,101,39,1],[102,5,102,6,1],[105,5,105,6,1],[106,9,106,30,1],[107,9,107,10,1],[108,13,108,33,1],[109,13,109,31,1],[110,13,110,48,0],[111,13,111,31,0],[112,9,112,10,1],[113,5,113,6,0],[116,5,116,6,1],[117,9,117,30,1],[118,9,118,10,1],[120,13,120,34,1],[121,13,121,14,0],[122,17,122,27,0],[123,17,123,35,0],[124,17,124,23,1],[127,13,127,31,1],[128,13,128,48,0],[129,13,129,27,0],[130,9,130,10,1],[131,5,131,6,0],[134,5,134,6,1],[135,9,135,30,1],[136,9,136,19,1],[137,9,137,26,1],[138,9,138,30,1],[139,9,139,22,1],[140,9,140,35,1],[142,9,142,81,1],[143,9,143,42,1],[145,9,145,68,1],[146,9,146,42,1],[147,5,147,6,1],[150,5,150,6,1],[151,9,151,31,1],[152,9,152,31,1],[153,9,153,34,1],[154,9,154,34,1],[155,9,155,34,1],[157,5,157,6,1],[161,5,161,6,1],[162,9,162,35,1],[163,9,163,21,1],[164,5,164,6,1],[167,5,167,6,1],[168,9,168,35,1],[169,9,169,31,1],[170,5,170,6,1]]);
+    </script>
+  </body>
+</html>

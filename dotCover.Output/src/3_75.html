@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\TestProject\UnitTest1.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Bunit;
+using Xunit;
+using System.Threading;
+using MoleProject;
+using MoleProject.Layout;
+using MoleProject.Pages;
+using MoleProject.Shared;
+
+namespace WhackEmAllTests{
+    public class WhackEmAllTests : TestContext
+    {
+
+        [Fact]
+        public void StartGame_ShouldInitializeGameCorrectly()
+        {
+            var gameService = new Game();
+            gameService.StartGame();
+
+            Assert.True(gameService.isGameRunning);
+            Assert.Equal(0, gameService.score);
+            Assert.Equal(750, gameService.gameSpeed);
+            Assert.Equal(16, gameService.Cells.Count);
+            Assert.True(gameService.isGameStarted);
+            Assert.True(string.IsNullOrEmpty(gameService.message));
+            Assert.False(gameService.showGameOverModal);
+            Assert.NotNull(gameService.gameLoopTimer);
+            Assert.NotNull(gameService.gameTimeTimer); 
+            Assert.Equal(60, gameService.currentTime);
+        }
+
+        [Fact]
+        public void EndGame_ShouldTerminateGameCorrectly()
+        {
+            var gameService = new Game();
+            gameService.EndGame();
+
+            Assert.False(gameService.isGameRunning);
+            Assert.True(gameService.showGameOverModal);
+            Assert.Equal(&quot;Game Over&quot;, gameService.message);
+        }
+
+        [Fact]
+        public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
+        {
+            var gameService = new Game();
+
+            gameService.StartGame();
+
+            gameService.setNextAppearance();
+            int currentMoleIndex = gameService.hitPosition;
+            Assert.True(gameService.Cells[currentMoleIndex].IsShown);
+
+            gameService.setNextAppearance();
+            int newMoleIndex = gameService.hitPosition;
+
+            Assert.False(gameService.Cells[currentMoleIndex].IsShown);
+            Assert.True(gameService.Cells[newMoleIndex].IsShown);
+        }
+    }
+}
+
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,9,15,10,1],[16,13,16,42,1],[17,13,17,37,1],[19,13,19,52,1],[20,13,20,48,1],[21,13,21,54,1],[22,13,22,55,1],[23,13,23,52,1],[24,13,24,68,1],[25,13,25,57,1],[26,13,26,55,1],[27,13,27,55,1],[28,13,28,55,1],[29,9,29,10,1],[33,9,33,10,1],[34,13,34,42,1],[35,13,35,35,1],[37,13,37,53,1],[38,13,38,56,1],[39,13,39,60,1],[40,9,40,10,1],[44,9,44,10,1],[45,13,45,42,1],[47,13,47,37,1],[49,13,49,45,1],[50,13,50,60,1],[51,13,51,70,1],[53,13,53,45,1],[54,13,54,56,1],[56,13,56,71,1],[57,13,57,66,1],[58,9,58,10,1]]);
+    </script>
+  </body>
+</html>

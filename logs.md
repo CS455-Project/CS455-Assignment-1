@@ -44,7 +44,7 @@
 - Added tests for start game and end game
 - Added tests for SetNextAppearence
 - Linked the Project with SonarCloud
-- Added Unit Test quality gate using SonarCloud
+- Added Code quality gates using SonarCloud
 - Added cognitive complexity check
 - Added cyclomatic complexity check
 - Added numerous gates on old code
@@ -56,6 +56,28 @@
 
 ---
 
+### 11-09-2024
+
+**Task(s) Completed:**  
+- Integrated SonarCloud with github for test coverage with dotCover.
+- Fixed the issues that were causing the quality gates to fail on SonarCloud.
+- Added unit tests to check whether the javascript code is working properly on certain events.
+
+**Challenges Faced:**
+- SonarCloud was initially configuring source files as test files and thus we spent a long time to resolve this.
+
+**Solutions or Workarounds:**  
+- We could solve this issue with the help of community support on internet.
+---
+
+### 12-09-2024
+
+**Task(s) Completed:**  
+- Added the instructions to play the game on the home page.
+
+---
+
+
 ## Summary 
 
 **Milestone Achieved:** 
@@ -66,9 +88,7 @@
 5. Integerate Code Linters.
 6. Unit Testing.
 7. Choice of Code Quality Metrics.
-
-**Remaining Milestones:** 
-1. Instructions page for the Game(Not related to assignment 2).
+8. Instructions page for the Game.
 
 ---
 

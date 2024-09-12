@@ -40,16 +40,17 @@ dotnet watch
 ## Testing
 The project uses the following tools for testing and quality assurance:
 
-### xUnit, bUnit, NUnit and Moq
+### Tools for Unit Tests
 - **xUnit**: This is the testing framework used for unit testing the application's code. It is known for its simplicity and ease of use.
 - **bUnit**: This is used for testing Blazor components specifically. It allows for testing the UI components and their interactions in isolation.
 - **NUnit**: A popular unit testing framework for .NET applications, known for its flexibility and rich set of attributes for organizing and running tests.
 - **Moq**: A mocking library for .NET, used to create mock objects for testing dependencies, allowing for behavior verification and isolation of components.
 
-### SonarCloud
+### Tools for Code Quality
 - **SonarCloud**: This tool has been integrated to enforce quality gates on the codebase. SonarCloud provides continuous inspection of code quality and helps identify bugs, code smells, and security vulnerabilities. Quality gates are used to ensure that the code meets predefined standards before it is merged or released.
-
-### dotCover
+  
+- **SonarLint**: Along with SonarCloud, we used SonarLint explicitly as linters for our codebase.
+  
 - **dotCover**: This tool is used to create code coverage reports. It helps in identifying which parts of the code are covered by tests and which are not. Ensuring high code coverage is essential for maintaining code quality and reliability.
 
 ## Running Tests and Coverage Reports

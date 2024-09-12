@@ -23,9 +23,28 @@ To run the application locally, follow the following steps &rarr;
 ```bash
 git clone https://github.com/akankshabw/CS455-Assignment-1
 ```
-2. Change the directory to Project directory and run &rarr;
+2. To run locally, make sure you are in the `src/` directory and run &rarr;
 ```bash
-cd CS455-Assignment-1/
 dotnet watch
 ```
 3. Within a few seconds, this should direct you to your browser, with locally running version of the game.
+## Testing
+The project uses the following tools for testing and quality assurance:
+
+### xUnit and bUnit
+- **xUnit**: This is the testing framework used for unit testing the application's code. It is known for its simplicity and ease of use.
+- **bUnit**: This is used for testing Blazor components specifically. It allows for testing the UI components and their interactions in isolation.
+
+### SonarCloud
+- **SonarCloud**: This tool has been integrated to enforce quality gates on the codebase. SonarCloud provides continuous inspection of code quality and helps identify bugs, code smells, and security vulnerabilities. Quality gates are used to ensure that the code meets predefined standards before it is merged or released.
+
+### dotCover
+- **dotCover**: This tool is used to create code coverage reports. It helps in identifying which parts of the code are covered by tests and which are not. Ensuring high code coverage is essential for maintaining code quality and reliability.
+
+## Running Tests and Coverage Reports
+To run tests, make sure you are in the `TestProject/` directory and run the following command &rarr;
+```bash
+donet test
+```
+
+

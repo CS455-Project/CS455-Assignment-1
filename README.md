@@ -4,8 +4,11 @@ This repository consists of the codebase for the Whack'Em All project, completed
 ## Release Notes
 This is the first working version of the repo, submitted as Assignment-1 Submission on 12 August 2024.
 
-## Link
-Please use this [link](https://akankshabw.github.io/CS455-Assignment-1/) to access the deployed version.
+## Links
+Please use this [link](https://cs455-project.github.io/CS455-Assignment-1/) to access the deployed version.
+1. The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
+2. Follow [this](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1) for detailed code quality and coverage analysis.
+
 ## Team 
 Arush Upadhyaya | Wattamwar Akanksha Balaji
 

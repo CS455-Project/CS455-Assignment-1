@@ -5,9 +5,9 @@ This repository consists of the codebase for the Whack'Em All project, completed
 This is the first working version of the repo, submitted as Assignment-1 Submission on 12 August 2024.
 
 ## Links
-Please use this [link](https://cs455-project.github.io/CS455-Assignment-1/) to access the deployed version.
-1. The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
-2. Follow [this](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1) for detailed code quality and coverage analysis.
+
+- The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
+- For detailed code quality and coverage analysis, visit our [SonarCloud project page](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1).
 
 ## Team 
 Arush Upadhyaya | Wattamwar Akanksha Balaji
@@ -15,7 +15,7 @@ Arush Upadhyaya | Wattamwar Akanksha Balaji
 ## Description 
 1. The game involves a grid, which has, at any point of time, exactly of its cell occupied by the character. 
 2. The goal is hit the character by clicking on it, which awards the player an increment in score by 1.
-3. The player is supposed to achieve the maximum possible score within 2 minutes.
+3. The player is supposed to achieve the maximum possible score within 1 minute.
 
 ## Requirements 
 For local deployment, this app requires `.NET Core SDK 8.0.107` to be installed on the system.
@@ -49,5 +49,3 @@ To run tests, make sure you are in the `TestProject/` directory and run the foll
 ```bash
 donet test
 ```
-
-

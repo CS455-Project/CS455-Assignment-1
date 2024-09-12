@@ -1,0 +1,632 @@
+{
+  "MoleProject.dll": {
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Program.cs": {
+      "Program/<<Main>$>d__0": {
+        "System.Void Program/<<Main>$>d__0::MoveNext()": {
+          "Lines": {
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "9": 0,
+            "11": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Layout\\NavMenu.razor": {
+      "MoleProject.Layout.NavMenu": {
+        "System.String MoleProject.Layout.NavMenu::get_NavMenuCssClass()": {
+          "Lines": {
+            "33": 0
+          },
+          "Branches": [
+            {
+              "Line": 33,
+              "Offset": 6,
+              "EndOffset": 8,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 6,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void MoleProject.Layout.NavMenu::ToggleNavMenu()": {
+          "Lines": {
+            "36": 0,
+            "37": 0,
+            "38": 0
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Layout.NavMenu::.ctor()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Shared\\CellModel.cs": {
+      "MoleProject.Shared.CellModel": {
+        "System.Boolean MoleProject.Shared.CellModel::get_isShown()": {
+          "Lines": {
+            "5": 309
+          },
+          "Branches": []
+        },
+        "System.Int32 MoleProject.Shared.CellModel::get_Id()": {
+          "Lines": {
+            "7": 132
+          },
+          "Branches": []
+        },
+        "System.String MoleProject.Shared.CellModel::get_Style()": {
+          "Lines": {
+            "8": 283
+          },
+          "Branches": []
+        },
+        "System.Boolean MoleProject.Shared.CellModel::get_IsShown()": {
+          "Lines": {
+            "10": 3
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Shared.CellModel::set_IsShown(System.Boolean)": {
+          "Lines": {
+            "11": 153,
+            "12": 153,
+            "13": 162,
+            "14": 9,
+            "15": 9,
+            "16": 144,
+            "17": 144,
+            "18": 144,
+            "19": 153
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 9
+            },
+            {
+              "Line": 13,
+              "Offset": 17,
+              "EndOffset": 35,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 144
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Shared\\Cell.razor": {
+      "MoleProject.Shared.Cell": {
+        "MoleProject.Shared.CellModel MoleProject.Shared.Cell::get_CellModel()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Components.EventCallback MoleProject.Shared.Cell::get_OnMouseUp()": {
+          "Lines": {
+            "7": 0
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Shared.Cell::ValidateHit()": {
+          "Lines": {
+            "9": 0,
+            "10": 0,
+            "11": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Pages\\Game.cs": {
+      "MoleProject.Pages.Game": {
+        "System.Int32 MoleProject.Pages.Game::get_currentTime()": {
+          "Lines": {
+            "7": 16
+          },
+          "Branches": []
+        },
+        "System.Int32 MoleProject.Pages.Game::get_gameSpeed()": {
+          "Lines": {
+            "8": 16
+          },
+          "Branches": []
+        },
+        "System.String MoleProject.Pages.Game::get_message()": {
+          "Lines": {
+            "9": 20
+          },
+          "Branches": []
+        },
+        "System.Int32 MoleProject.Pages.Game::get_hitPosition()": {
+          "Lines": {
+            "10": 23
+          },
+          "Branches": []
+        },
+        "System.Boolean MoleProject.Pages.Game::get_isGameRunning()": {
+          "Lines": {
+            "11": 37
+          },
+          "Branches": []
+        },
+        "System.Boolean MoleProject.Pages.Game::get_isGameStarted()": {
+          "Lines": {
+            "12": 23
+          },
+          "Branches": []
+        },
+        "System.Boolean MoleProject.Pages.Game::get_showGameOverModal()": {
+          "Lines": {
+            "13": 28
+          },
+          "Branches": []
+        },
+        "System.Int32 MoleProject.Pages.Game::get_score()": {
+          "Lines": {
+            "14": 21
+          },
+          "Branches": []
+        },
+        "System.Threading.PeriodicTimer MoleProject.Pages.Game::get_gameLoopTimer()": {
+          "Lines": {
+            "15": 18
+          },
+          "Branches": []
+        },
+        "System.Threading.PeriodicTimer MoleProject.Pages.Game::get_gameTimeTimer()": {
+          "Lines": {
+            "16": 18
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.List`1<MoleProject.Shared.CellModel> MoleProject.Pages.Game::get_Cells()": {
+          "Lines": {
+            "17": 160
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Pages.Game::.ctor()": {
+          "Lines": {
+            "19": 8,
+            "20": 8,
+            "21": 272,
+            "22": 128,
+            "23": 128,
+            "24": 128,
+            "25": 8
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 148,
+              "EndOffset": 110,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 128
+            },
+            {
+              "Line": 21,
+              "Offset": 148,
+              "EndOffset": 150,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 8
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Pages\\Game.razor": {
+      "MoleProject.Pages.Game": {
+        "System.Void MoleProject.Pages.Game::BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)": {
+          "Lines": {
+            "7": 4,
+            "8": 0,
+            "19": 0,
+            "20": 0,
+            "22": 0,
+            "28": 0,
+            "30": 4,
+            "46": 4,
+            "48": 4,
+            "49": 0,
+            "52": 0,
+            "55": 0,
+            "58": 0,
+            "63": 0
+          },
+          "Branches": [
+            {
+              "Line": 7,
+              "Offset": 68,
+              "EndOffset": 73,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 464,
+              "EndOffset": 341,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 464,
+              "EndOffset": 466,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 7,
+              "Offset": 68,
+              "EndOffset": 517,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 4
+            },
+            {
+              "Line": 48,
+              "Offset": 681,
+              "EndOffset": 686,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 767,
+              "EndOffset": 769,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 767,
+              "EndOffset": 842,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 681,
+              "EndOffset": 1086,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 4
+            }
+          ]
+        },
+        "System.Void MoleProject.Pages.Game::setNextAppearance()": {
+          "Lines": {
+            "94": 9,
+            "95": 315,
+            "96": 144,
+            "97": 144,
+            "98": 144,
+            "103": 9,
+            "104": 9,
+            "105": 18,
+            "107": 9,
+            "108": 9,
+            "109": 9,
+            "110": 9
+          },
+          "Branches": [
+            {
+              "Line": 95,
+              "Offset": 41,
+              "EndOffset": 16,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 144
+            },
+            {
+              "Line": 95,
+              "Offset": 41,
+              "EndOffset": 43,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 9
+            },
+            {
+              "Line": 105,
+              "Offset": 109,
+              "EndOffset": 60,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 9
+            },
+            {
+              "Line": 105,
+              "Offset": 109,
+              "EndOffset": 111,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 9
+            }
+          ]
+        },
+        "System.Void MoleProject.Pages.Game::StartGame()": {
+          "Lines": {
+            "142": 7,
+            "143": 7,
+            "144": 7,
+            "145": 7,
+            "146": 7,
+            "147": 7,
+            "148": 7,
+            "150": 7,
+            "151": 7,
+            "153": 7,
+            "154": 7,
+            "155": 7
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Pages.Game::EndGame()": {
+          "Lines": {
+            "158": 3,
+            "159": 3,
+            "160": 3,
+            "161": 3,
+            "162": 3,
+            "163": 3,
+            "165": 3
+          },
+          "Branches": [
+            {
+              "Line": 162,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 162,
+              "Offset": 36,
+              "EndOffset": 41,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 163,
+              "Offset": 54,
+              "EndOffset": 56,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 163,
+              "Offset": 54,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void MoleProject.Pages.Game::RestartGame()": {
+          "Lines": {
+            "169": 1,
+            "170": 1,
+            "171": 1,
+            "172": 1
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Pages.Game::ReturnToStartMenu()": {
+          "Lines": {
+            "175": 1,
+            "176": 1,
+            "177": 1,
+            "178": 1
+          },
+          "Branches": []
+        },
+        "System.Void MoleProject.Pages.Game::.ctor()": {
+          "Lines": {
+            "66": 8,
+            "67": 8
+          },
+          "Branches": []
+        }
+      },
+      "MoleProject.Pages.Game/<>c__DisplayClass45_0": {
+        "System.Threading.Tasks.Task MoleProject.Pages.Game/<>c__DisplayClass45_0::<BuildRenderTree>b__1()": {
+          "Lines": {
+            "21": 0
+          },
+          "Branches": []
+        }
+      },
+      "MoleProject.Pages.Game/<GameLoopAsync>d__52": {
+        "System.Void MoleProject.Pages.Game/<GameLoopAsync>d__52::MoveNext()": {
+          "Lines": {
+            "113": 7,
+            "114": 7,
+            "115": 7,
+            "116": 7,
+            "117": 7,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0
+          },
+          "Branches": [
+            {
+              "Line": 114,
+              "Offset": 184,
+              "EndOffset": 20,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 7
+            },
+            {
+              "Line": 114,
+              "Offset": 184,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "MoleProject.Pages.Game/<GameTimeAsync>d__53": {
+        "System.Void MoleProject.Pages.Game/<GameTimeAsync>d__53::MoveNext()": {
+          "Lines": {
+            "124": 7,
+            "125": 7,
+            "126": 7,
+            "128": 7,
+            "129": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0,
+            "135": 7,
+            "136": 0,
+            "137": 0,
+            "138": 0,
+            "139": 0
+          },
+          "Branches": [
+            {
+              "Line": 125,
+              "Offset": 244,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 7
+            },
+            {
+              "Line": 128,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 128,
+              "Offset": 40,
+              "EndOffset": 72,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 7
+            },
+            {
+              "Line": 125,
+              "Offset": 244,
+              "EndOffset": 249,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "MoleProject.Pages.Game/<MouseUp>d__48": {
+        "System.Void MoleProject.Pages.Game/<MouseUp>d__48::MoveNext()": {
+          "Lines": {
+            "69": 2,
+            "70": 2,
+            "71": 2,
+            "72": 2,
+            "73": 1,
+            "74": 1,
+            "75": 1,
+            "76": 2,
+            "77": 1,
+            "78": 1,
+            "79": 2,
+            "80": 2
+          },
+          "Branches": [
+            {
+              "Line": 70,
+              "Offset": 42,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 72,
+              "Offset": 74,
+              "EndOffset": 79,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 72,
+              "Offset": 74,
+              "EndOffset": 210,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 70,
+              "Offset": 42,
+              "EndOffset": 315,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "MoleProject.Pages.Game/<PlayHitSound>d__49": {
+        "System.Void MoleProject.Pages.Game/<PlayHitSound>d__49::MoveNext()": {
+          "Lines": {
+            "83": 1,
+            "84": 1,
+            "85": 1
+          },
+          "Branches": []
+        }
+      },
+      "MoleProject.Pages.Game/<PlayMissSound>d__50": {
+        "System.Void MoleProject.Pages.Game/<PlayMissSound>d__50::MoveNext()": {
+          "Lines": {
+            "88": 1,
+            "89": 1,
+            "90": 1
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

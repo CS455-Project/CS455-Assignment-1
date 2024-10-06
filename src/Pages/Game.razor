@@ -1,5 +1,7 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
+@inject HttpClient Http
+@using System.Net.Http.Json;
 @using MoleProject.Shared;
 
 <PageTitle>Whack'Em-All</PageTitle>
@@ -12,7 +14,6 @@
         <div class="info-container">
             <h2>Score: @score</h2>
             <h2>Remaining Time: @currentTime</h2>
-            <!-- <h2>@message</h2> -->
         </div>
 
         <div class="canvas">
@@ -31,17 +32,21 @@ else
     <div class="start-menu full-screen">
         <h1>Welcome to Whack'Em-All!</h1>
         <div class="Instructions">
-        <p> How to play?? </p>
-        <ul >
-            <li> The game consists of 4 x 4 grid. Every second, a smiley will appear in any one of the grid cells.</li>
-            <li> You need to collect these smileys by clicking on them. Each time you collect one, your score will increase by one.</li>
-            <li>You will be given time of 60 seconds in total and the game will end after 60 seconds.</li>
-        </ul>
-         <p>ALL THE BEST !!!</p>
+            <p> How to play?? </p>
+            <ul>
+                <li>The game consists of a 4x4 grid. Every second, a smiley will appear in one of the grid cells.</li>
+                <li>You need to collect these smileys by clicking on them. Each time you collect one, your score will increase by one.</li>
+                <li>You have 60 seconds to play. The game will end after that.</li>
+            </ul>
+            <p>ALL THE BEST!!!</p>
         </div>
-       
+
+        <p>Please enter your name to start the game:</p>
+        <input type="text" @bind="playerName" placeholder="Enter your name" />
+
         <p>Are you ready to start the game?</p>
         <button @onclick="StartGame">Start Game</button>
+        <button @onclick="ViewLeaderboard">View Leaderboard</button>
     </div>
 }
 
@@ -49,22 +54,91 @@ else
 {
     <div class="modal-overlay">
         <div class="modal-content">
-            @if(@score < 45){
-                <h2> Oops ...Game Over !!</h2>
+            @if (score < 45)
+            {
+                <h2>Oops ... Game Over!</h2>
                 <p>Your final score is: @score</p>
-            }else{
-                <h2>You Won !!</h2>
+            }
+            else
+            {
+                <h2>You Won!</h2>
                 <p>Your final score is: @score</p>
             }
             <button @onclick="RestartGame">Restart Game</button>
             <button @onclick="ReturnToStartMenu">Return to Start Menu</button>
+            <button @onclick="ViewLeaderboard">View Leaderboard</button>
+        </div>
+    </div>
+}
+
+@if (showLeaderboard)
+{
+    <div class="modal-overlay">
+        <div class="modal-content">
+            <h2>Leaderboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < leaderboardData.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@leaderboardData[i].Name</td>
+                            <td>@leaderboardData[i].Score</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button @onclick="CloseLeaderboard">Close Leaderboard</button>
         </div>
     </div>
 }
 
 @code {
     private Random random = new Random();
+    private string playerName = string.Empty;
     private int? lastPosition = null;
+    private bool showLeaderboard = false;
+    private List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
+
+     public async Task ViewLeaderboard()
+    {
+        try
+        {
+            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("http://localhost:3000/leaderboard");
+            if (response != null)
+            {
+                leaderboardData = response;
+                showLeaderboard = true;
+            }
+            else
+            {
+                Console.WriteLine("Failed to fetch leaderboard data.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching leaderboard: {ex.Message}");
+        }
+    }
+
+    public void CloseLeaderboard()
+    {
+        showLeaderboard = false;
+    }
+
+    public class LeaderboardEntry
+    {
+        public string Name { get; set; }
+        public int Score { get; set; }
+    }
+
     public async Task MouseUp(CellModel s)
     {
         if (isGameRunning)
@@ -72,8 +146,10 @@ else
             if (s.Id == hitPosition)
             {
                 score += 1;
-                await PlayHitSound(); 
-            }else{
+                await PlayHitSound();
+            }
+            else
+            {
                 await PlayMissSound();
             }
         }
@@ -89,7 +165,6 @@ else
         await JSRuntime.InvokeVoidAsync("playSound2");
     }
 
-
     public void setNextAppearance()
     {
         foreach (var item in Cells)
@@ -98,7 +173,6 @@ else
         }
 
         int randomPosition;
-
         do
         {
             randomPosition = random.Next(0, 16);
@@ -124,46 +198,46 @@ else
     {
         while (isGameRunning)
         {
-
             if (currentTime == 0)
             {
                 EndGame();
-                StateHasChanged();
                 break;
             }
-
-            StateHasChanged();
             await timer.WaitForNextTickAsync();
             currentTime--;
+            StateHasChanged();
         }
     }
 
     public void StartGame()
     {
+        if (string.IsNullOrWhiteSpace(playerName))
+    {
+        Console.WriteLine("Please enter a valid name.");
+        return;
+    }
         isGameStarted = true;
         score = 0;
-        currentTime = 60; // Reset time
+        currentTime = 10;
         isGameRunning = true;
-        message = "";
         showGameOverModal = false;
 
-        gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(gameSpeed));
+        gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(1000)); 
         _ = GameLoopAsync(gameLoopTimer);
 
         gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
         _ = GameTimeAsync(gameTimeTimer);
     }
 
-    public void EndGame()
+    public async void EndGame()
     {
-        message = "Game Over";
         isGameRunning = false;
         showGameOverModal = true;
         gameLoopTimer?.Dispose();
         gameTimeTimer?.Dispose();
         
+        await SendScoreToServer(score); 
     }
-
 
     public void RestartGame()
     {
@@ -175,5 +249,18 @@ else
     {
         showGameOverModal = false;
         isGameStarted = false;
+    }
+
+    public async Task SendScoreToServer(int score)
+    {
+        var response = await Http.PostAsJsonAsync("http://localhost:3000/", new { name = playerName, score });
+    if (response.IsSuccessStatusCode)
+    {
+        Console.WriteLine("Score successfully sent to the server.");
+    }
+    else
+    {
+        Console.WriteLine($"Failed to send score. Status Code: {response.StatusCode}");
+    }
     }
 }

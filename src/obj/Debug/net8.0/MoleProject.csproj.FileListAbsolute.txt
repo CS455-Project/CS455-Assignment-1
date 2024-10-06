@@ -1044,10 +1044,6 @@ C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\obj\Debug\net8.
 C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\obj\Debug\net8.0\webcil\nunit.framework.legacy.wasm
 C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\obj\Debug\net8.0\compressed\1w62rqyomj.gz
 C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\obj\Debug\net8.0\compressed\ylwhgyjuh3.gz
-C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\bin\Debug\net8.0\publish\sample-data\weather.json
-C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\bin\Debug\net8.0\publish\wwwroot\sample-data\weather.json
-C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\bin\Debug\net8.0\publish\wwwroot\_framework\blazor.boot.json
-C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\bin\Debug\net8.0\publish\_framework\blazor.boot.json
 =======
 C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json
 C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/bin/Debug/net8.0/wwwroot/_framework/blazor.webassembly.js

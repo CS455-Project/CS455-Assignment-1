@@ -9,7 +9,7 @@
 @if (isGameStarted)
 {
     <div class="game-container">
-        <h1>Welcome to Whack'Em-All</h1>
+        <h3>Welcome to Whack'Em-All</h3>
 
         <div class="info-container">
             <h2>Score: @score</h2>
@@ -27,6 +27,32 @@
         <audio id="missSound" src="misssound.mp3" preload="auto"></audio>
     </div>
 }
+else if (showLeaderboard)
+{
+    <div class="leaderboard-page">
+        <h1>Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < leaderboardData.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@leaderboardData[i].Name</td>
+                        <td>@leaderboardData[i].Score</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button @onclick="CloseLeaderboard">Back to Menu</button>
+    </div>
+}
 else
 {
     <div class="start-menu full-screen">
@@ -41,12 +67,24 @@ else
             <p>ALL THE BEST!!!</p>
         </div>
 
-        <p>Please enter your name to start the game:</p>
-        <input type="text" @bind="playerName" placeholder="Enter your name" />
-
-        <p>Are you ready to start the game?</p>
-        <button @onclick="StartGame">Start Game</button>
+        @* <p>Are you ready to start the game?</p> *@
+        <div class="Buttons">
+        <button @onclick="ShowNamePrompt">Start Game</button>
         <button @onclick="ViewLeaderboard">View Leaderboard</button>
+        </div>
+    </div>
+}
+
+@if (showNamePrompt)
+{
+    <div class="modal-overlay">
+        <div class="modal-content">
+            <h1>Enter Your Name</h1>
+            <input type="text" @bind="playerName" placeholder="Name" />
+             @* //<p>Current Player Name: @playerName</p> <!-- Debug line --> *@
+            <button @onclick="StartGame">Start Game</button>
+            <button @onclick="CancelNamePrompt">Cancel</button>
+        </div>
     </div>
 }
 
@@ -66,36 +104,7 @@ else
             }
             <button @onclick="RestartGame">Restart Game</button>
             <button @onclick="ReturnToStartMenu">Return to Start Menu</button>
-            <button @onclick="ViewLeaderboard">View Leaderboard</button>
-        </div>
-    </div>
-}
-
-@if (showLeaderboard)
-{
-    <div class="modal-overlay">
-        <div class="modal-content">
-            <h2>Leaderboard</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < leaderboardData.Count; i++)
-                    {
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>@leaderboardData[i].Name</td>
-                            <td>@leaderboardData[i].Score</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <button @onclick="CloseLeaderboard">Close Leaderboard</button>
+            @* <button @onclick="ViewLeaderboard">View Leaderboard</button> *@
         </div>
     </div>
 }
@@ -105,6 +114,7 @@ else
     private string playerName = string.Empty;
     private int? lastPosition = null;
     private bool showLeaderboard = false;
+    private bool showNamePrompt = false;
     private List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
 
      public async Task ViewLeaderboard()
@@ -133,6 +143,16 @@ else
         showLeaderboard = false;
     }
 
+    public void ShowNamePrompt()
+    {
+        showNamePrompt = true;
+    }
+
+    public void CancelNamePrompt()
+    {
+        showNamePrompt = false;
+        playerName = string.Empty;
+    }
     public class LeaderboardEntry
     {
         public string Name { get; set; }
@@ -212,13 +232,14 @@ else
     public void StartGame()
     {
         if (string.IsNullOrWhiteSpace(playerName))
-    {
-        Console.WriteLine("Please enter a valid name.");
-        return;
-    }
+        {
+            Console.WriteLine("Please enter a valid name.");
+            return;
+        }
+        showNamePrompt = false;
         isGameStarted = true;
         score = 0;
-        currentTime = 10;
+        currentTime = 60;
         isGameRunning = true;
         showGameOverModal = false;
 

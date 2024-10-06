@@ -7569,32 +7569,39 @@
     ]
   },
   "packageFolders": {
-    "/home/arush-upadhyaya/.nuget/packages/": {}
+    "C:\\Users\\Akanksha Wattamwar\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/TestProject/TestProject.csproj",
+      "projectUniqueName": "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\TestProject\\TestProject.csproj",
       "projectName": "TestProject",
-      "projectPath": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/TestProject/TestProject.csproj",
-      "packagesPath": "/home/arush-upadhyaya/.nuget/packages/",
-      "outputPath": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/TestProject/obj/",
+      "projectPath": "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\TestProject\\TestProject.csproj",
+      "packagesPath": "C:\\Users\\Akanksha Wattamwar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\TestProject\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/arush-upadhyaya/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Akanksha Wattamwar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/MoleProject.csproj": {
-              "projectPath": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/MoleProject.csproj"
+            "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\MoleProject.csproj": {
+              "projectPath": "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\MoleProject.csproj"
             }
           }
         }
@@ -7603,6 +7610,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -7668,7 +7680,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

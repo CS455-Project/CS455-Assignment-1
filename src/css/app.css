@@ -1,4 +1,4 @@
-/* html, body {
+html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -170,6 +170,7 @@ code {
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
+    flex-direction: column;
 }
 
 .start-menu {
@@ -212,76 +213,4 @@ ul{
   
 .Instructions{
     background-color: #e2eaa3;
-}
-   */
-
-
-
-   .full-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-    color: #343a40;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-}
-
-.instructions {
-    margin: 20px 0;
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.instructions h2 {
-    margin-bottom: 10px;
-}
-
-.best-of-luck {
-    font-weight: bold;
-}
-
-.name-input {
-    padding: 10px;
-    border: 2px solid #6c757d;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 250px;
-    font-size: 16px;
-}
-
-.button-container {
-    margin-top: 20px;
-}
-
-.start-button, .leaderboard-button {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.start-button {
-    background-color: #28a745;
-    color: white;
-}
-
-.start-button:hover {
-    background-color: #218838;
-}
-
-.leaderboard-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.leaderboard-button:hover {
-    background-color: #0056b3;
 }

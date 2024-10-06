@@ -16,7 +16,9 @@ This repository consists of the codebase for the Whack'Em All project, completed
 - For detailed code quality and coverage analysis, visit our [SonarCloud project page](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1).
 
 ## Team 
-Arush Upadhyaya | Wattamwar Akanksha Balaji
+1. Arush Upadhyaya | Roll No: 220213
+2. Wattamwar Akanksha Balaji | Roll No: 221214
+
 
 ## Description 
 1. The game involves a grid, which has, at any point of time, exactly of its cell occupied by the character. 

@@ -1,3 +1,7 @@
 ﻿<Project>
+<<<<<<< HEAD
   <Import Project="..\build\MoleProject.props" />
+=======
+  <Import Project="../build/MoleProject.props" />
+>>>>>>> 95d3226a1aced9662564458a89cd9b85117e641d
 </Project>

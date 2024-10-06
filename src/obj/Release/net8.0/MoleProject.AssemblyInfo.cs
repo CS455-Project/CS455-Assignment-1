@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MoleProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8f08e86acdaeb2e16dd7277fd4eae0c5e11123a")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d95e6d2e171be6664a971778faa9f4ebf4b4eb5")]
+>>>>>>> 95d3226a1aced9662564458a89cd9b85117e641d
 [assembly: System.Reflection.AssemblyProductAttribute("MoleProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MoleProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

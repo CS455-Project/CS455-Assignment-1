@@ -217,7 +217,11 @@
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Alternative</AssetRole>
+<<<<<<< HEAD
       <RelatedAsset>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\bin\Release\net8.0\wwwroot\_framework\blazor.webassembly.js</RelatedAsset>
+=======
+      <RelatedAsset>/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/bin/Release/net8.0/wwwroot/_framework/blazor.webassembly.js</RelatedAsset>
+>>>>>>> 95d3226a1aced9662564458a89cd9b85117e641d
       <AssetTraitName>Content-Encoding</AssetTraitName>
       <AssetTraitValue>gzip</AssetTraitValue>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,6 +1,7 @@
 {
   "Files": [
     {
+<<<<<<< HEAD
       "Id": "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\bin\\Release\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
@@ -70,6 +71,77 @@
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.MoleProject.props",
+=======
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/bin/Release/net8.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/obj/Release/net8.0/compressed/ktibsvkwgc.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/obj/Release/net8.0/scopedcss/bundle/MoleProject.styles.css",
+      "PackagePath": "staticwebassets/MoleProject.styles.css"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/assets/smile.png",
+      "PackagePath": "staticwebassets/assets/smile.png"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/css/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/hitsound.mp3",
+      "PackagePath": "staticwebassets/hitsound.mp3"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/misssound.mp3",
+      "PackagePath": "staticwebassets/misssound.mp3"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/sample-data/weather.json",
+      "PackagePath": "staticwebassets/sample-data/weather.json"
+    },
+    {
+      "Id": "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/wwwroot/sound.js",
+      "PackagePath": "staticwebassets/sound.js"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.MoleProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.MoleProject.props",
+      "PackagePath": "build\\MoleProject.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.MoleProject.props",
+      "PackagePath": "buildMultiTargeting\\MoleProject.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.MoleProject.props",
+>>>>>>> 95d3226a1aced9662564458a89cd9b85117e641d
       "PackagePath": "buildTransitive\\MoleProject.props"
     }
   ],

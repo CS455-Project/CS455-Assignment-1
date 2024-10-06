@@ -1,6 +1,6 @@
 {
   "MoleProject.dll": {
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Program.cs": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Program.cs": {
       "Program/<<Main>$>d__0": {
         "System.Void Program/<<Main>$>d__0::MoveNext()": {
           "Lines": {
@@ -14,7 +14,17 @@
         }
       }
     },
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Layout\\NavMenu.razor": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Layout/MainLayout.razor": {
+      "MoleProject.Layout.MainLayout": {
+        "System.Void MoleProject.Layout.MainLayout::BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Layout/NavMenu.razor": {
       "MoleProject.Layout.NavMenu": {
         "System.String MoleProject.Layout.NavMenu::get_NavMenuCssClass()": {
           "Lines": {
@@ -55,7 +65,7 @@
         }
       }
     },
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Shared\\CellModel.cs": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Shared/CellModel.cs": {
       "MoleProject.Shared.CellModel": {
         "System.Boolean MoleProject.Shared.CellModel::get_isShown()": {
           "Lines": {
@@ -114,7 +124,7 @@
         }
       }
     },
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Shared\\Cell.razor": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Shared/Cell.razor": {
       "MoleProject.Shared.Cell": {
         "MoleProject.Shared.CellModel MoleProject.Shared.Cell::get_CellModel()": {
           "Lines": {
@@ -138,7 +148,7 @@
         }
       }
     },
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Pages\\Game.cs": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Pages/Game.cs": {
       "MoleProject.Pages.Game": {
         "System.Int32 MoleProject.Pages.Game::get_currentTime()": {
           "Lines": {
@@ -219,16 +229,16 @@
           "Branches": [
             {
               "Line": 21,
-              "Offset": 148,
-              "EndOffset": 110,
+              "Offset": 141,
+              "EndOffset": 103,
               "Path": 1,
               "Ordinal": 1,
               "Hits": 128
             },
             {
               "Line": 21,
-              "Offset": 148,
-              "EndOffset": 150,
+              "Offset": 141,
+              "EndOffset": 143,
               "Path": 0,
               "Ordinal": 0,
               "Hits": 8
@@ -237,12 +247,14 @@
         }
       }
     },
-    "C:\\Users\\Akanksha Wattamwar\\Desktop\\CS455\\CS455-Assignment-1\\src\\Pages\\Game.razor": {
+    "/home/arush-upadhyaya/Repos/CS455-Assignment-1/src/Pages/Game.razor": {
       "MoleProject.Pages.Game": {
         "System.Void MoleProject.Pages.Game::BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)": {
           "Lines": {
             "7": 4,
             "8": 0,
+            "13": 0,
+            "14": 0,
             "19": 0,
             "20": 0,
             "22": 0,
@@ -252,7 +264,9 @@
             "48": 4,
             "49": 0,
             "52": 0,
+            "54": 0,
             "55": 0,
+            "57": 0,
             "58": 0,
             "63": 0
           },

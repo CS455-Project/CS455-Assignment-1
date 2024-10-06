@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
-@inject HttpClient Http
+@* @inject HttpClient Http *@
 @using System.Net.Http.Json;
 @using MoleProject.Shared;
 
@@ -111,10 +111,11 @@ else
 
 @code {
     private Random random = new Random();
-    private string playerName = string.Empty;
+    public string playerName = string.Empty;
     private int? lastPosition = null;
     private bool showLeaderboard = false;
     private bool showNamePrompt = false;
+    public HttpClient Http { get; set; }
     private List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
 
      public async Task ViewLeaderboard()
@@ -250,7 +251,7 @@ else
         _ = GameTimeAsync(gameTimeTimer);
     }
 
-    public async void EndGame()
+    public async Task EndGame() // Change from void to Task
     {
         isGameRunning = false;
         showGameOverModal = true;

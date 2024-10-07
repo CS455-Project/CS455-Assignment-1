@@ -1,7 +1,6 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
-@* @inject HttpClient Http *@
-@using System.Net.Http.Json;
+@inject HttpClient Http
 @using MoleProject.Shared;
 
 <PageTitle>Whack'Em-All</PageTitle>
@@ -104,7 +103,7 @@ else
             }
             <button @onclick="RestartGame">Restart Game</button>
             <button @onclick="ReturnToStartMenu">Return to Start Menu</button>
-            @* <button @onclick="ViewLeaderboard">View Leaderboard</button> *@
+            <button @onclick="ViewLeaderboard">View Leaderboard</button>
         </div>
     </div>
 }
@@ -115,14 +114,15 @@ else
     private int? lastPosition = null;
     private bool showLeaderboard = false;
     private bool showNamePrompt = false;
-    public HttpClient Http { get; set; }
     private List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
 
      public async Task ViewLeaderboard()
     {
         try
         {
+            Console.WriteLine("wassup");
             var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("http://localhost:3000/leaderboard");
+            Console.WriteLine(response);
             if (response != null)
             {
                 leaderboardData = response;

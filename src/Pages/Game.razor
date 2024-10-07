@@ -119,8 +119,7 @@ else
      public async Task ViewLeaderboard()
     {
         try
-        {
-            Console.WriteLine("wassup");
+        {   
             var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("http://localhost:3000/leaderboard");
             Console.WriteLine(response);
             if (response != null)

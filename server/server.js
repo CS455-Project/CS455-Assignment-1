@@ -49,7 +49,7 @@ app.get("/leaderboard", async function (req, res) {
 
 // Endpoint to retrieve scores
 app.get("/", function (req, res) {
-    res.status(200).send( "<h1>Welcome to the server side of Whack-A-Mole !!!</h1>");
+    res.status(200).send( "<h1>Welcome to the server side of Whack'Em-All !!!</h1>");
 });
 
 // Start the server

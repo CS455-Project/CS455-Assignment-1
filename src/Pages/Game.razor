@@ -110,13 +110,8 @@ else
 
 @code {
     private Random random = new Random();
-    public string playerName = string.Empty;
-    private int? lastPosition = null;
-    public bool showLeaderboard = false;
-    public bool showNamePrompt = false;
     public List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
-
-     public async Task ViewLeaderboard()
+    public async Task ViewLeaderboard()
     {
         try
         {   
@@ -217,7 +212,7 @@ else
         {
             if (currentTime == 0)
             {
-                EndGame();
+                await EndGame();
                 break;
             }
             await timer.WaitForNextTickAsync();

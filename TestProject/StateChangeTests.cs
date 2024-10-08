@@ -50,6 +50,7 @@ namespace WhackEmAllTests{
 
             gameService.StartGame();
 
+            // Setup mock response for SendScoreToServer
             _httpMessageHandlerMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>(

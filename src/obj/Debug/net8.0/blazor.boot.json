@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MoleProject",
   "resources": {
-    "hash": "sha256-eDr6PiwxLDobU3KPCEXotUd9IROC8FRQxspY4qs9y/Y=",
+    "hash": "sha256-LZzE7HeW/S3E68aMd74B6VTSnPRjenWLvGx2tmVcig8=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.yt1hs82opk.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -210,10 +210,10 @@
       "mscorlib.wasm": "sha256-XvLAB5IyfVSmj5aaGnPwgVFaaZz8jXmbN8WmeopiPBM=",
       "netstandard.wasm": "sha256-TbMssdnuTiKq1gjTPkpgROAuWN0uhvPnagvWR+wAgNs=",
       "System.Private.CoreLib.wasm": "sha256-sscg+Efk8ROPq+q4IVmhShzITuoOYvB8Bsc+Mp9vcSM=",
-      "MoleProject.wasm": "sha256-qyRkWl0Vc4C20vsvqgsB+OEylFFFVnv0lW2syo0roFM="
+      "MoleProject.wasm": "sha256-H2bSGXIS/KvpWzZyWA0UXZrWT/ysVMpIIQp+meLk4tg="
     },
     "pdb": {
-      "MoleProject.pdb": "sha256-M7RpALdJEx2c25P2GX9bprrTuN/4/P3VgdZdTRFRr9E="
+      "MoleProject.pdb": "sha256-AZNRKUdJLcwjbcCiKGjT+9mwphB20S9dAuGJW98l4rQ="
     }
   },
   "cacheBootResources": true,

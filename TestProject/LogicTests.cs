@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MoleProject.Pages;
 using MoleProject.Shared;
 
-namespace GameTests
+namespace WhackEmAllTests
 {
     public class GameTests : TestContext
     {

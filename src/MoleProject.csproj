@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!-- Project is not a test project --> <SonarQubeTestProject>false</SonarQubeTestProject> 
   </PropertyGroup>
   <ItemGroup>

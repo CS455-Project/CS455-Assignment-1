@@ -1,6 +1,11 @@
 server.zip
+
 **/bin/
+
 **/obj/
+
 **/node_modules/
+
 */.env
-TestProject/coverage.json
+
+**/coverage.json

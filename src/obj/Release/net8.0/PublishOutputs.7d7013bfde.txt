@@ -1,3 +1,0 @@
-/home/arush-upadhyaya/Repos/CS455-Assignment-1/server/public/web.config
-/home/arush-upadhyaya/Repos/CS455-Assignment-1/server/public/sample-data/weather.json
-/home/arush-upadhyaya/Repos/CS455-Assignment-1/server/public/_framework/blazor.boot.json

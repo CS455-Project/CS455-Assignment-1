@@ -5,7 +5,8 @@ using Moq;
 using System.Net;
 using Moq.Protected;
 
-namespace WhackEmAllTests{
+namespace WhackEmAllTests
+{
     public class WhackEmAllTests : TestContext
     {
         [Fact]
@@ -17,7 +18,7 @@ namespace WhackEmAllTests{
             };
             gameService.StartGame();
 
-            
+
             Assert.Equal(0, gameService.score);
             Assert.Equal(750, gameService.gameSpeed);
             Assert.Equal(16, gameService.Cells.Count);
@@ -25,7 +26,7 @@ namespace WhackEmAllTests{
             Assert.True(string.IsNullOrEmpty(gameService.message));
             Assert.False(gameService.showGameOverModal);
             Assert.NotNull(gameService.gameLoopTimer);
-            Assert.NotNull(gameService.gameTimeTimer); 
+            Assert.NotNull(gameService.gameTimeTimer);
             Assert.Equal(60, gameService.currentTime);
             Assert.True(gameService.isGameRunning);
         }
@@ -48,7 +49,7 @@ namespace WhackEmAllTests{
             // Assert
             Assert.False(mockGame.Object.isGameRunning);
             Assert.True(mockGame.Object.showGameOverModal);
-            mockGame.Verify(x => x.SendScoreToServer(It.IsAny<int>()), Times.Once); 
+            mockGame.Verify(x => x.SendScoreToServer(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]

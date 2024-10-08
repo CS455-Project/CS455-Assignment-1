@@ -1,0 +1,4 @@
+server.zip
+server/node_modules/
+*/bin/*
+*/obj/*

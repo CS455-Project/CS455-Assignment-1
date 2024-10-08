@@ -123,7 +123,7 @@ else
         {   
             showGameOverModal = false;
             isGameStarted = false;
-            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("http://localhost:3000/leaderboard");
+            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("https://cs455-assignment-1.onrender.com/leaderboard");
             Console.WriteLine(response);
             if (response != null)
             {
@@ -277,7 +277,7 @@ else
 
     public async Task SendScoreToServer(int score)
     {
-        var response = await Http.PostAsJsonAsync("http://localhost:3000/", new { name = playerName, score });
+        var response = await Http.PostAsJsonAsync("https://cs455-assignment-1.onrender.com/", new { name = playerName, score });
     if (response.IsSuccessStatusCode)
     {
         Console.WriteLine("Score successfully sent to the server.");

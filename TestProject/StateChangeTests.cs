@@ -1,10 +1,6 @@
 using Bunit;
 using Xunit;
-using System.Threading;
-using MoleProject;
-using MoleProject.Layout;
 using MoleProject.Pages;
-using MoleProject.Shared;
 using Moq;
 using System.Net;
 using Moq.Protected;
@@ -12,19 +8,13 @@ using Moq.Protected;
 namespace WhackEmAllTests{
     public class WhackEmAllTests : TestContext
     {
-        private readonly HttpClient _httpClient;
-        private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
-        public WhackEmAllTests()
-        {
-            _httpMessageHandlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-            _httpClient = new HttpClient(_httpMessageHandlerMock.Object);
-        }
-
         [Fact]
         public void StartGame_ShouldInitializeGameCorrectly()
         {
-            var gameService = new Game();
-            gameService.playerName = "TestPlayer";
+            var gameService = new Game
+            {
+                playerName = "TestPlayer"
+            };
             gameService.StartGame();
 
             
@@ -44,36 +34,30 @@ namespace WhackEmAllTests{
         public async Task EndGame_ShouldTerminateGameCorrectly()
         {
             // Arrange
-            var gameService = new Game();
-            gameService.Http = _httpClient; // Set the mocked HttpClient
-            gameService.playerName = "TestPlayer";
-
-            gameService.StartGame();
-
-            // Setup mock response for SendScoreToServer
-            _httpMessageHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>(
-                    "SendAsync",
-                    ItExpr.IsAny<HttpRequestMessage>(),
-                    ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                });
+            var mockGame = new Mock<Game>
+            {
+                CallBase = true // Ensures the actual logic is used except for mocked methods
+            };
+            mockGame.Object.playerName = "TestPlayer";
+            mockGame.Object.StartGame();
+            mockGame.Setup(x => x.SendScoreToServer(It.IsAny<int>())).Returns(Task.CompletedTask); // Mock the method
 
             // Act
-            await gameService.EndGame();
+            await mockGame.Object.EndGame();
 
             // Assert
-            Assert.False(gameService.isGameRunning);
-            Assert.True(gameService.showGameOverModal);
+            Assert.False(mockGame.Object.isGameRunning);
+            Assert.True(mockGame.Object.showGameOverModal);
+            mockGame.Verify(x => x.SendScoreToServer(It.IsAny<int>()), Times.Once); 
         }
 
         [Fact]
         public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
         {
-            var gameService = new Game();
+            var gameService = new Game
+            {
+                playerName = "TestPlayer"
+            };
 
             gameService.StartGame();
 

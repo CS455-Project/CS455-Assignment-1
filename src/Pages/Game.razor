@@ -253,7 +253,7 @@ else
         _ = GameTimeAsync(gameTimeTimer);
     }
 
-    public async Task EndGame() // Change from void to Task
+    public async Task EndGame()
     {
         isGameRunning = false;
         showGameOverModal = true;
@@ -275,7 +275,7 @@ else
         isGameStarted = false;
     }
 
-    public async Task SendScoreToServer(int score)
+    public virtual async Task SendScoreToServer(int score)
     {
         var response = await Http.PostAsJsonAsync("http://localhost:3000/", new { name = playerName, score });
     if (response.IsSuccessStatusCode)

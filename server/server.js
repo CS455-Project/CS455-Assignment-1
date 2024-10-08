@@ -9,7 +9,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 mongoose.connect(process.env.MONGODB);
-const port = 3000;
 
 
 const userSchema = new mongoose.Schema({
@@ -54,6 +53,6 @@ app.get("/", function (req, res) {
 });
 
 // Start the server
-app.listen(port, function () {
-    console.log(`Server running on http://localhost:${port}`);
-});
+app.listen(process.env.PORT ||8000, () => {
+    console.log(`Server is running on port ${process.env.PORT}.`);
+  });

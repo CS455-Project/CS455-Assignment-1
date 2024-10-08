@@ -13,35 +13,35 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = MoleProject
 build_property.RootNamespace = MoleProject
-build_property.ProjectDir = C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\
+build_property.ProjectDir = c:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src
+build_property.MSBuildProjectDirectory = c:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/App.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Pages/Game.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Pages/Game.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2FtZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Shared/Cell.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Shared/Cell.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENlbGwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/_Imports.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Layout/MainLayout.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-4w5rom2trr
 
-[C:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Layout/NavMenu.razor]
+[c:/Users/Akanksha Wattamwar/Desktop/CS455/CS455-Assignment-1/src/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-yxexzj4x4o

@@ -27,8 +27,6 @@ namespace GameTests{
             Assert.All(game.Cells, cell => Assert.IsType<CellModel>(cell));
         }
 
-       
-
         [Fact]
         public async Task MouseUp_MissPosition_InvokeJavaScript()
         {
@@ -42,6 +40,7 @@ namespace GameTests{
             Assert.Equal(0, cut.Instance.score);
             mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
         }
+        
         [Fact]
         public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
         {

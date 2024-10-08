@@ -2,18 +2,22 @@ namespace MoleProject.Shared
 {
     public class CellModel
     {
-        public bool isShown{get; set;}
+        public bool isShown { get; set; }
 
-        public int Id {get;set;}
-        public string Style{get;set;} = "";
-        public bool IsShown{
+        public int Id { get; set; }
+        public string Style { get; set; } = "";
+        public bool IsShown
+        {
             get => isShown;
-            set {
+            set
+            {
                 isShown = value;
-                if ( isShown){
+                if (isShown)
+                {
                     Style = "mole";
                 }
-                else {
+                else
+                {
                     Style = "";
                 }
             }

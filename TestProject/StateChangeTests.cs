@@ -41,34 +41,33 @@ namespace WhackEmAllTests{
         }
 
         [Fact]
-   public async Task EndGame_ShouldTerminateGameCorrectly()
-{
-    // Arrange
-    var gameService = new Game();
-    gameService.Http = _httpClient; // Set the mocked HttpClient
-    gameService.playerName = "TestPlayer";
-
-    gameService.StartGame();
-
-    // Setup mock response for SendScoreToServer
-    _httpMessageHandlerMock
-        .Protected()
-        .Setup<Task<HttpResponseMessage>>(
-            "SendAsync",
-            ItExpr.IsAny<HttpRequestMessage>(),
-            ItExpr.IsAny<CancellationToken>())
-        .ReturnsAsync(new HttpResponseMessage
+        public async Task EndGame_ShouldTerminateGameCorrectly()
         {
-            StatusCode = HttpStatusCode.OK,
-        });
+            // Arrange
+            var gameService = new Game();
+            gameService.Http = _httpClient; // Set the mocked HttpClient
+            gameService.playerName = "TestPlayer";
 
-    // Act
-    await gameService.EndGame();
+            gameService.StartGame();
 
-    // Assert
-    Assert.False(gameService.isGameRunning);
-    Assert.True(gameService.showGameOverModal);
-}
+            _httpMessageHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(new HttpResponseMessage
+                {
+                    StatusCode = HttpStatusCode.OK,
+                });
+
+            // Act
+            await gameService.EndGame();
+
+            // Assert
+            Assert.False(gameService.isGameRunning);
+            Assert.True(gameService.showGameOverModal);
+        }
 
         [Fact]
         public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()

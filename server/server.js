@@ -5,20 +5,11 @@ const cors = require('cors');
 require("dotenv").config();
 const mongoose = require('mongoose');
 
-
-// Use CORS middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 mongoose.connect(process.env.MONGODB);
 const port = 3000;
-
-//app.use(express.static(path.join(__dirname, "public")));
-
-// Serve the Blazor WebAssembly app
-// app.get("/", function (req, res) {
-//     res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
 
 
 const userSchema = new mongoose.Schema({
@@ -27,15 +18,13 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-// Endpoint to receive scores
-// Endpoint to receive scores
+
 app.post("/", async function (req, res) {
 
     if (req.body.score === undefined) {
         return res.status(400).send({ error: "Invalid score data" });
     }
 
-    // Store the score in the array
     const new_user = new User({
         name: req.body.name,
         score: req.body.score

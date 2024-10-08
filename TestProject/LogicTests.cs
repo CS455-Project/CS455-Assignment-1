@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using MoleProject.Pages;
 using MoleProject.Shared;
 
-namespace GameTests{
-    public class GameTests: TestContext
+namespace GameTests
+{
+    public class GameTests : TestContext
     {
-        private Mock<IJSRuntime> mockJSRuntime;
+        private readonly Mock<IJSRuntime> mockJSRuntime;
 
         public GameTests()
         {
@@ -40,7 +41,7 @@ namespace GameTests{
             Assert.Equal(0, cut.Instance.score);
             mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
         }
-        
+
         [Fact]
         public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
         {

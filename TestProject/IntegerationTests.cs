@@ -27,8 +27,8 @@ namespace WhackEmAllTests
             Services.AddSingleton(_httpClient);
 
             _jsRuntimeMock = new Mock<IJSRuntime>();
-            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound1", null)).Returns(ValueTask.FromResult((object)null));
-            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound2", null)).Returns(ValueTask.FromResult((object)null));
+            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound1", null)).Returns(ValueTask.FromResult((object?)null));
+            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound2", null)).Returns(ValueTask.FromResult((object?)null));
             Services.AddSingleton(_jsRuntimeMock.Object);
         }
 

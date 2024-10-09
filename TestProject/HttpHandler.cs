@@ -19,7 +19,7 @@ namespace HttpHandler
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (_mockResponses.TryGetValue(request.RequestUri.ToString(), out var mockResponse))
+            if (request.RequestUri != null && _mockResponses.TryGetValue(request.RequestUri.ToString(), out var mockResponse))
             {
                 var response = new HttpResponseMessage(mockResponse.StatusCode)
                 {

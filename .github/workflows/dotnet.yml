@@ -24,8 +24,8 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Update Workloads
-        run: dotnet workload update
+      # - name: Update Workloads
+      #   run: dotnet workload update
       
       # - name: Setup Node.js
       #   uses: actions/setup-node@v3

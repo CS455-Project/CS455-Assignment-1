@@ -83,10 +83,26 @@ namespace WhackEmAllTests
 
             // End the game
             await component.EndGame();
+            cut.Render();
 
             // Assert
             Assert.True(component.score == 50, "Score should be 5 after playing");
             Assert.True(component.showGameOverModal, "Game over modal should be shown");
+            // Verify that the modal is rendered with the correct elements
+            var modal = cut.Find(".modal-overlay");
+            Assert.NotNull(modal); 
+
+            var heading = modal.QuerySelector("h2").TextContent;
+            Assert.Equal("You Won!", heading); 
+            
+            var scoreText = modal.QuerySelector("p").TextContent;
+            Assert.Contains("Your final score is: 50", scoreText); 
+
+            var buttons = modal.QuerySelectorAll("button");
+            Assert.Equal(3, buttons.Length); 
+            Assert.Contains("Restart Game", buttons[0].TextContent);
+            Assert.Contains("Return to Start Menu", buttons[1].TextContent);
+            Assert.Contains("View Leaderboard", buttons[2].TextContent);
 
             // Verify that the score was sent to the server
             var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>("https://cs455-assignment-1.onrender.com/leaderboard");

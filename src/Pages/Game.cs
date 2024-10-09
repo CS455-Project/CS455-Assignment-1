@@ -4,8 +4,9 @@ namespace MoleProject.Pages
 {
     public partial class Game
     {
-        public int currentTime { get; set; }
+        public static string serverUrl {get;set;} = "https://cs455-assignment-1.onrender.com";
         public int gameSpeed { get; set; } = 750;
+        public int currentTime { get; set; }
         public string message { get; set; } = "";
         public int hitPosition { get; set; } = 0;
         public bool isGameRunning { get; set; } = false;
@@ -17,7 +18,6 @@ namespace MoleProject.Pages
         public List<CellModel> Cells { get; set; } = new List<CellModel>();
         public string playerName {get; set;}= string.Empty;
         public int? lastPosition {set;get;}= null;
-        public string serverUrl {get;set;} = "https://cs455-assignment-1.onrender.com";
         public bool showLeaderboard {get;set;} = false;
         public bool showNamePrompt{get;set;} = false;
 

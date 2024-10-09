@@ -7,11 +7,11 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
-using MoleProject.Pages;
 using MoleProject.Shared;
 using Microsoft.JSInterop;  // For IJSRuntime
 using HttpHandler;  // For MockHttpMessageHandler
 using RichardSzalay.MockHttp;
+using MoleProject.Pages;
 
 
 namespace WhackEmAllTests
@@ -89,7 +89,7 @@ namespace WhackEmAllTests
             Assert.True(component.showGameOverModal, "Game over modal should be shown");
 
             // Verify that the score was sent to the server
-            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>($"{serverUrl}/leaderboard");
+            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>($"{Game.serverUrl}/leaderboard");
             Assert.Contains(leaderboard!, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
         }
 
@@ -104,7 +104,7 @@ namespace WhackEmAllTests
         new { Name = "Player2", Score = 90 }
     };
 
-            mockHttp.When($"{serverUrl}/leaderboard")
+            mockHttp.When($"{Game.serverUrl}/leaderboard")
                     .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
 
             var client = mockHttp.ToHttpClient();

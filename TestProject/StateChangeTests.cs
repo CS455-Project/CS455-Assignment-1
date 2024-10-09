@@ -3,7 +3,11 @@ using Xunit;
 using MoleProject.Pages;
 using Moq;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Moq.Protected;
+using Newtonsoft.Json;
 
 namespace WhackEmAllTests
 {

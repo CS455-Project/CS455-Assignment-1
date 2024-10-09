@@ -16,7 +16,7 @@ namespace MoleProject.Pages
         public PeriodicTimer? gameTimeTimer { get; set; }
         public List<CellModel> Cells { get; set; } = new List<CellModel>();
         public string playerName {get; set;}= string.Empty;
-        public int? lastPosition = null;
+        public int? lastPosition {set;get;}= null;
         public string serverUrl {get;set;} = "https://cs455-assignment-1.onrender.com";
         public bool showLeaderboard {get;set;} = false;
         public bool showNamePrompt{get;set;} = false;

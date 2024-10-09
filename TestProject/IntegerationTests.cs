@@ -89,8 +89,8 @@ namespace WhackEmAllTests
             Assert.True(component.showGameOverModal, "Game over modal should be shown");
 
             // Verify that the score was sent to the server
-            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>("https://cs455-assignment-1.onrender.com/leaderboard");
-            Assert.Contains(leaderboard, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
+            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>($"{serverUrl}/leaderboard");
+            Assert.Contains(leaderboard!, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace WhackEmAllTests
         new { Name = "Player2", Score = 90 }
     };
 
-            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
+            mockHttp.When($"{serverUrl}/leaderboard")
                     .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
 
             var client = mockHttp.ToHttpClient();

@@ -7,11 +7,11 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
-using MoleProject.Pages;
 using MoleProject.Shared;
 using Microsoft.JSInterop;  // For IJSRuntime
 using HttpHandler;  // For MockHttpMessageHandler
 using RichardSzalay.MockHttp;
+using MoleProject.Pages;
 
 
 namespace WhackEmAllTests
@@ -27,8 +27,10 @@ namespace WhackEmAllTests
             Services.AddSingleton(_httpClient);
 
             _jsRuntimeMock = new Mock<IJSRuntime>();
-             _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound1", null)).Returns(ValueTask.FromResult((object)null));
-            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound2", null)).Returns(ValueTask.FromResult((object)null));
+            // _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound1", null)).Returns(ValueTask.FromResult((object)null!));
+            // _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound2", null)).Returns(ValueTask.FromResult((object)null!));
+            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound1", null)).ReturnsAsync((object?)null);
+            _jsRuntimeMock.Setup(j => j.InvokeAsync<object>("playSound2", null)).ReturnsAsync((object?)null);
             Services.AddSingleton(_jsRuntimeMock.Object);
         }
 
@@ -89,8 +91,8 @@ namespace WhackEmAllTests
             Assert.True(component.showGameOverModal, "Game over modal should be shown");
 
             // Verify that the score was sent to the server
-            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>("https://cs455-assignment-1.onrender.com/leaderboard");
-            Assert.Contains(leaderboard, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
+            var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>($"{Game.serverUrl}/leaderboard");
+            Assert.Contains(leaderboard!, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
         }
 
         [Fact]
@@ -104,7 +106,7 @@ namespace WhackEmAllTests
         new { Name = "Player2", Score = 90 }
     };
 
-            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
+            mockHttp.When($"{Game.serverUrl}/leaderboard")
                     .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
 
             var client = mockHttp.ToHttpClient();

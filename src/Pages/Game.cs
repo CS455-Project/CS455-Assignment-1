@@ -12,8 +12,8 @@ namespace MoleProject.Pages
         public GameState State { get; set; } = new GameState();
         public GameConfig Config { get; set; } = new GameConfig(InitialGameSpeed);
         public Player CurrentPlayer { get; set; } = new Player();
-        public LeaderboardManager LeaderboardManager { get; set; } = new LeaderboardManager();
-        public CellManager CellManager { get; set; } = new CellManager(CellCount);
+        public LeaderboardManager CurrLeaderboardManager { get; set; } = new LeaderboardManager();
+        public CellManager CurrCellManager { get; set; } = new CellManager(CellCount);
 
         public Game() { }
     }

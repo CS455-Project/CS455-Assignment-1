@@ -5,3 +5,4 @@
 **\coverage.json
 server-tests/
 .gitignore
+.vscode

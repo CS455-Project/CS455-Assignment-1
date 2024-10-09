@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\Shared\CellModel.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace MoleProject.Shared
+{
+    public class CellModel
+    {
+        public bool isShown { get; set; }
+
+        public int Id { get; set; }
+        public string Style { get; set; } = &quot;&quot;;
+        public bool IsShown
+        {
+            get =&gt; isShown;
+            set
+            {
+                isShown = value;
+                if (isShown)
+                {
+                    Style = &quot;mole&quot;;
+                }
+                else
+                {
+                    Style = &quot;&quot;;
+                }
+            }
+        }
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[5,31,5,35,1],[5,36,5,40,1],[7,25,7,29,1],[7,30,7,34,1],[8,31,8,35,0],[8,36,8,40,1],[8,45,8,47,1],[11,20,11,27,1],[13,13,13,14,1],[14,17,14,33,1],[15,17,15,29,1],[16,17,16,18,1],[17,21,17,36,1],[18,17,18,18,1],[20,17,20,18,1],[21,21,21,32,1],[22,17,22,18,1],[23,13,23,14,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\Pages\Game.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using MoleProject.Shared;
+
+namespace MoleProject.Pages
+{
+    public partial class Game
+    {
+        public int currentTime { get; set; }
+        public int gameSpeed { get; set; } = 750;
+        public string message { get; set; } = &quot;&quot;;
+        public int hitPosition { get; set; } = 0;
+        public bool isGameRunning { get; set; } = false;
+        public bool isGameStarted { get; set; } = false;
+        public bool showGameOverModal { get; set; } = false;
+        public int score { get; set; } = 0;
+        public PeriodicTimer? gameLoopTimer { get; set; }
+        public PeriodicTimer? gameTimeTimer { get; set; }
+        public List&lt;CellModel&gt; Cells { get; set; } = new List&lt;CellModel&gt;();
+        public string playerName = string.Empty;
+        private int? lastPosition = null;
+        public bool showLeaderboard = false;
+        public bool showNamePrompt = false;
+
+        public Game()
+        {
+            for (int i = 0; i &lt; 16; i++)
+            {
+                Cells.Add(new CellModel { Id = i });
+            }
+        }
+    }
+    public class LeaderboardEntry
+    {
+        public string Name { get; set; } = string.Empty;
+        public int Score { get; set; }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[7,34,7,38,1],[7,39,7,43,1],[8,32,8,36,1],[8,37,8,41,0],[8,46,8,49,1],[9,33,9,37,1],[9,38,9,42,0],[9,47,9,49,1],[10,34,10,38,1],[10,39,10,43,1],[10,48,10,49,1],[11,37,11,41,1],[11,42,11,46,1],[11,51,11,56,1],[12,37,12,41,1],[12,42,12,46,1],[12,51,12,56,1],[13,41,13,45,1],[13,46,13,50,1],[13,55,13,60,1],[14,28,14,32,1],[14,33,14,37,1],[14,42,14,43,1],[15,47,15,51,1],[15,52,15,56,1],[16,47,16,51,1],[16,52,16,56,1],[17,40,17,44,1],[17,45,17,49,0],[17,54,17,75,1],[18,9,18,49,1],[19,9,19,42,1],[20,9,20,45,1],[21,9,21,44,1],[23,9,23,22,1],[24,9,24,10,1],[25,18,25,27,1],[25,29,25,35,1],[25,37,25,40,1],[26,13,26,14,1],[27,17,27,53,1],[28,13,28,14,1],[29,9,29,10,1],[33,30,33,34,1],[33,35,33,39,1],[33,44,33,56,1],[34,28,34,32,1],[34,33,34,37,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\TestProject\SoundTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using NUnit.Framework;
+using Moq;
+using System;
+
+namespace Audio
+{
+    public interface IAudioPlayer
+    {
+        void Play(string soundId);
+    }
+}
+
+namespace GameLogic
+{
+    public class SoundPlayer
+    {
+        private readonly Audio.IAudioPlayer _audioPlayer;
+
+        public SoundPlayer(Audio.IAudioPlayer audioPlayer)
+        {
+            _audioPlayer = audioPlayer;
+        }
+
+        public void PlaySound1()
+        {
+            _audioPlayer.Play(&quot;hitSound&quot;);
+        }
+
+        public void PlaySound2()
+        {
+            _audioPlayer.Play(&quot;missSound&quot;);
+        }
+    }
+}
+
+namespace WhackEmAllTests
+{
+    [TestFixture]
+    public class SoundPlayerTests
+    {
+        private Mock&lt;Audio.IAudioPlayer&gt;? _mockAudioPlayer;
+        private GameLogic.SoundPlayer? _soundPlayer;
+
+        [SetUp]
+        public void Setup()
+        {
+            _mockAudioPlayer = new Mock&lt;Audio.IAudioPlayer&gt;();
+            _soundPlayer = new GameLogic.SoundPlayer(_mockAudioPlayer.Object);
+        }
+
+        [Test]
+        public void PlaySound1_ShouldPlayHitSound()
+        {
+            _soundPlayer!.PlaySound1();
+
+            _mockAudioPlayer!.Verify(x =&gt; x.Play(&quot;hitSound&quot;), Times.Once);
+        }
+
+        [Test]
+        public void PlaySound2_ShouldPlayMissSound()
+        {
+            _soundPlayer!.PlaySound2();
+
+            _mockAudioPlayer!.Verify(x =&gt; x.Play(&quot;missSound&quot;), Times.Once);
+        }
+
+        [Test]
+        public void PlaySound1_ShouldNotPlayMissSound()
+        {
+            _soundPlayer!.PlaySound1();
+
+            _mockAudioPlayer!.Verify(x =&gt; x.Play(&quot;missSound&quot;), Times.Never);
+        }
+
+        [Test]
+        public void PlaySound2_ShouldNotPlayHitSound()
+        {
+            _soundPlayer!.PlaySound2();
+
+            _mockAudioPlayer!.Verify(x =&gt; x.Play(&quot;hitSound&quot;), Times.Never);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[19,9,19,59,1],[20,9,20,10,1],[21,13,21,40,1],[22,9,22,10,1],[25,9,25,10,1],[26,13,26,43,1],[27,9,27,10,1],[30,9,30,10,1],[31,13,31,44,1],[32,9,32,10,1],[46,9,46,10,1],[47,13,47,63,1],[48,13,48,79,1],[49,9,49,10,1],[53,9,53,10,1],[54,13,54,40,1],[56,13,56,75,1],[57,9,57,10,1],[61,9,61,10,1],[62,13,62,40,1],[64,13,64,76,1],[65,9,65,10,1],[69,9,69,10,1],[70,13,70,40,1],[72,13,72,77,1],[73,9,73,10,1],[77,9,77,10,1],[78,13,78,40,1],[80,13,80,76,1],[81,9,81,10,1]]);
+    </script>
+  </body>
+</html>

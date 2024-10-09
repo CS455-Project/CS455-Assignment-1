@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\src\Program.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MoleProject;
+
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add&lt;App&gt;(&quot;#app&quot;);
+builder.RootComponents.Add&lt;HeadOutlet&gt;(&quot;head::after&quot;);
+
+builder.Services.AddScoped(sp =&gt; new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+await builder.Build().RunAsync();
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[5,1,5,58,0],[6,1,6,41,0],[7,1,7,55,0],[9,1,9,34,0],[9,34,9,111,0],[9,111,9,113,0],[11,1,11,34,0]]);
+    </script>
+  </body>
+</html>

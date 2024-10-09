@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\TestProject\FinalTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Bunit;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Moq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Xunit;
+using MoleProject.Pages;
+using MoleProject.Shared;
+using Microsoft.JSInterop;  // For IJSRuntime
+using HttpHandler;  // For MockHttpMessageHandler
+using RichardSzalay.MockHttp;
+
+
+namespace WhackEmAllTests
+{
+    public class WhackEmAllIntegrationTests : TestContext
+    {
+        private readonly HttpClient _httpClient;
+        private readonly Mock&lt;IJSRuntime&gt; _jsRuntimeMock;
+
+        public WhackEmAllIntegrationTests()
+        {
+            _httpClient = new HttpClient();
+            Services.AddSingleton(_httpClient);
+
+            _jsRuntimeMock = new Mock&lt;IJSRuntime&gt;();
+            _jsRuntimeMock.Setup(j =&gt; j.InvokeAsync&lt;object&gt;(&quot;playSound1&quot;, null)).Returns(ValueTask.FromResult((object)null));
+            _jsRuntimeMock.Setup(j =&gt; j.InvokeAsync&lt;object&gt;(&quot;playSound2&quot;, null)).Returns(ValueTask.FromResult((object)null));
+            Services.AddSingleton(_jsRuntimeMock.Object);
+        }
+
+
+        [Fact]
+        public async Task GameLoop_TimersWorkCorrectly_AndIntegrateWithService()
+        {
+            // Arrange
+            var cut = RenderComponent&lt;Game&gt;();
+            var component = cut.Instance;
+
+            // Act
+            component.playerName = &quot;TestPlayer&quot;;
+            component.StartGame();
+
+            // Allow the game to run for a few seconds
+            await Task.Delay(2000);
+
+            for ( int i= 0 ; i &lt; 5; i++)
+            {
+                // Get the active cell using hitPosition
+                var activeCell = component.Cells[component.hitPosition];
+
+                // Trigger MouseUp event on the active cell directly
+                await component.MouseUp(activeCell);
+            }
+
+            // End the game
+            await component.EndGame();
+
+            // Assert
+            Assert.True(component.score == 5, &quot;Score should be 5 after playing&quot;);
+            Assert.True(component.currentTime &lt; 60, &quot;Time should have decreased&quot;);
+            Assert.True(component.showGameOverModal, &quot;Game over modal should be shown&quot;);
+        }
+        [Fact]
+        public async Task GameEndUpdatesLeaderboardCorrectly()
+        {
+            // Arrange
+            var cut = RenderComponent&lt;Game&gt;();
+            var component = cut.Instance;
+
+            // Act
+            component.playerName = &quot;TestPlayer&quot;;
+            component.StartGame();
+
+            // Allow the game to run for a few seconds
+            await Task.Delay(2000);
+
+            // Allot a score 
+            component.score = 50;
+
+            // End the game
+            await component.EndGame();
+
+            // Assert
+            Assert.True(component.score == 50, &quot;Score should be 5 after playing&quot;);
+            Assert.True(component.showGameOverModal, &quot;Game over modal should be shown&quot;);
+
+            // Verify that the score was sent to the server
+            var leaderboard = await _httpClient.GetFromJsonAsync&lt;List&lt;LeaderboardEntry&gt;&gt;(&quot;https://cs455-assignment-1.onrender.com/leaderboard&quot;);
+            Assert.Contains(leaderboard, entry =&gt; entry.Name == &quot;TestPlayer&quot; &amp;&amp; entry.Score == component.score);
+        }
+
+    [Fact]
+        public async Task ViewLeaderboard_FetchesAndDisplaysLeaderboard()
+{
+    // Arrange
+    var mockHttp = new RichardSzalay.MockHttp.MockHttpMessageHandler();
+    var leaderboardData = new[]
+    {
+        new { Name = &quot;Player1&quot;, Score = 100 },
+        new { Name = &quot;Player2&quot;, Score = 90 }
+    };
+
+    mockHttp.When(&quot;https://cs455-assignment-1.onrender.com/leaderboard&quot;)
+            .Respond(&quot;application/json&quot;, System.Text.Json.JsonSerializer.Serialize(leaderboardData));
+
+    var client = mockHttp.ToHttpClient();
+    Services.AddSingleton(client);
+
+    var cut = RenderComponent&lt;Game&gt;();
+
+    // Act
+    await cut.Instance.ViewLeaderboard();
+
+    // Assert
+    Assert.True(cut.Instance.showLeaderboard);
+    Assert.Equal(2, cut.Instance.leaderboardData.Count);
+    Assert.False(cut.Instance.isGameStarted);
+    Assert.False(cut.Instance.showGameOverModal);
+
+    // Additional assertions to check the content of leaderboardData
+    Assert.Equal(&quot;Player1&quot;, cut.Instance.leaderboardData[0].Name);
+    Assert.Equal(100, cut.Instance.leaderboardData[0].Score);
+    Assert.Equal(&quot;Player2&quot;, cut.Instance.leaderboardData[1].Name);
+    Assert.Equal(90, cut.Instance.leaderboardData[1].Score);
+}
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[24,9,24,44,1],[25,9,25,10,1],[26,13,26,44,1],[27,13,27,48,1],[29,13,29,53,1],[30,13,30,126,1],[31,13,31,126,1],[32,13,32,58,1],[33,9,33,10,1],[38,9,38,10,1],[40,13,40,47,1],[41,13,41,42,1],[44,13,44,49,1],[45,13,45,35,1],[48,13,48,36,1],[50,19,50,27,1],[50,30,50,35,1],[50,37,50,40,1],[51,13,51,14,1],[53,17,53,73,1],[56,17,56,53,1],[57,13,57,14,1],[60,13,60,39,1],[63,13,63,82,1],[64,13,64,83,1],[65,13,65,89,1],[66,9,66,10,1],[69,9,69,10,1],[71,13,71,47,1],[72,13,72,42,1],[75,13,75,49,1],[76,13,76,35,1],[79,13,79,36,1],[82,13,82,34,1],[85,13,85,39,1],[88,13,88,83,1],[89,13,89,89,1],[92,13,92,145,1],[93,13,93,51,1],[93,51,93,111,1],[93,111,93,113,1],[94,9,94,10,1],[98,1,98,2,1],[100,5,100,72,1],[101,5,105,7,1],[107,5,108,102,1],[110,5,110,42,1],[111,5,111,35,1],[113,5,113,39,1],[116,5,116,42,1],[119,5,119,47,1],[120,5,120,57,1],[121,5,121,46,1],[122,5,122,50,1],[125,5,125,67,1],[126,5,126,62,1],[127,5,127,67,1],[128,5,128,61,1],[129,1,129,2,1]]);
+    </script>
+  </body>
+</html>

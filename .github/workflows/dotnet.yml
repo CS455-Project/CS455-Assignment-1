@@ -24,6 +24,16 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install server-side dependencies
+        run: |
+          cd server-tests
+          npm ci
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:

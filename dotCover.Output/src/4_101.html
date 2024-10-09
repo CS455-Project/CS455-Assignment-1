@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\Akanksha Wattamwar\Desktop\CS455\CS455-Assignment-1\TestProject\LeaderboardTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
 using Bunit;
 using Xunit;
 using MoleProject.Pages;
@@ -13,7 +23,7 @@ namespace WhackEmAllTests
         [Fact]
         public void ShowNamePrompt_SetsCorrectState()
         {
-            var cut = RenderComponent<Game>();
+            var cut = RenderComponent&lt;Game&gt;();
             cut.Instance.ShowNamePrompt();
 
             Assert.True(cut.Instance.showNamePrompt);
@@ -22,9 +32,9 @@ namespace WhackEmAllTests
         [Fact]
         public void CancelNamePrompt_ResetsNamePromptState()
         {
-            var cut = RenderComponent<Game>();
+            var cut = RenderComponent&lt;Game&gt;();
             cut.Instance.ShowNamePrompt();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.playerName = &quot;TestPlayer&quot;;
 
             cut.Instance.CancelNamePrompt();
 
@@ -39,8 +49,8 @@ namespace WhackEmAllTests
             var mockHttp = new MockHttpMessageHandler();
             var requestMade = false;
 
-            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
-                    .Respond(req =>
+            mockHttp.When(&quot;https://cs455-assignment-1.onrender.com/leaderboard&quot;)
+                    .Respond(req =&gt;
                     {
                         requestMade = true;
                         return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
@@ -49,13 +59,13 @@ namespace WhackEmAllTests
             var client = mockHttp.ToHttpClient();
             Services.AddSingleton(client);
 
-            var cut = RenderComponent<Game>();
+            var cut = RenderComponent&lt;Game&gt;();
 
             // Act
             await cut.Instance.ViewLeaderboard();
 
             // Assert
-            Assert.True(requestMade, "GET request was not sent to the leaderboard endpoint");
+            Assert.True(requestMade, &quot;GET request was not sent to the leaderboard endpoint&quot;);
             Assert.False(cut.Instance.isGameStarted);
             Assert.False(cut.Instance.showGameOverModal);
         }
@@ -63,7 +73,7 @@ namespace WhackEmAllTests
         [Fact]
         public void CloseLeaderboard_HidesLeaderboard()
         {
-            var cut = RenderComponent<Game>();
+            var cut = RenderComponent&lt;Game&gt;();
             cut.Instance.showLeaderboard = true;
 
             cut.Instance.CloseLeaderboard();
@@ -75,8 +85,8 @@ namespace WhackEmAllTests
         public void StartGame_WithValidName_StartsGameAndHidesNamePrompt()
         {
             // Arrange
-            var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "ValidPlayer";
+            var cut = RenderComponent&lt;Game&gt;();
+            cut.Instance.playerName = &quot;ValidPlayer&quot;;
             cut.Instance.showNamePrompt = true;
 
             // Act
@@ -95,8 +105,8 @@ namespace WhackEmAllTests
         public void StartGame_WithInvalidName_DoesNotStartGame()
         {
             // Arrange
-            var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "";
+            var cut = RenderComponent&lt;Game&gt;();
+            cut.Instance.playerName = &quot;&quot;;
             cut.Instance.showNamePrompt = true;
 
             // Act
@@ -108,3 +118,9 @@ namespace WhackEmAllTests
         }
     }
 }
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,9,15,10,1],[16,13,16,47,1],[17,13,17,43,1],[19,13,19,54,1],[20,9,20,10,1],[24,9,24,10,1],[25,13,25,47,1],[26,13,26,43,1],[27,13,27,52,1],[29,13,29,45,1],[31,13,31,55,1],[32,13,32,65,1],[33,9,33,10,1],[37,9,37,10,1],[39,13,39,57,1],[40,13,40,37,1],[42,13,44,21,1],[44,21,44,22,1],[44,22,45,25,1],[45,25,45,44,1],[45,44,46,25,1],[46,25,46,86,1],[46,86,47,21,1],[47,21,47,22,1],[47,22,47,24,1],[49,13,49,50,1],[50,13,50,43,1],[52,13,52,47,1],[55,13,55,50,1],[58,13,58,94,1],[59,13,59,54,1],[60,13,60,58,1],[61,9,61,10,1],[65,9,65,10,1],[66,13,66,47,1],[67,13,67,49,1],[69,13,69,45,1],[71,13,71,56,1],[72,9,72,10,1],[76,9,76,10,1],[78,13,78,47,1],[79,13,79,53,1],[80,13,80,48,1],[83,13,83,38,1],[86,13,86,53,1],[87,13,87,55,1],[88,13,88,49,1],[89,13,89,56,1],[90,13,90,53,1],[91,13,91,58,1],[92,9,92,10,1],[96,9,96,10,1],[98,13,98,47,1],[99,13,99,42,1],[100,13,100,48,1],[103,13,103,38,1],[106,13,106,54,1],[107,13,107,54,1],[108,9,108,10,1]]);
+    </script>
+  </body>
+</html>

@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
 const cors = require('cors');
 require("dotenv").config();
 const mongoose = require('mongoose');
@@ -8,7 +7,10 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-mongoose.connect(process.env.MONGODB);
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect(process.env.MONGODB);
+  }
+  
 
 
 const userSchema = new mongoose.Schema({
@@ -51,8 +53,10 @@ app.get("/leaderboard", async function (req, res) {
 app.get("/", function (req, res) {
     res.status(200).send( "<h1>Welcome to the server side of Whack'Em-All !!!</h1>");
 });
-
-// Start the server
-app.listen(process.env.PORT ||8000, () => {
-    console.log(`Server is running on port ${process.env.PORT}.`);
-  });
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running on port ${process.env.PORT || 8000}.`);
+    });
+  }
+  
+  module.exports = { app, User };

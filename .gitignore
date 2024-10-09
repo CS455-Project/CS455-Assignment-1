@@ -1,6 +1,6 @@
-server.zip
-**/bin/
-**/obj/
-**/node_modules/
-*/.env
-TestProject/coverage.json
+**\bin
+**\obj
+**\node_modules
+**\.env
+**\coverage.json
+*.gitignore

@@ -15,6 +15,10 @@ namespace MoleProject.Pages
         public PeriodicTimer? gameLoopTimer { get; set; }
         public PeriodicTimer? gameTimeTimer { get; set; }
         public List<CellModel> Cells { get; set; } = new List<CellModel>();
+        public string playerName = string.Empty;
+        private int? lastPosition = null;
+        public bool showLeaderboard = false;
+        public bool showNamePrompt = false;
 
         public Game()
         {
@@ -23,5 +27,10 @@ namespace MoleProject.Pages
                 Cells.Add(new CellModel { Id = i });
             }
         }
+    }
+    public class LeaderboardEntry
+    {
+        public string Name { get; set; } = string.Empty;
+        public int Score { get; set; }
     }
 }

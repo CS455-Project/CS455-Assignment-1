@@ -1,7 +1,6 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
-@using MoleProject.Shared;
 
 <PageTitle>Whack'Em-All</PageTitle>
 
@@ -111,13 +110,8 @@ else
 
 @code {
     private Random random = new Random();
-    public string playerName = string.Empty;
-    private int? lastPosition = null;
-    public bool showLeaderboard = false;
-    public bool showNamePrompt = false;
     public List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
-
-     public async Task ViewLeaderboard()
+    public async Task ViewLeaderboard()
     {
         try
         {   
@@ -155,11 +149,6 @@ else
     {
         showNamePrompt = false;
         playerName = string.Empty;
-    }
-    public class LeaderboardEntry
-    {
-        public string Name { get; set; }
-        public int Score { get; set; }
     }
 
     public async Task MouseUp(CellModel s)
@@ -223,7 +212,7 @@ else
         {
             if (currentTime == 0)
             {
-                EndGame();
+                await EndGame();
                 break;
             }
             await timer.WaitForNextTickAsync();
@@ -278,13 +267,13 @@ else
     public virtual async Task SendScoreToServer(int score)
     {
         var response = await Http.PostAsJsonAsync("https://cs455-assignment-1.onrender.com/", new { name = playerName, score });
-    if (response.IsSuccessStatusCode)
-    {
-        Console.WriteLine("Score successfully sent to the server.");
-    }
-    else
-    {
-        Console.WriteLine($"Failed to send score. Status Code: {response.StatusCode}");
-    }
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Score successfully sent to the server.");
+        }
+        else
+        {
+            Console.WriteLine($"Failed to send score. Status Code: {response.StatusCode}");
+        }
     }
 }

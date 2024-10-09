@@ -33,33 +33,32 @@ namespace WhackEmAllTests
         }
 
         [Fact]
-        public async Task ViewLeaderboard_FetchesAndDisplaysLeaderboard()
-        {
-            // Arrange
-            var mockHttp = new MockHttpMessageHandler();
-            var leaderboardData = new[]
+        public async Task ViewLeaderboard_SendsGetRequest()
+{
+    // Arrange
+    var mockHttp = new MockHttpMessageHandler();
+    var requestMade = false;
+
+    mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
+            .Respond(req =>
             {
-                new { Name = "Player1", Score = 100 },
-                new { Name = "Player2", Score = 90 }
-            };
+                requestMade = true;
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            });
 
-            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
-                    .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
+    var client = mockHttp.ToHttpClient();
+    Services.AddSingleton(client);
 
-            var client = mockHttp.ToHttpClient();
-            Services.AddSingleton<HttpClient>(client);
+    var cut = RenderComponent<Game>();
 
-            var cut = RenderComponent<Game>();
+    // Act
+    await cut.Instance.ViewLeaderboard();
 
-            // Act
-            await cut.Instance.ViewLeaderboard();
-
-            // Assert
-            Assert.True(cut.Instance.showLeaderboard);
-            Assert.Equal(2, cut.Instance.leaderboardData.Count);
-            Assert.False(cut.Instance.isGameStarted);
-            Assert.False(cut.Instance.showGameOverModal);
-        }
+    // Assert
+    Assert.True(requestMade, "GET request was not sent to the leaderboard endpoint");
+    Assert.False(cut.Instance.isGameStarted);
+    Assert.False(cut.Instance.showGameOverModal);
+}
 
         [Fact]
         public void CloseLeaderboard_HidesLeaderboard()

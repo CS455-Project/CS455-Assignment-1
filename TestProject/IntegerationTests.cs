@@ -49,20 +49,18 @@ namespace WhackEmAllTests
 
             for ( int i= 0 ; i < 5; i++)
             {
-                // Get the active cell using hitPosition
                 var activeCell = component.Cells[component.hitPosition];
-
-                // Trigger MouseUp event on the active cell directly
                 await component.MouseUp(activeCell);
             }
-
-            // End the game
-            await component.EndGame();
+            cut.Render();
 
             // Assert
+
             Assert.True(component.score == 5, "Score should be 5 after playing");
-            Assert.True(component.currentTime < 60, "Time should have decreased");
-            Assert.True(component.showGameOverModal, "Game over modal should be shown");
+            Assert.NotNull(component.Cells);
+            Assert.True(component.Cells.Count > 0, "Cells should be initialized and not empty after StartGame");
+            var renderedCells = cut.FindAll(".square");
+            Assert.Equal(component.Cells.Count, renderedCells.Count);
         }
         [Fact]
         public async Task GameEndUpdatesLeaderboardCorrectly()

@@ -110,14 +110,14 @@ else
 
 @code {
     private Random random = new Random();
-    public List<LeaderboardEntry> leaderboardData = new List<LeaderboardEntry>();
+    public List<LeaderboardEntry> leaderboardData {get;set;}= new List<LeaderboardEntry>();
     public async Task ViewLeaderboard()
     {
         try
         {   
             showGameOverModal = false;
             isGameStarted = false;
-            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>("https://cs455-assignment-1.onrender.com/leaderboard");
+            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>($"{serverUrl}/leaderboard");
             Console.WriteLine(response);
             if (response != null)
             {
@@ -266,7 +266,7 @@ else
 
     public virtual async Task SendScoreToServer(int score)
     {
-        var response = await Http.PostAsJsonAsync("https://cs455-assignment-1.onrender.com/", new { name = playerName, score });
+        var response = await Http.PostAsJsonAsync($"{serverUrl}/", new { name = playerName, score });
         if (response.IsSuccessStatusCode)
         {
             Console.WriteLine("Score successfully sent to the server.");

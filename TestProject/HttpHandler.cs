@@ -9,7 +9,7 @@ namespace HttpHandler
 {
     public class MockHttpMessageHandler : HttpMessageHandler
     {
-        private readonly Dictionary<string, (HttpStatusCode StatusCode, object ResponseBody)> _mockResponses 
+        private readonly Dictionary<string, (HttpStatusCode StatusCode, object ResponseBody)> _mockResponses
             = new Dictionary<string, (HttpStatusCode, object)>();
 
         public void When(string url, HttpStatusCode statusCode, object responseBody)

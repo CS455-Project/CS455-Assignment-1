@@ -47,7 +47,7 @@ namespace WhackEmAllTests
             // Allow the game to run for a few seconds
             await Task.Delay(2000);
 
-            for ( int i= 0 ; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 // Get the active cell using hitPosition
                 var activeCell = component.Cells[component.hitPosition];
@@ -93,39 +93,39 @@ namespace WhackEmAllTests
             Assert.Contains(leaderboard, entry => entry.Name == "TestPlayer" && entry.Score == component.score);
         }
 
-    [Fact]
+        [Fact]
         public async Task ViewLeaderboard_FetchesAndDisplaysLeaderboard()
-{
-    // Arrange
-    var mockHttp = new RichardSzalay.MockHttp.MockHttpMessageHandler();
-    var leaderboardData = new[]
-    {
+        {
+            // Arrange
+            var mockHttp = new RichardSzalay.MockHttp.MockHttpMessageHandler();
+            var leaderboardData = new[]
+            {
         new { Name = "Player1", Score = 100 },
         new { Name = "Player2", Score = 90 }
     };
 
-    mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
-            .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
+            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
+                    .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));
 
-    var client = mockHttp.ToHttpClient();
-    Services.AddSingleton(client);
+            var client = mockHttp.ToHttpClient();
+            Services.AddSingleton(client);
 
-    var cut = RenderComponent<Game>();
+            var cut = RenderComponent<Game>();
 
-    // Act
-    await cut.Instance.ViewLeaderboard();
+            // Act
+            await cut.Instance.ViewLeaderboard();
 
-    // Assert
-    Assert.True(cut.Instance.showLeaderboard);
-    Assert.Equal(2, cut.Instance.leaderboardData.Count);
-    Assert.False(cut.Instance.isGameStarted);
-    Assert.False(cut.Instance.showGameOverModal);
+            // Assert
+            Assert.True(cut.Instance.showLeaderboard);
+            Assert.Equal(2, cut.Instance.leaderboardData.Count);
+            Assert.False(cut.Instance.isGameStarted);
+            Assert.False(cut.Instance.showGameOverModal);
 
-    // Additional assertions to check the content of leaderboardData
-    Assert.Equal("Player1", cut.Instance.leaderboardData[0].Name);
-    Assert.Equal(100, cut.Instance.leaderboardData[0].Score);
-    Assert.Equal("Player2", cut.Instance.leaderboardData[1].Name);
-    Assert.Equal(90, cut.Instance.leaderboardData[1].Score);
-}
+            // Additional assertions to check the content of leaderboardData
+            Assert.Equal("Player1", cut.Instance.leaderboardData[0].Name);
+            Assert.Equal(100, cut.Instance.leaderboardData[0].Score);
+            Assert.Equal("Player2", cut.Instance.leaderboardData[1].Name);
+            Assert.Equal(90, cut.Instance.leaderboardData[1].Score);
+        }
     }
 }

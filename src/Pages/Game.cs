@@ -9,16 +9,13 @@ namespace MoleProject.Pages
 
         public static string ServerUrl { get; } = "https://cs455-assignment-1.onrender.com";
 
-        public GameState State { get; set;} = new GameState();
-        public GameConfig Config { get; set;} = new GameConfig();
-        public Player CurrentPlayer { get; set;} = new Player();
-        public LeaderboardManager CurrLeaderboardManager { get; set;} = new LeaderboardManager();
-        public CellManager CurrCellManager { get; set;} = new CellManager(CellCount);
+        public GameState State { get; set; } = new GameState();
+        public GameConfig Config { get; set; } = new GameConfig(InitialGameSpeed);
+        public Player CurrentPlayer { get; set; } = new Player();
+        public LeaderboardManager LeaderboardManager { get; set; } = new LeaderboardManager();
+        public CellManager CellManager { get; set; } = new CellManager(CellCount);
 
-        public Game()
-        {
-            Config.GameSpeed = InitialGameSpeed;
-        }
+        public Game() { }
     }
 
     public class GameState
@@ -37,6 +34,11 @@ namespace MoleProject.Pages
         public int GameSpeed { get; set; }
         public PeriodicTimer? GameLoopTimer { get; set; }
         public PeriodicTimer? GameTimeTimer { get; set; }
+
+        public GameConfig(int gameSpeed)
+        {
+            GameSpeed = gameSpeed;
+        }
     }
 
     public class Player
@@ -54,16 +56,21 @@ namespace MoleProject.Pages
 
     public class CellManager
     {
-        public List<CellModel> Cells { get; set; }
+        public List<CellModel> Cells { get; set;}
 
         public CellManager(int cellCount)
         {
+            Cells = InitializeCells(cellCount);
+        }
+
+        private static List<CellModel> InitializeCells(int count)
+        {
             var cells = new List<CellModel>();
-            for (int i = 0; i < cellCount; i++)
+            for (int i = 0; i < count; i++)
             {
                 cells.Add(new CellModel { Id = i });
             }
-            Cells = new List<CellModel>(cells);
+            return cells;
         }
     }
 

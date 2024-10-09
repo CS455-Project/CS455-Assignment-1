@@ -232,7 +232,7 @@ else
         State.IsGameRunning = true;
         State.ShowGameOverModal = false;
 
-        Config.GameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(InitialGameSpeed)); 
+        Config.GameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(Config.GameSpeed)); 
         _ = GameLoopAsync(Config.GameLoopTimer);
 
         Config.GameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));

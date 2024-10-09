@@ -4,16 +4,13 @@ namespace MoleProject.Pages
 {
     public partial class Game
     {
-        private const int InitialGameSpeed = 750;
-        private const int CellCount = 16;
-
         public static string ServerUrl { get; } = "https://cs455-assignment-1.onrender.com";
 
         public GameState State { get; set; } = new GameState();
-        public GameConfig Config { get; set; } = new GameConfig(InitialGameSpeed);
+        public GameConfig Config { get; set; } = new GameConfig();
         public Player CurrentPlayer { get; set; } = new Player();
         public LeaderboardManager CurrLeaderboardManager { get; set; } = new LeaderboardManager();
-        public CellManager CurrCellManager { get; set; } = new CellManager(CellCount);
+        public CellManager CurrCellManager { get; set; } = new CellManager();
 
         public Game() { }
     }
@@ -31,14 +28,9 @@ namespace MoleProject.Pages
 
     public class GameConfig
     {
-        public int GameSpeed { get; set; }
+        public int GameSpeed { get; set; } = 750;
         public PeriodicTimer? GameLoopTimer { get; set; }
         public PeriodicTimer? GameTimeTimer { get; set; }
-
-        public GameConfig(int gameSpeed)
-        {
-            GameSpeed = gameSpeed;
-        }
     }
 
     public class Player
@@ -56,22 +48,19 @@ namespace MoleProject.Pages
 
     public class CellManager
     {
+        private const int count = 16;
         public List<CellModel> Cells { get; set;}
 
-        public CellManager(int cellCount)
-        {
-            Cells = InitializeCells(cellCount);
-        }
-
-        private static List<CellModel> InitializeCells(int count)
+        public CellManager()
         {
             var cells = new List<CellModel>();
             for (int i = 0; i < count; i++)
             {
                 cells.Add(new CellModel { Id = i });
             }
-            return cells;
+            Cells = cells;
         }
+
     }
 
     public class LeaderboardEntry

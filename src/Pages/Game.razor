@@ -220,7 +220,7 @@ else
         _ = GameTimeAsync(Config.GameTimeTimer);
     }
 
-    public async Task EndGame()
+    public virtual async Task EndGame()
     {
         State.IsGameRunning = false;
         State.ShowGameOverModal = true;

@@ -74,6 +74,25 @@ namespace WhackEmAllTests
         }
 
         [Fact]
+        public void GameTimeAsync_ShouldEndGameCorrectly()
+        {
+            // Arrange
+            var _gameComponent = new Mock<Game>() { CallBase = true };
+            _gameComponent.Object.State.IsGameRunning = true; 
+            _gameComponent.Object.State.CurrentTime = 0; 
+
+            _gameComponent.Setup(m => m.EndGame()).Verifiable();
+
+            // Act
+            _gameComponent.Object.GameTimeAsync(new PeriodicTimer(TimeSpan.FromSeconds(1)));
+
+            // Assert
+            _gameComponent.Verify(m => m.EndGame(), Times.Once); 
+            Assert.False(_gameComponent.Object.State.IsGameRunning);
+            Assert.True(_gameComponent.Object.State.ShowGameOverModal); 
+        }
+
+        [Fact]
         public void RestartGame_ResetsGameState()
         {
             var cut = RenderComponent<Game>();

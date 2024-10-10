@@ -11,6 +11,9 @@ namespace WhackEmAllTests
 {
     public class GameTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         private readonly Mock<IJSRuntime> mockJSRuntime;
 
         public GameTests()
@@ -32,7 +35,7 @@ namespace WhackEmAllTests
         public async Task MouseUp_MissPosition_InvokeJavaScript()
         {
             var cut = RenderComponent<Game>();
-            cut.Instance.CurrentPlayer.Name = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.StartGame();
             var missCell = new CellModel { Id = (cut.Instance.State.HitPosition + 1) % 16 };
 
@@ -46,7 +49,7 @@ namespace WhackEmAllTests
         public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
         {
             var cut = RenderComponent<Game>();
-            cut.Instance.CurrentPlayer.Name = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.StartGame();
             var hitCell = new CellModel { Id = cut.Instance.State.HitPosition };
 

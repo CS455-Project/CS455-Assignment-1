@@ -13,11 +13,14 @@ namespace WhackEmAllTests
 {
     public class WhackEmAllTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         [Fact]
         public void StartGame_ShouldInitializeGameCorrectly()
         {
             var gameService = new Game();
-            gameService.CurrentPlayer.Name = "TestPlayer";
+            gameService.CurrentPlayer.Name = GenerateRandomName();
             gameService.StartGame();
 
 
@@ -41,7 +44,7 @@ namespace WhackEmAllTests
             {
                 CallBase = true // Ensures the actual logic is used except for mocked methods
             };
-            mockGame.Object.CurrentPlayer.Name = "TestPlayer";
+            mockGame.Object.CurrentPlayer.Name = GenerateRandomName();
             mockGame.Object.StartGame();
             mockGame.Setup(x => x.SendScoreToServer(It.IsAny<int>())).Returns(Task.CompletedTask); // Mock the method
 
@@ -58,7 +61,7 @@ namespace WhackEmAllTests
         public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
         {
             var gameService = new Game();
-            gameService.CurrentPlayer.Name = "TestPlayer";
+            gameService.CurrentPlayer.Name = GenerateRandomName();
 
             gameService.StartGame();
 
@@ -97,7 +100,7 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.StartGame();
-            cut.Instance.CurrentPlayer.Name = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.EndGame();
 
             cut.Instance.RestartGame();
@@ -114,7 +117,7 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.StartGame();
-            cut.Instance.CurrentPlayer.Name = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.EndGame();
 
             cut.Instance.ReturnToStartMenu();

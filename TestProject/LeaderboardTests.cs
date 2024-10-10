@@ -10,6 +10,9 @@ namespace WhackEmAllTests
 {
     public class WhackEmAllAdditionalTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         [Fact]
         public void ShowNamePrompt_SetsCorrectState()
         {
@@ -24,7 +27,7 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.ShowNamePrompt();
-            cut.Instance.CurrentPlayer.Name = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
 
             cut.Instance.CancelNamePrompt();
 

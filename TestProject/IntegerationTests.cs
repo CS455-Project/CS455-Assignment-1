@@ -87,7 +87,6 @@ namespace WhackEmAllTests
             // Allot a score 
             var score = randomScore.Next(200, 400);
             component.CurrentPlayer.Score = score;
-            System.Console.WriteLine(score);
 
             // End the game
             await component.EndGame();

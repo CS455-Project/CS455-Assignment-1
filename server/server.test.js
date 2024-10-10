@@ -104,3 +104,62 @@ describe("User API", () => {
       User.find.mockRestore();
   });
 });
+
+describe('DELETE /leaderboard/delete', () => {
+    it('should delete entries for an existing player', async () => {
+        // Arrange: Create a user to delete
+        const playerName = 'TestPlayer';
+        const user = new User({ name: playerName, score: 100 });
+        await user.save();
+
+        // Act: Send DELETE request
+        const response = await request(app)
+            .post('/leaderboard/delete')
+            .query({ name: playerName }); // Sending the player name as query
+
+        // Assert
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('1 entries deleted.');
+
+        // Ensure the user was deleted
+        const deletedUser = await User.findOne({ name: playerName });
+        expect(deletedUser).toBeNull();
+    });
+
+    it('should return 404 if no entries are found for the given player name', async () => {
+        // Act: Attempt to delete a non-existing player
+        const response = await request(app)
+            .post('/leaderboard/delete')
+            .query({ name: 'NonExistentPlayer' });
+
+        // Assert
+        expect(response.status).toBe(404);
+        expect(response.body.error).toBe('No entries found for the given name.');
+    });
+
+    it('should handle errors during deletion', async () => {
+        // Arrange: Mock a database error
+        jest.spyOn(User, 'deleteMany').mockImplementationOnce(() => {
+            throw new Error('Database error');
+        });
+
+        const playerName = 'TestPlayer';
+        const response = await request(app)
+            .post('/leaderboard/delete')
+            .query({ name: playerName });
+
+        // Assert
+        expect(response.status).toBe(500);
+        expect(response.body.error).toBe('Error deleting entries');
+    });
+
+    it('should return 400 if player name is missing', async () => {
+        // Act: Attempt to delete without a player name
+        const response = await request(app)
+            .post('/leaderboard/delete');
+
+        // Assert
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Player name is required.'); // You should modify your server code to handle this case
+    });
+});

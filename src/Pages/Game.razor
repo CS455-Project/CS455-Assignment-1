@@ -121,10 +121,6 @@ else
                 CurrLeaderboardManager.Entries = response;
                 CurrLeaderboardManager.ShowLeaderboard = true;
             }
-            else
-            {
-                Console.WriteLine("Failed to fetch leaderboard data.");
-            }
         }
         catch (Exception ex)
         {
@@ -132,15 +128,8 @@ else
         }
     }
 
-    public void CloseLeaderboard()
-    {
-        CurrLeaderboardManager.ShowLeaderboard = false;
-    }
-
-    public void ShowNamePrompt()
-    {
-        CurrLeaderboardManager.ShowNamePrompt = true;
-    }
+    public void CloseLeaderboard() => CurrLeaderboardManager.ShowLeaderboard = false;
+    public void ShowNamePrompt() => CurrLeaderboardManager.ShowNamePrompt = true;
 
     public void CancelNamePrompt()
     {
@@ -164,16 +153,8 @@ else
         }
     }
 
-    protected async Task PlayHitSound()
-    {
-        await JSRuntime.InvokeVoidAsync("playSound1");
-    }
-
-    protected async Task PlayMissSound()
-    {
-        await JSRuntime.InvokeVoidAsync("playSound2");
-    }
-
+    protected async Task PlayHitSound() => await JSRuntime.InvokeVoidAsync("playSound1");
+    protected async Task PlayMissSound() => await JSRuntime.InvokeVoidAsync("playSound2");
     public void setNextAppearance()
     {
         foreach (var item in CurrCellManager.Cells)
@@ -249,11 +230,7 @@ else
         await SendScoreToServer(CurrentPlayer.Score); 
     }
 
-    public void RestartGame()
-    {
-        State.ShowGameOverModal = false;
-        StartGame();
-    }
+    public void RestartGame() => StartGame();
 
     public void ReturnToStartMenu()
     {

@@ -6,3 +6,4 @@
 server-tests/
 .gitignore
 .vscode
+**\coverage

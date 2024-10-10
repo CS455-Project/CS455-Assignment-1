@@ -10,8 +10,6 @@ app.use(cors());
 if (process.env.NODE_ENV !== 'test') {
     mongoose.connect(process.env.MONGODB);
   }
-  
-
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -41,7 +39,7 @@ app.get("/leaderboard", async function (req, res) {
         const leaderboard = await User.find()
             .sort({ score: -1 })
             .limit(10)
-            .select('name score -_id'); // Only return name and score, exclude _id
+            .select('name score -_id'); 
         res.status(200).json(leaderboard);
     } catch (error) {
         console.error("Error retrieving leaderboard:", error);

@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --runInBand --forceExit --coverage",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm i"
@@ -16,9 +16,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "mongoose": "^8.7.0"
+    "mongoose": "^8.7.0",
+    "mongodb-memory-server": "^10.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "jest": "^29.7.0",
+    "mongoose": "^8.7.0",
+    "request": "^2.88.2",
+    "supertest": "^7.0.0"
   }
 }

@@ -46,7 +46,8 @@ namespace WhackEmAllTests
             var component = cut.Instance;
 
             // Act
-            component.CurrentPlayer.Name = GenerateRandomName();
+            var name = GenerateRandomName();
+            component.CurrentPlayer.Name = name;
             component.StartGame();
 
             // Allow the game to run for a few seconds
@@ -68,6 +69,11 @@ namespace WhackEmAllTests
             Assert.True(component.CurrentPlayer.Score == 5, "Score should be 5 after playing");
             Assert.True(component.State.CurrentTime < 60, "Time should have decreased");
             Assert.True(component.State.ShowGameOverModal, "Game over modal should be shown");
+
+            // Cleanup: Remove the entry from the leaderboard
+            var url = $"{Game.ServerUrl}/leaderboard/delete?name={Uri.EscapeDataString(name)}";
+            var response = await _httpClient.PostAsync(url, null);
+            Assert.True(response.IsSuccessStatusCode, "Entity should be deleted successfully");
         }
         [Fact]
         public async Task GameEndUpdatesLeaderboardCorrectly()

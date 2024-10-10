@@ -100,9 +100,9 @@ namespace WhackEmAllTests
             var mockHttp = new RichardSzalay.MockHttp.MockHttpMessageHandler();
             var leaderboardData = new[]
             {
-        new { Name = "Player1", Score = 100 },
-        new { Name = "Player2", Score = 90 }
-    };
+                new { Name = "Player1", Score = 100 },
+                new { Name = "Player2", Score = 90 }
+            };
 
             mockHttp.When($"{Game.ServerUrl}/leaderboard")
                     .Respond("application/json", System.Text.Json.JsonSerializer.Serialize(leaderboardData));

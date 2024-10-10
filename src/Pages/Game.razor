@@ -173,7 +173,7 @@ else
         State.LastPosition = randomPosition;
     }
 
-    protected virtual async Task GameLoopAsync(PeriodicTimer timer)
+    public virtual async Task GameLoopAsync(PeriodicTimer timer)
     {
         while (State.IsGameRunning)
         {
@@ -184,7 +184,7 @@ else
         }
     }
 
-    protected virtual async Task GameTimeAsync(PeriodicTimer timer)
+    public virtual async Task GameTimeAsync(PeriodicTimer timer)
     {
         while (State.IsGameRunning)
         {
@@ -241,11 +241,7 @@ else
     public virtual async Task SendScoreToServer(int score)
     {
         var response = await Http.PostAsJsonAsync($"{ServerUrl}/", new { name = CurrentPlayer.Name, score });
-        if (response.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Score successfully sent to the server.");
-        }
-        else
+        if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine($"Failed to send score. Status Code: {response.StatusCode}");
         }

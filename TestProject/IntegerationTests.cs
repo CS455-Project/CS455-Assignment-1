@@ -12,12 +12,17 @@ using Microsoft.JSInterop;  // For IJSRuntime
 using HttpHandler;  // For MockHttpMessageHandler
 using RichardSzalay.MockHttp;
 using MoleProject.Pages;
+using Microsoft.VisualBasic;
 
 
 namespace WhackEmAllTests
 {
     public class WhackEmAllIntegrationTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
+        private readonly Random randomScore = new Random();
         private readonly HttpClient _httpClient;
         private readonly Mock<IJSRuntime> _jsRuntimeMock;
 
@@ -41,7 +46,7 @@ namespace WhackEmAllTests
             var component = cut.Instance;
 
             // Act
-            component.CurrentPlayer.Name = "TestPlayer";
+            component.CurrentPlayer.Name = GenerateRandomName();
             component.StartGame();
 
             // Allow the game to run for a few seconds
@@ -72,25 +77,33 @@ namespace WhackEmAllTests
             var component = cut.Instance;
 
             // Act
-            component.CurrentPlayer.Name = "TestPlayer";
+            var name = GenerateRandomName();
+            component.CurrentPlayer.Name = name;
             component.StartGame();
 
             // Allow the game to run for a few seconds
             await Task.Delay(2000);
 
             // Allot a score 
-            component.CurrentPlayer.Score = 50;
+            var score = randomScore.Next(200, 400);
+            component.CurrentPlayer.Score = score;
+            System.Console.WriteLine(score);
 
             // End the game
             await component.EndGame();
 
             // Assert
-            Assert.True(component.CurrentPlayer.Score == 50, "Score should be 5 after playing");
+            Assert.True(component.CurrentPlayer.Score == score, "Score should be correct after playing");
             Assert.True(component.State.ShowGameOverModal, "Game over modal should be shown");
 
             // Verify that the score was sent to the server
             var leaderboard = await _httpClient.GetFromJsonAsync<List<LeaderboardEntry>>($"{Game.ServerUrl}/leaderboard");
-            Assert.Contains(leaderboard!, entry => entry.Name == "TestPlayer" && entry.Score == component.CurrentPlayer.Score);
+            Assert.Contains(leaderboard!, entry => entry.Name == name && entry.Score == component.CurrentPlayer.Score);
+
+            // Cleanup: Remove the entry from the leaderboard
+            var url = $"{Game.ServerUrl}/leaderboard/delete?name={Uri.EscapeDataString(name)}";
+            var response = await _httpClient.PostAsync(url, null);
+            Assert.True(response.IsSuccessStatusCode, "Entity should be deleted successfully");
         }
 
         [Fact]

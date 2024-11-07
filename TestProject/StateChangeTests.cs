@@ -13,26 +13,27 @@ namespace WhackEmAllTests
 {
     public class WhackEmAllTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         [Fact]
         public void StartGame_ShouldInitializeGameCorrectly()
         {
-            var gameService = new Game
-            {
-                playerName = "TestPlayer"
-            };
+            var gameService = new Game();
+            gameService.CurrentPlayer.Name = GenerateRandomName();
             gameService.StartGame();
 
 
-            Assert.Equal(0, gameService.score);
-            Assert.Equal(750, gameService.gameSpeed);
-            Assert.Equal(16, gameService.Cells.Count);
-            Assert.True(gameService.isGameStarted);
-            Assert.True(string.IsNullOrEmpty(gameService.message));
-            Assert.False(gameService.showGameOverModal);
-            Assert.NotNull(gameService.gameLoopTimer);
-            Assert.NotNull(gameService.gameTimeTimer);
-            Assert.Equal(60, gameService.currentTime);
-            Assert.True(gameService.isGameRunning);
+            Assert.Equal(0, gameService.CurrentPlayer.Score);
+            Assert.Equal(750, gameService.Config.GameSpeed);
+            Assert.Equal(16, gameService.CurrCellManager.Cells.Count);
+            Assert.True(gameService.State.IsGameStarted);
+            Assert.True(string.IsNullOrEmpty(gameService.State.Message));
+            Assert.False(gameService.State.ShowGameOverModal);
+            Assert.NotNull(gameService.Config.GameLoopTimer);
+            Assert.NotNull(gameService.Config.GameTimeTimer);
+            Assert.Equal(60, gameService.State.CurrentTime);
+            Assert.True(gameService.State.IsGameRunning);
         }
 
         [Fact]
@@ -43,7 +44,7 @@ namespace WhackEmAllTests
             {
                 CallBase = true // Ensures the actual logic is used except for mocked methods
             };
-            mockGame.Object.playerName = "TestPlayer";
+            mockGame.Object.CurrentPlayer.Name = GenerateRandomName();
             mockGame.Object.StartGame();
             mockGame.Setup(x => x.SendScoreToServer(It.IsAny<int>())).Returns(Task.CompletedTask); // Mock the method
 
@@ -51,30 +52,47 @@ namespace WhackEmAllTests
             await mockGame.Object.EndGame();
 
             // Assert
-            Assert.False(mockGame.Object.isGameRunning);
-            Assert.True(mockGame.Object.showGameOverModal);
+            Assert.False(mockGame.Object.State.IsGameRunning);
+            Assert.True(mockGame.Object.State.ShowGameOverModal);
             mockGame.Verify(x => x.SendScoreToServer(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]
         public void SetNextAppearance_ShouldSetNextMoleAppearanceCorrectly()
         {
-            var gameService = new Game
-            {
-                playerName = "TestPlayer"
-            };
+            var gameService = new Game();
+            gameService.CurrentPlayer.Name = GenerateRandomName();
 
             gameService.StartGame();
 
             gameService.setNextAppearance();
-            int currentMoleIndex = gameService.hitPosition;
-            Assert.True(gameService.Cells[currentMoleIndex].IsShown);
+            int currentMoleIndex = gameService.State.HitPosition;
+            Assert.True(gameService.CurrCellManager.Cells[currentMoleIndex].IsShown);
 
             gameService.setNextAppearance();
-            int newMoleIndex = gameService.hitPosition;
+            int newMoleIndex = gameService.State.HitPosition;
 
-            Assert.False(gameService.Cells[currentMoleIndex].IsShown);
-            Assert.True(gameService.Cells[newMoleIndex].IsShown);
+            Assert.False(gameService.CurrCellManager.Cells[currentMoleIndex].IsShown);
+            Assert.True(gameService.CurrCellManager.Cells[newMoleIndex].IsShown);
+        }
+
+        [Fact]
+        public void GameTimeAsync_ShouldEndGameCorrectly()
+        {
+            // Arrange
+            var _gameComponent = new Mock<Game>() { CallBase = true };
+            _gameComponent.Object.State.IsGameRunning = true; 
+            _gameComponent.Object.State.CurrentTime = 0; 
+
+            _gameComponent.Setup(m => m.EndGame()).Verifiable();
+
+            // Act
+            _gameComponent.Object.GameTimeAsync(new PeriodicTimer(TimeSpan.FromSeconds(1)));
+
+            // Assert
+            _gameComponent.Verify(m => m.EndGame(), Times.Once); 
+            Assert.False(_gameComponent.Object.State.IsGameRunning);
+            Assert.True(_gameComponent.Object.State.ShowGameOverModal); 
         }
 
         [Fact]
@@ -82,16 +100,16 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.StartGame();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.EndGame();
 
             cut.Instance.RestartGame();
 
-            Assert.True(cut.Instance.isGameStarted);
-            Assert.True(cut.Instance.isGameRunning);
-            Assert.Equal(0, cut.Instance.score);
-            Assert.Equal(60, cut.Instance.currentTime);
-            Assert.False(cut.Instance.showGameOverModal);
+            Assert.True(cut.Instance.State.IsGameStarted);
+            Assert.True(cut.Instance.State.IsGameRunning);
+            Assert.Equal(0, cut.Instance.CurrentPlayer.Score);
+            Assert.Equal(60, cut.Instance.State.CurrentTime);
+            Assert.False(cut.Instance.State.ShowGameOverModal);
         }
 
         [Fact]
@@ -99,13 +117,13 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.StartGame();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.EndGame();
 
             cut.Instance.ReturnToStartMenu();
 
-            Assert.False(cut.Instance.isGameStarted);
-            Assert.False(cut.Instance.showGameOverModal);
+            Assert.False(cut.Instance.State.IsGameStarted);
+            Assert.False(cut.Instance.State.ShowGameOverModal);
         }
 
     }

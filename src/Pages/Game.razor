@@ -4,18 +4,18 @@
 
 <PageTitle>Whack'Em-All</PageTitle>
 
-@if (isGameStarted)
+@if (State.IsGameStarted)
 {
     <div class="game-container">
         <h3>Welcome to Whack'Em-All</h3>
 
         <div class="info-container">
-            <h2>Score: @score</h2>
-            <h2>Remaining Time: @currentTime</h2>
+            <h2>Score: @CurrentPlayer.Score</h2>
+            <h2>Remaining Time: @State.CurrentTime</h2>
         </div>
 
         <div class="canvas">
-            @foreach (var s in Cells)
+            @foreach (var s in CurrCellManager.Cells)
             {
                 <Cell CellModel="s" OnMouseUp="() => MouseUp(s)" />
             }
@@ -25,7 +25,7 @@
         <audio id="missSound" src="misssound.mp3" preload="auto"></audio>
     </div>
 }
-else if (showLeaderboard)
+else if (CurrLeaderboardManager.ShowLeaderboard)
 {
     <div class="leaderboard-page">
         <h1>Leaderboard</h1>
@@ -38,12 +38,12 @@ else if (showLeaderboard)
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < leaderboardData.Count; i++)
+                @for (int i = 0; i < CurrLeaderboardManager.Entries.Count; i++)
                 {
                     <tr>
                         <td>@(i + 1)</td>
-                        <td>@leaderboardData[i].Name</td>
-                        <td>@leaderboardData[i].Score</td>
+                        <td>@CurrLeaderboardManager.Entries[i].Name</td>
+                        <td>@CurrLeaderboardManager.Entries[i].Score</td>
                     </tr>
                 }
             </tbody>
@@ -66,7 +66,6 @@ else
             <p>ALL THE BEST!!!</p>
         </div>
 
-        @* <p>Are you ready to start the game?</p> *@
         <div class="Buttons">
         <button @onclick="ShowNamePrompt">Start Game</button>
         <button @onclick="ViewLeaderboard">View Leaderboard</button>
@@ -74,32 +73,31 @@ else
     </div>
 }
 
-@if (showNamePrompt)
+@if (CurrLeaderboardManager.ShowNamePrompt)
 {
     <div class="modal-overlay">
         <div class="modal-content">
             <h1>Enter Your Name</h1>
-            <input type="text" @bind="playerName" placeholder="Name" />
-             @* //<p>Current Player Name: @playerName</p> <!-- Debug line --> *@
+            <input type="text" @bind="CurrentPlayer.Name" placeholder="Name" />
             <button @onclick="StartGame">Start Game</button>
             <button @onclick="CancelNamePrompt">Cancel</button>
         </div>
     </div>
 }
 
-@if (showGameOverModal)
+@if (State.ShowGameOverModal)
 {
     <div class="modal-overlay">
         <div class="modal-content">
-            @if (score < 45)
+            @if (CurrentPlayer.Score < 45)
             {
                 <h2>Oops ... Game Over!</h2>
-                <p>Your final score is: @score</p>
+                <p>Your final score is: @CurrentPlayer.Score</p>
             }
             else
             {
                 <h2>You Won!</h2>
-                <p>Your final score is: @score</p>
+                <p>Your final score is: @CurrentPlayer.Score</p>
             }
             <button @onclick="RestartGame">Restart Game</button>
             <button @onclick="ReturnToStartMenu">Return to Start Menu</button>
@@ -110,23 +108,18 @@ else
 
 @code {
     private Random random = new Random();
-    public List<LeaderboardEntry> leaderboardData {get;set;}= new List<LeaderboardEntry>();
     public async Task ViewLeaderboard()
     {
         try
         {   
-            showGameOverModal = false;
-            isGameStarted = false;
-            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>($"{serverUrl}/leaderboard");
+            State.ShowGameOverModal = false;
+            State.IsGameStarted = false;
+            var response = await Http.GetFromJsonAsync<List<LeaderboardEntry>>($"{ServerUrl}/leaderboard");
             Console.WriteLine(response);
             if (response != null)
             {
-                leaderboardData = response;
-                showLeaderboard = true;
-            }
-            else
-            {
-                Console.WriteLine("Failed to fetch leaderboard data.");
+                CurrLeaderboardManager.Entries = response;
+                CurrLeaderboardManager.ShowLeaderboard = true;
             }
         }
         catch (Exception ex)
@@ -135,29 +128,22 @@ else
         }
     }
 
-    public void CloseLeaderboard()
-    {
-        showLeaderboard = false;
-    }
-
-    public void ShowNamePrompt()
-    {
-        showNamePrompt = true;
-    }
+    public void CloseLeaderboard() => CurrLeaderboardManager.ShowLeaderboard = false;
+    public void ShowNamePrompt() => CurrLeaderboardManager.ShowNamePrompt = true;
 
     public void CancelNamePrompt()
     {
-        showNamePrompt = false;
-        playerName = string.Empty;
+        CurrLeaderboardManager.ShowNamePrompt = false;
+        CurrentPlayer.Name = string.Empty;
     }
 
     public async Task MouseUp(CellModel s)
     {
-        if (isGameRunning)
+        if (State.IsGameRunning)
         {
-            if (s.Id == hitPosition)
+            if (s.Id == State.HitPosition)
             {
-                score += 1;
+                CurrentPlayer.Score += 1;
                 await PlayHitSound();
             }
             else
@@ -167,19 +153,11 @@ else
         }
     }
 
-    protected async Task PlayHitSound()
-    {
-        await JSRuntime.InvokeVoidAsync("playSound1");
-    }
-
-    protected async Task PlayMissSound()
-    {
-        await JSRuntime.InvokeVoidAsync("playSound2");
-    }
-
+    protected async Task PlayHitSound() => await JSRuntime.InvokeVoidAsync("playSound1");
+    protected async Task PlayMissSound() => await JSRuntime.InvokeVoidAsync("playSound2");
     public void setNextAppearance()
     {
-        foreach (var item in Cells)
+        foreach (var item in CurrCellManager.Cells)
         {
             item.IsShown = false;
         }
@@ -188,16 +166,16 @@ else
         do
         {
             randomPosition = random.Next(0, 16);
-        } while (lastPosition == randomPosition);
+        } while (State.LastPosition == randomPosition);
 
-        Cells[randomPosition].IsShown = true;
-        hitPosition = randomPosition;
-        lastPosition = randomPosition;
+        CurrCellManager.Cells[randomPosition].IsShown = true;
+        State.HitPosition = randomPosition;
+        State.LastPosition = randomPosition;
     }
 
-    protected virtual async Task GameLoopAsync(PeriodicTimer timer)
+    public virtual async Task GameLoopAsync(PeriodicTimer timer)
     {
-        while (isGameRunning)
+        while (State.IsGameRunning)
         {
             setNextAppearance();
             StateHasChanged();
@@ -206,72 +184,64 @@ else
         }
     }
 
-    protected virtual async Task GameTimeAsync(PeriodicTimer timer)
+    public virtual async Task GameTimeAsync(PeriodicTimer timer)
     {
-        while (isGameRunning)
+        while (State.IsGameRunning)
         {
-            if (currentTime == 0)
+            if (State.CurrentTime == 0)
             {
                 await EndGame();
                 break;
             }
             await timer.WaitForNextTickAsync();
-            currentTime--;
+            State.CurrentTime--;
             StateHasChanged();
         }
     }
 
     public void StartGame()
     {
-        if (string.IsNullOrWhiteSpace(playerName))
+        if (string.IsNullOrWhiteSpace(CurrentPlayer.Name))
         {
             Console.WriteLine("Please enter a valid name.");
             return;
         }
-        showNamePrompt = false;
-        isGameStarted = true;
-        score = 0;
-        currentTime = 60;
-        isGameRunning = true;
-        showGameOverModal = false;
+        CurrLeaderboardManager.ShowNamePrompt = false;
+        State.IsGameStarted = true;
+        CurrentPlayer.Score = 0;
+        State.CurrentTime = 60;
+        State.IsGameRunning = true;
+        State.ShowGameOverModal = false;
 
-        gameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(1000)); 
-        _ = GameLoopAsync(gameLoopTimer);
+        Config.GameLoopTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(Config.GameSpeed)); 
+        _ = GameLoopAsync(Config.GameLoopTimer);
 
-        gameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
-        _ = GameTimeAsync(gameTimeTimer);
+        Config.GameTimeTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        _ = GameTimeAsync(Config.GameTimeTimer);
     }
 
-    public async Task EndGame()
+    public virtual async Task EndGame()
     {
-        isGameRunning = false;
-        showGameOverModal = true;
-        gameLoopTimer?.Dispose();
-        gameTimeTimer?.Dispose();
+        State.IsGameRunning = false;
+        State.ShowGameOverModal = true;
+        Config.GameLoopTimer?.Dispose();
+        Config.GameTimeTimer?.Dispose();
         
-        await SendScoreToServer(score); 
+        await SendScoreToServer(CurrentPlayer.Score); 
     }
 
-    public void RestartGame()
-    {
-        showGameOverModal = false;
-        StartGame();
-    }
+    public void RestartGame() => StartGame();
 
     public void ReturnToStartMenu()
     {
-        showGameOverModal = false;
-        isGameStarted = false;
+        State.ShowGameOverModal = false;
+        State.IsGameStarted = false;
     }
 
     public virtual async Task SendScoreToServer(int score)
     {
-        var response = await Http.PostAsJsonAsync($"{serverUrl}/", new { name = playerName, score });
-        if (response.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Score successfully sent to the server.");
-        }
-        else
+        var response = await Http.PostAsJsonAsync($"{ServerUrl}/", new { name = CurrentPlayer.Name, score });
+        if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine($"Failed to send score. Status Code: {response.StatusCode}");
         }

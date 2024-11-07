@@ -76,8 +76,80 @@
 - Added the instructions to play the game on the home page.
 
 ---
+### 30-09-2024
 
+**Task(s) Completed:**  
+- Added JavaScript server side code to run application on server
 
+---
+
+### 05-10-2024
+
+**Task(s) Completed:**  
+- Verified existance of minimum 50% coverage gate.
+---
+
+### 06-09-2024
+
+**Task(s) Completed:**  
+- Implemented leaderboard functionality 
+- Implemented user name retrieval and sending score to the server
+- Integerated server with MongoDB to maintain Name and Score
+
+**Challenges Faced:**
+- Facing conflicts because of different operating systems.
+
+**Solutions or Workarounds:**  
+- Added .gitignore to ignore all dependenices and build files
+
+---
+### 07-09-2024
+
+**Task(s) Completed:**  
+- Added Styles to homepage, leaderboard and endgame screen
+- Fixed Bug where EndGame test was failing
+
+---
+### 08-09-2024
+
+**Task(s) Completed:**  
+- Used Mock Game to test EndGame and StartGame
+- Import `PORT` from `.env`
+- Formatted code using `dotnet format`
+- Replaced local host address by remote host
+- Disabled exit on quality gate failure for Test Period
+- Renamed namespace to include all tests in one namespace
+- Moved Variable declarations from `Game.razor` to `Game.cs`
+- Added unit tests for leaderboard and name prompt
+- Added Integeration tests
+
+---
+### 09-09-2024
+
+**Task(s) Completed:**  
+- Added integeration test for Leaderboard
+- Added tests for server side
+- Added coverage of server side tests
+- Stopped tracking server-tests, to work on it later
+- Extracted server url as configuration constant
+- Turned public variables to properties as suggested by SonarCloud
+- Solved Sonar Issue where non-nullable and nullable types were clashing
+
+**Challenges Faced:**
+- Server tests are run using jest, but current pipeline runs and collects dotnet test
+- Currently sonar cannot track server test coverage
+
+---
+### 10-09-2024
+**Task(s) Completed:**  
+- Code cleaning, removed dead code
+- Removed unnecessary constructors and logic from Pages, to make the code simpler.
+- Added back server tests, in the `server.test.js` in the `server/` directory
+- Added coverage for server side test and sending report to sonar in the pipeline.
+- Added architecture diagram and Test Pyramid
+- Re-Enabled exit on Quality Gate failure.
+
+---
 ## Summary 
 
 **Milestone Achieved:** 
@@ -89,6 +161,11 @@
 6. Unit Testing.
 7. Choice of Code Quality Metrics.
 8. Instructions page for the Game.
+9. Server Side code for leaderboard
+10. MongoDB database for keeping previous score
+11. Integerations Tests for Game-Server and Server-Database endpoints
+12. Tests for server side code
+13. Server hosted on render.
 
 ---
 

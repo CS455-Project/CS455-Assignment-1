@@ -18,24 +18,16 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       
-      # Installing the correct version of .NET SDK
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      # - name: Update Workloads
-      #   run: dotnet workload update
-      
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '14'
-
-      # - name: Install server-side dependencies
-      #   run: |
-      #     cd server-tests
-      #     npm ci
+      - name: Install server test dependencies
+        run: |
+          cd server
+          npm install
+          cd ..
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
@@ -59,39 +51,33 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       
-      # Install dotcover for code coverage
       - name: Install dotCover
         run: dotnet tool install --global JetBrains.dotCover.GlobalTool
 
-      # SonarCloud analysis begins
-      - name: Begin SonarCloud Analysis
-        run: .\.sonar\scanner\dotnet-sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" /o:"cs455-project" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html /d:sonar.exclusions="**/dotCover.Output/**,dotCover.Output.html"
-
-      # Build the solution after starting SonarCloud analysis
       - name: Build the solution
         run: dotnet build src/MoleProject.csproj --configuration Debug
 
-      # Build the test project explicitly to generate test DLLs
       - name: Build the test project
         run: dotnet build TestProject/TestProject.csproj --configuration Debug
 
+      - name: Begin SonarCloud Analysis
+        run: .\.sonar\scanner\dotnet-sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" /o:"cs455-project" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html /d:sonar.javascript.lcov.reportPaths=server/coverage/lcov.info /d:sonar.exclusions="**/dotCover.Output/**,dotCover.Output.html"
+
       # Run tests and collect coverage
       - name: Run tests and collect coverage
-        run: dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML                  
-      # - name: Run JavaScript tests
-      #   run: |
-      #     cd server-tests
-      #     npm test
-    
-      # - name: Generate JavaScript coverage
-      #   run: |
-      #       cd server-tests
-      #       npm run coverage  
-      # Finalize the SonarCloud analysis after building the project
+        run: dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML        
+        
+      - name: Run JavaScript tests and Coverage
+        run: |
+          cd server
+          npm test 
+          cd ..
+
+
+      # End SonarCloud analysis after running tests
       - name: End SonarCloud Analysis
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      # Fetch detailed SonarCloud results and output in the logs
       - name: Fetch and display detailed SonarCloud analysis results
         if: always()
         shell: bash
@@ -118,7 +104,7 @@ jobs:
           SONAR_STATUS=$(curl -s -u $SONAR_TOKEN: "https://sonarcloud.io/api/qualitygates/project_status?projectKey=CS455-Project_CS455-Assignment-1" | jq -r '.projectStatus.status')
           if [ "$SONAR_STATUS" != "OK" ]; then
             echo "Quality gate failed: $SONAR_STATUS"
-            # exit  
+            exit 1  
           else
             echo "Quality gate passed!"
           fi
@@ -151,19 +137,15 @@ jobs:
           exit 1
         fi
 
-    # Change base tag in index.html to point to the correct subdirectory (StackNServe)
     - name: Change base-tag in index.html
       run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
     
-    # Copy index.html to 404.html for GitHub Pages fallback routing
     - name: Copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
 
-    # Add a .nojekyll file to prevent Jekyll processing
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
 
-    # Deploy the wwwroot folder to the gh-pages branch
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:

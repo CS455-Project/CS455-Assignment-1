@@ -10,8 +10,6 @@ app.use(cors());
 if (process.env.NODE_ENV !== 'test') {
     mongoose.connect(process.env.MONGODB);
   }
-  
-
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -32,7 +30,6 @@ app.post("/", async function (req, res) {
     })
     const doc = await new_user.save();
     res.json(doc);
-    console.log(doc);
    
 });
 
@@ -41,7 +38,7 @@ app.get("/leaderboard", async function (req, res) {
         const leaderboard = await User.find()
             .sort({ score: -1 })
             .limit(10)
-            .select('name score -_id'); // Only return name and score, exclude _id
+            .select('name score -_id'); 
         res.status(200).json(leaderboard);
     } catch (error) {
         console.error("Error retrieving leaderboard:", error);
@@ -53,6 +50,27 @@ app.get("/leaderboard", async function (req, res) {
 app.get("/", function (req, res) {
     res.status(200).send( "<h1>Welcome to the server side of Whack'Em-All !!!</h1>");
 });
+
+app.post("/leaderboard/delete", async function (req, res) {
+    const playerName = req.query.name;
+
+    if (!playerName) {
+        return res.status(400).send({ error: "Player name is required." });
+    }
+
+    console.log(playerName);
+    try {
+        const result = await User.deleteMany({ name: playerName });
+        if (result.deletedCount === 0) {
+            return res.status(404).send({ error: "No entries found for the given name." });
+        }
+        res.status(200).send({ message: `${result.deletedCount} entries deleted.` });
+    } catch (error) {
+        console.error("Error deleting entries:", error);
+        res.status(500).send({ error: "Error deleting entries" });
+    }
+});
+
 if (process.env.NODE_ENV !== 'test') {
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Server is running on port ${process.env.PORT || 8000}.`);

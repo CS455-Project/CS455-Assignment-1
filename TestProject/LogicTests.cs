@@ -11,6 +11,9 @@ namespace WhackEmAllTests
 {
     public class GameTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         private readonly Mock<IJSRuntime> mockJSRuntime;
 
         public GameTests()
@@ -24,21 +27,21 @@ namespace WhackEmAllTests
         {
             var game = new Game();
 
-            Assert.Equal(16, game.Cells.Count);
-            Assert.All(game.Cells, cell => Assert.IsType<CellModel>(cell));
+            Assert.Equal(16, game.CurrCellManager.Cells.Count);
+            Assert.All(game.CurrCellManager.Cells, cell => Assert.IsType<CellModel>(cell));
         }
 
         [Fact]
         public async Task MouseUp_MissPosition_InvokeJavaScript()
         {
             var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.StartGame();
-            var missCell = new CellModel { Id = (cut.Instance.hitPosition + 1) % 16 };
+            var missCell = new CellModel { Id = (cut.Instance.State.HitPosition + 1) % 16 };
 
             await cut.Instance.MouseUp(missCell);
 
-            Assert.Equal(0, cut.Instance.score);
+            Assert.Equal(0, cut.Instance.CurrentPlayer.Score);
             mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
         }
 
@@ -46,13 +49,13 @@ namespace WhackEmAllTests
         public async Task MouseUp_HitPosition_IncreaseScoreAndInvokeJavaScript()
         {
             var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
             cut.Instance.StartGame();
-            var hitCell = new CellModel { Id = cut.Instance.hitPosition };
+            var hitCell = new CellModel { Id = cut.Instance.State.HitPosition };
 
             await cut.Instance.MouseUp(hitCell);
 
-            Assert.Equal(1, cut.Instance.score);
+            Assert.Equal(1, cut.Instance.CurrentPlayer.Score);
             mockJSRuntime.Verify(js => js.InvokeAsync<object>(It.IsAny<string>(), It.IsAny<object[]>()), Times.Once);
         }
 

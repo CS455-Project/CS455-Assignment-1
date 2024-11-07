@@ -10,13 +10,16 @@ namespace WhackEmAllTests
 {
     public class WhackEmAllAdditionalTests : TestContext
     {
+        public static string GenerateRandomName() {
+            return $"TestPlayer_{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString("N").Substring(0, 4)}";
+        }
         [Fact]
         public void ShowNamePrompt_SetsCorrectState()
         {
             var cut = RenderComponent<Game>();
             cut.Instance.ShowNamePrompt();
 
-            Assert.True(cut.Instance.showNamePrompt);
+            Assert.True(cut.Instance.CurrLeaderboardManager.ShowNamePrompt);
         }
 
         [Fact]
@@ -24,12 +27,12 @@ namespace WhackEmAllTests
         {
             var cut = RenderComponent<Game>();
             cut.Instance.ShowNamePrompt();
-            cut.Instance.playerName = "TestPlayer";
+            cut.Instance.CurrentPlayer.Name = GenerateRandomName();
 
             cut.Instance.CancelNamePrompt();
 
-            Assert.False(cut.Instance.showNamePrompt);
-            Assert.Equal(string.Empty, cut.Instance.playerName);
+            Assert.False(cut.Instance.CurrLeaderboardManager.ShowNamePrompt);
+            Assert.Equal(string.Empty, cut.Instance.CurrentPlayer.Name);
         }
 
         [Fact]
@@ -39,7 +42,7 @@ namespace WhackEmAllTests
             var mockHttp = new MockHttpMessageHandler();
             var requestMade = false;
 
-            mockHttp.When("https://cs455-assignment-1.onrender.com/leaderboard")
+            mockHttp.When($"{Game.ServerUrl}/leaderboard")
                     .Respond(req =>
                     {
                         requestMade = true;
@@ -56,19 +59,19 @@ namespace WhackEmAllTests
 
             // Assert
             Assert.True(requestMade, "GET request was not sent to the leaderboard endpoint");
-            Assert.False(cut.Instance.isGameStarted);
-            Assert.False(cut.Instance.showGameOverModal);
+            Assert.False(cut.Instance.State.IsGameStarted);
+            Assert.False(cut.Instance.State.ShowGameOverModal);
         }
 
         [Fact]
         public void CloseLeaderboard_HidesLeaderboard()
         {
             var cut = RenderComponent<Game>();
-            cut.Instance.showLeaderboard = true;
+            cut.Instance.CurrLeaderboardManager.ShowLeaderboard = true;
 
             cut.Instance.CloseLeaderboard();
 
-            Assert.False(cut.Instance.showLeaderboard);
+            Assert.False(cut.Instance.CurrLeaderboardManager.ShowLeaderboard);
         }
 
         [Fact]
@@ -76,19 +79,19 @@ namespace WhackEmAllTests
         {
             // Arrange
             var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "ValidPlayer";
-            cut.Instance.showNamePrompt = true;
+            cut.Instance.CurrentPlayer.Name = "ValidPlayer";
+            cut.Instance.CurrLeaderboardManager.ShowNamePrompt = true;
 
             // Act
             cut.Instance.StartGame();
 
             // Assert
-            Assert.True(cut.Instance.isGameStarted);
-            Assert.False(cut.Instance.showNamePrompt);
-            Assert.Equal(0, cut.Instance.score);
-            Assert.Equal(60, cut.Instance.currentTime);
-            Assert.True(cut.Instance.isGameRunning);
-            Assert.False(cut.Instance.showGameOverModal);
+            Assert.True(cut.Instance.State.IsGameStarted);
+            Assert.False(cut.Instance.CurrLeaderboardManager.ShowNamePrompt);
+            Assert.Equal(0, cut.Instance.CurrentPlayer.Score);
+            Assert.Equal(60, cut.Instance.State.CurrentTime);
+            Assert.True(cut.Instance.State.IsGameRunning);
+            Assert.False(cut.Instance.State.ShowGameOverModal);
         }
 
         [Fact]
@@ -96,15 +99,15 @@ namespace WhackEmAllTests
         {
             // Arrange
             var cut = RenderComponent<Game>();
-            cut.Instance.playerName = "";
-            cut.Instance.showNamePrompt = true;
+            cut.Instance.CurrentPlayer.Name = "";
+            cut.Instance.CurrLeaderboardManager.ShowNamePrompt = true;
 
             // Act
             cut.Instance.StartGame();
 
             // Assert
-            Assert.False(cut.Instance.isGameStarted);
-            Assert.True(cut.Instance.showNamePrompt);
+            Assert.False(cut.Instance.State.IsGameStarted);
+            Assert.True(cut.Instance.CurrLeaderboardManager.ShowNamePrompt);
         }
     }
 }

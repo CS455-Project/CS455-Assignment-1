@@ -1,0 +1,1 @@
+for i in {1..6}; do curl -s http://localhost:3000/ ; done

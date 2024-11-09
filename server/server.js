@@ -13,7 +13,7 @@ const instanceId = process.argv[2] || '1';
 const port = process.argv[3] || (8000 + parseInt(instanceId));
 
 // MongoDB Connection Setup
-const MONGODB_URI = process.env.MONGODB || 'mongodb://localhost:27017/whackemall';
+const MONGODB_URI = process.env.MONGODB;
 
 if (process.env.NODE_ENV !== 'test') {
     mongoose.connect(MONGODB_URI, {
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'test') {
         serverSelectionTimeoutMS: 5000
     })
     .then(() => {
-        console.log(`MongoDB connected successfully to ${MONGODB_URI}`);
+        console.log(`MongoDB connected successfully `);
     })
     .catch((err) => {
         console.error('MongoDB connection error:', err);

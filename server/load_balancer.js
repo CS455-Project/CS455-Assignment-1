@@ -5,8 +5,8 @@ const app = express();
 
 // Define your backend servers
 const servers = [
-    'http://localhost:8001',  // First server instance
-    'http://localhost:8002'   // Second server instance
+    'https://cs455-assignment-1.onrender.com',  // First server instance
+    'https://server-2-0sir.onrender.com'   // Second server instance
 ];
 
 let currentServer = 0;

@@ -7,7 +7,7 @@ This repository consists of the codebase for the Whack'Em All project, completed
 **Date** : 14 November 2024
 
 **Notes** : 
-1. Added functionality for testing load-time, [here]/(./perftest/load_time.py).
+1. Added functionality for testing load-time, [here](./perftest/load_time.py).
 2. Added functionality for load testing the server, check for instructions below.
 3. Added a [load_balancer](./server/load_balancer.js) for distributing load between two parallel servers, along with backup server to redirect requests when no server is available.
 4. Added nightly load tests for server and game service

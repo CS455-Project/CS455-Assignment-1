@@ -2,6 +2,7 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const { app, User } = require('./server'); // Adjust the path if necessary
 const { MongoMemoryServer } = require('mongodb-memory-server');
+const net = require('net');
 
 // Initialize MongoDB memory server
 let mongoServer;
@@ -161,5 +162,116 @@ describe('DELETE /leaderboard/delete', () => {
         // Assert
         expect(response.status).toBe(400);
         expect(response.body.error).toBe('Player name is required.'); // You should modify your server code to handle this case
+    });
+});
+
+describe('Port Check Functionality', () => {
+    let server;
+    const testPort = 3333;
+
+    beforeEach(() => {
+        // Clear any existing servers
+        server = null;
+    });
+
+    afterEach((done) => {
+        // Cleanup: close server if it exists
+        if (server && server.listening) {
+            server.close(done);
+        } else {
+            done();
+        }
+    });
+
+    it('should return true when port is available', async () => {
+        // Import the checkPort function
+        const { checkPort } = require('./server');
+        
+        // Test an available port
+        const result = await checkPort(testPort);
+        expect(result).toBe(true);
+    });
+
+    it('should return false when port is in use', async () => {
+        // Import the checkPort function
+        const { checkPort } = require('./server');
+        
+        // Create a server to occupy the port
+        server = net.createServer();
+        
+        // Return a promise that resolves when the server is listening
+        await new Promise((resolve) => {
+            server.listen(testPort, () => resolve());
+        });
+
+        // Test the occupied port
+        const result = await checkPort(testPort);
+        expect(result).toBe(false);
+    });
+
+    it('should reject on non-EADDRINUSE errors', async () => {
+        // Import the checkPort function
+        const { checkPort } = require('./server');
+        
+        // Mock net.createServer to simulate a different error
+        const mockServer = {
+            once: jest.fn((event, cb) => {
+                if (event === 'error') {
+                    cb(new Error('Different error'));
+                }
+                return mockServer;
+            }),
+            listen: jest.fn()
+        };
+
+        jest.spyOn(net, 'createServer').mockImplementationOnce(() => mockServer);
+
+        // Test error handling
+        await expect(checkPort(testPort)).rejects.toThrow('Different error');
+
+        // Restore the original implementation
+        net.createServer.mockRestore();
+    });
+
+    it('should handle server closing correctly', async () => {
+        // Import the checkPort function
+        const { checkPort } = require('./server');
+        
+        // Create a proper mock server with chaining
+        const mockServer = {
+            once: jest.fn(function(event, cb) {
+                if (event === 'listening') {
+                    setTimeout(() => cb(), 0);
+                } else if (event === 'close') {
+                    setTimeout(() => cb(), 0);
+                } else if (event === 'error') {
+                    // Do nothing for error event in this test
+                }
+                return this;
+            }),
+            close: jest.fn(function() {
+                setTimeout(() => {
+                    this.once('close', () => {});
+                }, 0);
+                return this;
+            }),
+            listen: jest.fn(function() {
+                return this;
+            })
+        };
+
+        jest.spyOn(net, 'createServer').mockImplementationOnce(() => mockServer);
+
+        const result = await checkPort(testPort);
+        
+        // Verify the port check was successful
+        expect(result).toBe(true);
+        
+        // Verify proper method calls
+        expect(mockServer.once).toHaveBeenCalledWith('listening', expect.any(Function));
+        expect(mockServer.listen).toHaveBeenCalledWith(testPort);
+        
+        // Restore the original implementation
+        net.createServer.mockRestore();
     });
 });

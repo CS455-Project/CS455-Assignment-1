@@ -2,13 +2,12 @@ name: Nightly Performance Test
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "30 3 * * *"
 
 jobs:    
   nightly-load-test:
     name: Nightly Load Test 
     runs-on: ubuntu-latest 
-    if: github.event_name == 'schedule'  # Check if triggered by schedule
     steps:
       - uses: actions/checkout@v3
       

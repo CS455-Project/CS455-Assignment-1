@@ -1,6 +1,7 @@
 name: Nightly Performance Test
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "30 3 * * *"
 

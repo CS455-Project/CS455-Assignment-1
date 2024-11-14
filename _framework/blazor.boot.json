@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MoleProject",
   "resources": {
-    "hash": "sha256-EzOqYmA2W/jSvVTnjRxfnanoi9PkZTXyIDslsyrGZ+s=",
+    "hash": "sha256-0uK7pgMy7rM8B6utiqoWZQvDFIXO1X3BIv0EtQ+hN6s=",
     "jsModuleNative": {
       "dotnet.native.8.0.10.4xsnm8lwn6.js": "sha256-QVxMlY7ohmjgde/bZMA0dlWDAeuUP+tEfkiSdg4DFcE="
     },
@@ -32,7 +32,7 @@
       "Microsoft.JSInterop.wasm": "sha256-YrrPPJg6rA/Bmx1sladSdAwoqL78YSP+3xcjhBg0bnc=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-ZyIqQss3I64BQC2gc7JEDrkYq14vXKEXuw5vBJ5oFYM=",
       "Microsoft.Win32.Registry.wasm": "sha256-n5M5xJpb7jLqwIzIXsDLhNQkHXwIrfcmKaOSpjyoo6U=",
-      "MoleProject.wasm": "sha256-Hvhlk4C3mbI5gCNwsK8Brf5Wal+z2RtoNaR2wBkE9tc=",
+      "MoleProject.wasm": "sha256-C1GlXz7ZHetDHOBAdzQysm6QJCftNyjq49JLkmlqpJo=",
       "nunit.framework.legacy.wasm": "sha256-e7ocaQKDsfmh6LyBbLReKhZmt3+WzRJ7YHzGL/Y+lu8=",
       "nunit.framework.wasm": "sha256-ldSRxix2G7DiCj3gZ6FplHC92KJWUfq8qVWVwSktnuU=",
       "System.Collections.Concurrent.wasm": "sha256-wcGBtkaQKWcKHMDZHlcYgdpyW9hDDSU7sIXq+yMLhZc=",

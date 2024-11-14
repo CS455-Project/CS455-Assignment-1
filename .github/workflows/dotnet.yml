@@ -5,7 +5,6 @@ on:
     branches:
       - main
   schedule:
-    # Run nightly at midnight UTC
     - cron: '0 0 * * *'
 
 jobs:    
@@ -150,32 +149,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: release/wwwroot
-
-  nightly-load-test:
-    name: Nightly Load Test 
-    runs-on: ubuntu-latest 
-    if: github.event_name == 'schedule'  # Check if triggered by schedule
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Python 
-        uses: actions/setup-python@v2 
-        with:
-          python-version : '3.x'
-      
-      - name : Install dependencies 
-        run : |
-           pip install -r perftest/requirements.txt 
-           npm install -g artillery
-      
-      - name : Load Test
-        run : python perftest/load_time.py
-      
-      - name : Run Artillery Load Test
-        run : artillery run perftest/load-test.yml --output perftest/load_report.json
-      
-      - name : Upload Load Test Results
-        uses : actions/upload-artifact@v3
-        with :
-           name : load-test-results 
-           path : perftest/load_report.json 

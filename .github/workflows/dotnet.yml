@@ -1,11 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  [push]
+  push:
+    branches:
+      - main
+  schedule:
+    # Run nightly at midnight UTC
+    - cron: '0 0 * * *'
 
 jobs:    
-
-  build :
+  build:
     name: SonarCloud
     runs-on: windows-latest
     steps:
@@ -13,10 +17,10 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          distribution: 'zulu'
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
@@ -63,7 +67,6 @@ jobs:
       - name: Begin SonarCloud Analysis
         run: .\.sonar\scanner\dotnet-sonarscanner begin /k:"CS455-Project_CS455-Assignment-1" /o:"cs455-project" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html /d:sonar.javascript.lcov.reportPaths=server/coverage/lcov.info /d:sonar.exclusions="**/dotCover.Output/**,dotCover.Output.html"
 
-      # Run tests and collect coverage
       - name: Run tests and collect coverage
         run: dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML        
         
@@ -73,8 +76,6 @@ jobs:
           npm test 
           cd ..
 
-
-      # End SonarCloud analysis after running tests
       - name: End SonarCloud Analysis
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
@@ -88,13 +89,14 @@ jobs:
           curl -u $SONAR_TOKEN: "https://sonarcloud.io/api/issues/search?componentKeys=CS455-Project_CS455-Assignment-1" > sonarcloud-results.json
           echo "Analysis results:"
           cat sonarcloud-results.json | jq '.issues[] | {key, component, severity, message, line}' 
-      # Upload the SonarCloud results JSON as an artifact
+
       - name: Upload SonarCloud results artifact
         if: always()  
         uses: actions/upload-artifact@v3
         with:
           name: sonarcloud-results
           path: sonarcloud-results.json 
+
       - name: Check SonarCloud Quality Gate
         id: quality-gate
         shell: bash
@@ -116,39 +118,64 @@ jobs:
       contents: write   
     if: success()
     steps:
-    # Checkout the code from the master branch
-    - uses: actions/checkout@v3
-    
-    # Setup .NET Core SDK
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.107
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.107
 
-    # Publish the project
-    - name: Publish .NET Core Project
-      run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
-    
-    # Verify that index.html exists after the publish
-    - name: Verify index.html exists
-      run: |
-        if [ ! -f release/wwwroot/index.html ]; then
-          echo "Error: index.html not found!"
-          exit 1
-        fi
+      - name: Publish .NET Core Project
+        run: dotnet publish src/MoleProject.csproj -c Release -o release --nologo
+      
+      - name: Verify index.html exists
+        run: |
+          if [ ! -f release/wwwroot/index.html ]; then
+            echo "Error: index.html not found!"
+            exit 1
+          fi
 
-    - name: Change base-tag in index.html
-      run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
-    
-    - name: Copy index.html to 404.html
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
+      - name: Change base-tag in index.html
+        run: sed -i 's/<base href="\/" \/>/<base href="\/MoleProject\/" \/>/g' release/wwwroot/index.html
+      
+      - name: Copy index.html to 404.html
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
 
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: release/wwwroot
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: release/wwwroot
+
+  nightly-load-test:
+    name: Nightly Load Test 
+    runs-on: ubuntu-latest 
+    if: github.event_name == 'schedule'  # Check if triggered by schedule
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python 
+        uses: actions/setup-python@v2 
+        with:
+          python-version : '3.x'
+      
+      - name : Install dependencies 
+        run : |
+           pip install -r perftest/requirements.txt 
+           npm install -g artillery
+      
+      - name : Load Test
+        run : python perftest/load_time.py
+      
+      - name : Run Artillery Load Test
+        run : artillery run perftest/load-test.yml --output perftest/load_report.json
+      
+      - name : Upload Load Test Results
+        uses : actions/upload-artifact@v3
+        with :
+           name : load-test-results 
+           path : perftest/load_report.json 

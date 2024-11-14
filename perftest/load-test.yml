@@ -2,7 +2,7 @@ config:
   target: "https://cs455-assignment-load-balancer.onrender.com"
   phases:
     - duration: 60
-      arrivalRate: 10
+      arrivalRate: 1000
 
 scenarios:
   - flow:

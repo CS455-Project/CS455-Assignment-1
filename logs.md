@@ -150,6 +150,29 @@
 - Re-Enabled exit on Quality Gate failure.
 
 ---
+### 07-11-2024
+**Task(s) Completed:**  
+- Added python file `load-time.py` for testing the load
+- Added requirements.txt for python requirements
+
+---
+### 09-11-2024
+**Task(s) Completed:**  
+- Used artillery for load testing game and leaderboard service
+- Added load balancer that balances load between two servers
+
+---
+### 12-11-2024
+**Task(s) Completed:**  
+- Hosted the two servers on render and added links to load_balancer
+
+---
+### 14-11-2024
+**Task(s) Completed:**  
+- Documentation added to README
+- Scheduled running of performance tests added
+
+---
 ## Summary 
 
 **Milestone Achieved:** 
@@ -166,6 +189,9 @@
 11. Integerations Tests for Game-Server and Server-Database endpoints
 12. Tests for server side code
 13. Server hosted on render.
+14. Implemetned load balancing on two servers
+15. Added Backup Server
+16. Added load-time tests and load-tests
 
 ---
 

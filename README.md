@@ -2,17 +2,15 @@
 This repository consists of the codebase for the Whack'Em All project, completed as the first Assignment for the course CS455: Introduction to Software Engineering, under Prof. Sruti S Ragavan, Department of CSE, IIT Kanpur
 
 ## Release Notes
-**Version** : 3.0 
+**Version** : 4.0 
 
-**Date** : 10 October 2024
+**Date** : 14 November 2024
 
 **Notes** : 
-1. Added Integration Tests
-2. Added Architecture Diagram and Test Pyramid
-3. Added Server Side Code for leaderboard
-4. Added server tests and coverage to code as well as pipeline
-5. Increased Test coverage to 75%
-6. Refactored `Pages` files for better readability
+1. Added functionality for testing load-time, [here]/(./perftest/load_time.py).
+2. Added functionality for load testing the server, check for instructions below.
+3. Added a [load_balancer](./server/load_balancer.js) for distributing load between two parallel servers, along with backup server to redirect requests when no server is available.
+4. Added nightly load tests for server and game service
 
 ## Links
 
@@ -22,6 +20,7 @@ This repository consists of the codebase for the Whack'Em All project, completed
 - The `Documentation` [folder](Documentation/) consists of the Architecture Diagram and Test Pyramid Diagram.
 - The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
 - For detailed code quality and coverage analysis, visit our [SonarCloud project page](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1).
+- The `perftest/` folder consists the load-time, ['load_time.py'](./perftest/load_time.py) and load tests ([`load-test.yml`](./perftest/load-test.yml)) 
 
 ## Team 
 |    **Name**  | **Roll Number** |
@@ -49,7 +48,8 @@ This repository consists of the codebase for the Whack'Em All project, completed
 
 
 ## Requirements 
-For local deployment, this app requires `.NET Core SDK 8.0.107` and `node.js` to be installed on the system.
+- For local deployment, this app requires `.NET Core SDK 8.0.107` and `node.js` to be installed on the system.
+- For running load-time tests, please install Chrome WebDriver
 
 ## Instructions 
 To run the application locally, follow the following steps &rarr;
@@ -104,3 +104,32 @@ dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML
 npm test
 ```
 Coverage will be collected in the `server/coverage/` directory and can be seen by opening the html file in a browser.
+
+3. To run the perftests, switch to the `perftest/` directory &rarr;
+- Install requirments &rarr;
+```bash
+pip install -r requirements.txt
+npm install -g artillery 
+```
+- For load-time tests, run 
+```bash
+python load_time.py
+```
+
+The report is saved as an html file in `perftest/performance_reports` and can be viewed in a browser, along with graph displaying load time, resource size distribution and average timing
+
+- For load-tests for game, run 
+```bash
+artillery run --target https://cs455-project.github.io/CS455-Assignment-1/ --output report_game.json
+artillery report -o report_game.html report_game.json
+```
+- For load-tests for server(with load balancing), run
+```bash
+artillery run --target  https://cs455-assignment-load-balancer.onrender.com --output report_server.json
+artillery report -o report_server.html report_server.json
+```
+- For load-tests for individual server(without load balancing), run
+```bash
+artillery run --target  hhttps://cs455-assignment-1.onrender.com --output report_server_single.json
+artillery report -o report_server_single.html report_server_single.json
+```

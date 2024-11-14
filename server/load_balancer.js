@@ -44,7 +44,7 @@ const loadBalancer = createProxyMiddleware({
     changeOrigin: true,
     router: async (req) => {
 
-		if ( currentState = SERVER_STATE.backup ){
+		if ( currentState == SERVER_STATE.BACKUP ){
 			return backupServer;
 		}
 

@@ -1,5 +1,5 @@
 config:
-  target: "http://localhost:3000"
+  target: "https://cs455-assignment-load-balancer.onrender.com"
   phases:
     - duration: 60
       arrivalRate: 10

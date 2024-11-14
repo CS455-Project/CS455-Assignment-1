@@ -9,7 +9,16 @@ const servers = [
     'https://server-2-0sir.onrender.com'   // Second server instance
 ];
 
+const SERVER_STATE = {
+	INITIAL : 0,
+	RUNNING : 1,
+	BACKUP : 2,
+	INVALID : -1
+}
+
 let currentServer = 0;
+let currentState = SERVER_STATE.INITIAL;
+const backupServer = 'https://cs455-assignment-1-jm8m.onrender.com/';
 
 // Health check for backend servers
 const checkServerHealth = async (url) => {
@@ -34,6 +43,11 @@ const loadBalancer = createProxyMiddleware({
     target: servers[0],
     changeOrigin: true,
     router: async (req) => {
+
+		if ( currentState = SERVER_STATE.backup ){
+			return backupServer;
+		}
+
         let attempts = 0;
         const maxAttempts = servers.length;
 
@@ -44,6 +58,7 @@ const loadBalancer = createProxyMiddleware({
             if (isHealthy) {
                 console.log(`Routing request to: ${server}`);
                 currentServer = (currentServer + 1) % servers.length;
+				currentState = SERVER_STATE.RUNNING;
                 return server;
             }
 
@@ -52,7 +67,10 @@ const loadBalancer = createProxyMiddleware({
             attempts++;
         }
 
-        throw new Error('No healthy servers available');
+        console.log('No healthy servers available');
+		currentState = SERVER_STATE.BACKUP;
+		console.log("Initiating Backup Server")
+		return backupServer;
     },
     onError: (err, req, res) => {
         console.error('Proxy Error:', err);

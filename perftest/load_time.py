@@ -52,9 +52,9 @@ class GameLoadTimeTest:
             options = webdriver.ChromeOptions()
             options.add_argument('--enable-precise-memory-info')
             options.add_argument('--disable-cache')  # Disable browser cache
+            options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2}) 
-            options.add_argument("--no-sandbox") 
             options.add_argument("--disable-setuid-sandbox") 
 
             options.add_argument("--remote-debugging-port=9222")  # this
@@ -70,6 +70,9 @@ class GameLoadTimeTest:
             options.set_capability('goog:loggingPrefs', {'performance': 'ALL', 'browser': 'ALL'})
             
             self.driver = webdriver.Chrome(options=options)
+            self.driver.maximize_window()
+            self.wait = WebDriverWait(self.driver, 10)
+
             self.driver.set_page_load_timeout(30)
             logging.info("Browser started successfully")
             

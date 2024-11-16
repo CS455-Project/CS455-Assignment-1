@@ -143,5 +143,5 @@ artillery report -o load_test_report_server_single.html report_server_single.jso
 The corresponding report is generated in the same directory `perftest/` as `load_test_report{game/server}.html` file and can be viewed in a browser
 - Target can be replaced with the address of local server to test local instance
 
-## Nighlty Tests
+## Nightly Tests
 Above load-time tests and load-tests are performed every midnight and the html reports are uploaded as artifacts and can be accessed using Actions/Nightly Performance Tests, using the last action

@@ -1,4 +1,4 @@
-  name: Nightly Performance Test
+name: Nightly Performance Test
 
 on:
   workflow_dispatch:

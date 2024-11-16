@@ -6,8 +6,8 @@ on:
     - cron: "30 18 * * *"
 
 jobs:    
-  nightly-load-test:
-    name: Nightly Load Test 
+  nightly-perf-test:
+    name: Nightly Perf Test 
     runs-on: ubuntu-latest 
     permissions:
       contents: write   
@@ -38,24 +38,26 @@ jobs:
            pip install -r perftest/requirements.txt 
            npm install -g artillery
       
-      - name: Load Test
+      - name: Load Time
         run: |
           python perftest/load_time.py
           
       - name: Run Artillery Load Test
-        run: artillery run perftest/load-test.yml --output perftest/load_report.json
+        run: |
+          artillery run --target  https://cs455-assignment-load-balancer.onrender.com --output perftest/report_game.json
+          artillery run --target  https://cs455-assignment-1.onrender.com --output perftest/report_server.json
+
 
       - name: Convert report to html format
-        run: artillery report -o perftest/load_report.html perftest/load_report.json
+        run: |
+          artillery report -o perftest/load_test_report_server.html perftest/report_server.json
+          artillery report -o perftest/load_test_report_game.html perftest/report_game.json
       
-      - name: Upload Load Test Results
-        uses: actions/upload-artifact@v3
+      - name: Upload Perf Test Results
+        uses: actions/upload-artifact@v4
         with :
            name: load-test-results 
-           path : perftest/load_report.html 
-      
-      - name: Upload Load Time Results
-        uses: actions/upload-artifact@v3
-        with :
-           name: load-time-results 
-           path : perftest/performance_reports
+           path : |
+             perftest/load_test_report_server.html
+             perftest/load_test_report_game.html
+             performance_reports

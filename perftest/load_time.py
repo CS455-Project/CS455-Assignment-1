@@ -69,7 +69,8 @@ class GameLoadTimeTest:
             # Enable performance logging
             options.set_capability('goog:loggingPrefs', {'performance': 'ALL', 'browser': 'ALL'})
             
-            self.driver = webdriver.Chrome(options=options)
+            # self.driver = webdriver.Chrome(options=options)
+            self.driver = webdriver.Chrome()
             self.driver.maximize_window()
             self.wait = WebDriverWait(self.driver, 10)
 

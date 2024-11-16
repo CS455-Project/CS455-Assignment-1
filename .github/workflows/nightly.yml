@@ -18,14 +18,26 @@ jobs:
         uses: actions/setup-python@v2 
         with:
           python-version: '3.x'
-      
+          
+      - name: Install ChromeDriver and Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip -d /usr/local/bin
+          sudo apt-get install -y google-chrome-stable
+
+          
       - name: Install dependencies 
         run: |
            pip install -r perftest/requirements.txt 
            npm install -g artillery
       
       - name: Load Test
-        run : python perftest/load_time.py
+        run: |
+          python perftest/load_time.py
+        # env:
+        #   DISPLAY: :99
       
       - name: Run Artillery Load Test
         run: artillery run perftest/load-test.yml --output perftest/load_report.json
@@ -36,11 +48,7 @@ jobs:
       - name: Upload Load Test Results
         uses: actions/upload-artifact@v3
         with :
-           name: load-test-results 
-           path : perftest/load_report.html 
-      
-      - name: Upload Load Time Results
-        uses: actions/upload-artifact@v3
-        with :
-           name: load-time-results 
-           path : perftest/performance_reports
+           name: performance-results 
+           path : |
+             perftest/load_report.html 
+             perftest/performance_reports

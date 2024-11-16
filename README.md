@@ -64,9 +64,16 @@ dotnet watch
 3. If the local server has to be run then open another terminal instance and run the server &rarr;
 ```bash
 npm install # install dependencies
-node server.js
+node server.js <instance_number> <PORT>
 ```
-4. However the server is connected to MongoDB with a private connection string, so leaderboad cannot be accessed locally.
+For multiple parallel servers, host them with different id's
+By default PORT is 8000 + InstanceID, however custom port can be provided, but it must be unique for each server
+When all instances are hosted, the load balancer can be launched ( having default port 3000)
+```bash
+node load_balancer.js
+```
+
+4. However the server is connected to MongoDB with a private connection string, so leaderboard cannot be accessed locally.
 
 5. Within a few seconds, this should direct you to your browser, with a locally running version of the game.
 
@@ -95,7 +102,7 @@ The project uses the following tools for testing and quality assurance:
 dotnet test
 ```
 To collect coverage, a windows machine has to be used, run &rarr;
-```shell
+```bash
 dotnet dotcover test TestProject/TestProject.csproj --dcReportType=HTML
 ```
  
@@ -106,7 +113,7 @@ npm test
 Coverage will be collected in the `server/coverage/` directory and can be seen by opening the html file in a browser.
 
 3. To run the perftests, switch to the `perftest/` directory &rarr;
-- Install requirments &rarr;
+- Install requirements &rarr;
 ```bash
 pip install -r requirements.txt
 npm install -g artillery 
@@ -118,18 +125,20 @@ python load_time.py
 
 The report is saved as an html file in `perftest/performance_reports` and can be viewed in a browser, along with graph displaying load time, resource size distribution and average timing
 
-- For load-tests for game, run 
+- For load-tests for the game, run 
 ```bash
 artillery run --target https://cs455-project.github.io/CS455-Assignment-1/ --output report_game.json
-artillery report -o report_game.html report_game.json
+artillery report -o load_test_report_game.html report_game.json
 ```
 - For load-tests for server(with load balancing), run
 ```bash
 artillery run --target  https://cs455-assignment-load-balancer.onrender.com --output report_server.json
-artillery report -o report_server.html report_server.json
+artillery report -o load_test_report_server.html report_server.json
 ```
 - For load-tests for individual server(without load balancing), run
 ```bash
 artillery run --target  hhttps://cs455-assignment-1.onrender.com --output report_server_single.json
-artillery report -o report_server_single.html report_server_single.json
+artillery report -o load_test_report_server_single.html report_server_single.json
 ```
+The corresponding report is generated in the same directory `perftest/` as `load_test_report{game/server}.html` file and can be viewed in a browser
+- Target can be replaced with the address of local server to test local instance

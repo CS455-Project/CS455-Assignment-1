@@ -20,7 +20,7 @@ This repository consists of the codebase for the Whack'Em All project, completed
 - The `Documentation` [folder](Documentation/) consists of the Architecture Diagram and Test Pyramid Diagram.
 - The game is deployed on GitHub pages and can be accessed by following [this](https://cs455-project.github.io/CS455-Assignment-1/) link.
 - For detailed code quality and coverage analysis, visit our [SonarCloud project page](https://sonarcloud.io/project/overview?id=CS455-Project_CS455-Assignment-1).
-- The `perftest/` folder consists the load-time, ['load_time.py'](./perftest/load_time.py) and load tests ([`load-test.yml`](./perftest/load-test.yml)) 
+- The `perftest/` folder consists the load-time, [`load_time.py`](./perftest/load_time.py) and load tests ([`load-test.yml`](./perftest/load-test.yml)) 
 
 ## Team 
 |    **Name**  | **Roll Number** |

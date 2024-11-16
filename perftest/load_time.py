@@ -74,8 +74,7 @@ class GameLoadTimeTest:
             chrome_options.add_argument('--disable-gpu')
     
             # Use specific path for ChromeDriver
-            service = Service(executable_path='/usr/local/bin/chromedriver')
-            self.driver = webdriver.Chrome(service=service, options=chrome_options)
+            self.driver = webdriver.Chrome(options=chrome_options)
             
             self.driver.maximize_window()
             self.wait = WebDriverWait(self.driver, 10)

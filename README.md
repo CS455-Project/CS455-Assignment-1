@@ -127,17 +127,17 @@ The report is saved as an html file in `perftest/performance_reports` and can be
 
 - For load-tests for the game, run 
 ```bash
-artillery run --target https://cs455-project.github.io/CS455-Assignment-1/ --output report_game.json
+artillery run --target https://cs455-project.github.io/CS455-Assignment-1/ load-test.yml --output report_game.json
 artillery report -o load_test_report_game.html report_game.json
 ```
 - For load-tests for server(with load balancing), run
 ```bash
-artillery run --target  https://cs455-assignment-load-balancer.onrender.com --output report_server.json
+artillery run --target  https://cs455-assignment-load-balancer.onrender.com load-test.yml --output report_server.json
 artillery report -o load_test_report_server.html report_server.json
 ```
 - For load-tests for individual server(without load balancing), run
 ```bash
-artillery run --target  https://cs455-assignment-1.onrender.com --output report_server_single.json
+artillery run --target  https://cs455-assignment-1.onrender.com load-test.yml --output report_server_single.json
 artillery report -o load_test_report_server_single.html report_server_single.json
 ```
 The corresponding report is generated in the same directory `perftest/` as `load_test_report{game/server}.html` file and can be viewed in a browser

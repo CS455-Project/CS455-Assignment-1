@@ -19,16 +19,15 @@ jobs:
         with:
           python-version: '3.x'
           
-      - name: Setup Chrome and ChromeDriver
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
       
+      # Setup ChromeDriver
       - name: Setup ChromeDriver
-        uses: browser-actions/setup-chromedriver@v1
-        with:
-          chrome-version: stable
-      
+        uses: nanasess/setup-chromedriver@v2
+        
       - name: Check Chrome and ChromeDriver versions
         run: |
           google-chrome --version
@@ -40,9 +39,12 @@ jobs:
            npm install -g artillery
       
       - name: Load Test
-        run : python perftest/load_time.py
+        run: |
+          # Start ChromeDriver
+          chromedriver --port=4444 &
+          sleep 5  # Give ChromeDriver time to start
+          python perftest/load_time.py
         env:
-          CHROME_BINARY_PATH: /usr/bin/google-chrome
           DISPLAY: :99
       
       - name: Run Artillery Load Test

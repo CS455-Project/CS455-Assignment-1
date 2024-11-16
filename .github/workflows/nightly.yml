@@ -44,8 +44,8 @@ jobs:
           
       - name: Run Artillery Load Test
         run: |
-          artillery run --target  https://cs455-assignment-load-balancer.onrender.com perftest/load-test.yml --output perftest/report_game.json
-          artillery run --target  https://cs455-assignment-1.onrender.com perftest/load-test.yml --output perftest/report_server.json
+          artillery run --target  https://cs455-assignment-load-balancer.onrender.com perftest/load-test.yml --output perftest/report_server.json
+          artillery run --target  https://cs455-project.github.io/CS455-Assignment-1 perftest/load-test.yml --output perftest/report_game.json
 
 
       - name: Convert report to html format

@@ -49,28 +49,34 @@ class GameLoadTimeTest:
 
     def start_browser(self):
         try:
-            options = webdriver.ChromeOptions()
-            options.add_argument('--enable-precise-memory-info')
-            options.add_argument('--disable-cache')  # Disable browser cache
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2}) 
-            options.add_argument("--disable-setuid-sandbox") 
-
-            options.add_argument("--remote-debugging-port=9222")  # this
-
-            options.add_argument("--disable-dev-shm-using") 
-            options.add_argument("--disable-extensions") 
-            options.add_argument("--disable-gpu") 
-            options.add_argument("start-maximized") 
-            options.add_argument("disable-infobars")
-            options.add_argument(r"user-data-dir=.\cookies\\test")
+            chrome_options = webdriver.ChromeOptions()
+            # options.add_argument('--enable-precise-memory-info')
+            # options.add_argument('--disable-cache')  # Disable browser cache
+            # options.add_argument('--no-sandbox')
+            # options.add_argument('--disable-dev-shm-usage')
+            # options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2}) 
+            # options.add_argument("--disable-setuid-sandbox") 
+            #
+            # options.add_argument("--remote-debugging-port=9222")
+            #
+            # options.add_argument("--disable-dev-shm-using") 
+            # options.add_argument("--disable-extensions") 
+            # options.add_argument("--disable-gpu") 
+            # options.add_argument("start-maximized") 
+            # options.add_argument("disable-infobars")
+            # options.add_argument(r"user-data-dir=.\cookies\\test")
             
             # Enable performance logging
-            options.set_capability('goog:loggingPrefs', {'performance': 'ALL', 'browser': 'ALL'})
+            # options.set_capability('goog:loggingPrefs', {'performance': 'ALL', 'browser': 'ALL'})
+            chrome_options.add_argument('--headless=new')
+            chrome_options.add_argument('--no-sandbox')
+            chrome_options.add_argument('--disable-dev-shm-usage')
+            chrome_options.add_argument('--disable-gpu')
+    
+            # Use specific path for ChromeDriver
+            service = Service(executable_path='/usr/local/bin/chromedriver')
+            self.driver = webdriver.Chrome(service=service, options=chrome_options)
             
-            # self.driver = webdriver.Chrome(options=options)
-            self.driver = webdriver.Chrome()
             self.driver.maximize_window()
             self.wait = WebDriverWait(self.driver, 10)
 

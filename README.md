@@ -137,7 +137,7 @@ artillery report -o load_test_report_server.html report_server.json
 ```
 - For load-tests for individual server(without load balancing), run
 ```bash
-artillery run --target  hhttps://cs455-assignment-1.onrender.com --output report_server_single.json
+artillery run --target  https://cs455-assignment-1.onrender.com --output report_server_single.json
 artillery report -o load_test_report_server_single.html report_server_single.json
 ```
 The corresponding report is generated in the same directory `perftest/` as `load_test_report{game/server}.html` file and can be viewed in a browser

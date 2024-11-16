@@ -29,9 +29,18 @@ jobs:
       
       - name: Run Artillery Load Test
         run: artillery run perftest/load-test.yml --output perftest/load_report.json
+
+      - name: Convert report to html format
+        run: artillery report -o perftest/load_report.html perftest/load_report.json
       
       - name: Upload Load Test Results
         uses: actions/upload-artifact@v3
         with :
            name: load-test-results 
-           path : perftest/load_report.json 
+           path : perftest/load_report.html 
+      
+      - name: Upload Load Time Results
+        uses: actions/upload-artifact@v3
+        with :
+           name: load-time-results 
+           path : perftest/performance_reports
